@@ -1,0 +1,76 @@
+                      ;:::::::::: Configure test environment ::::::::::
+                      namereg sd, ERRORS             ; Error count
+                      namereg se, TEMP               ; Temp register
+                      namereg sf, SP                 ; Stack pointer
+
+                      constant portConsole, FE
+                      constant portQuit, FF
+                      constant portISR, FC
+
+                      constant portROM_H, fa
+                      constant portROM_L, fb
+
+
+
+
+
+
+
+
+
+
+
+
+                      load SP, 3f
+                      load ERRORS, 00
+
+                      jump init_done
+
+                      ;:::::::::: Finish testcase ::::::::::
+
+           terminate: output ERRORS, portQuit        ; End normally
+                      jump terminate
+
+                      default_jump exec_error
+          exec_error: jump exec_error                ; End by exceeding instruction limit
+
+           init_done:
+
+
+                      ;VALIDATES: swap
+
+                      ;:::::::::: swap ::::::::::
+
+                      load s0, 42
+                      load s1, 32
+
+                      xor s0, s1                     ; Swap
+                      xor s1, s0
+                      xor s0, s1
+
+                      ; If s0 == 0x32
+                      compare s0, 32
+                      jump nz, &&NEQ_f1_0001
+
+                      jump &&ENDIF_f1_0002
+       &&NEQ_f1_0001:
+                      add ERRORS, 01
+                      addcy ERRORS, 00
+
+     &&ENDIF_f1_0002:
+                      ; If s1 == 0x42
+                      compare s1, 42
+                      jump nz, &&NEQ_f1_0003
+
+                      jump &&ENDIF_f1_0004
+       &&NEQ_f1_0003:
+                      add ERRORS, 01
+                      addcy ERRORS, 00
+
+     &&ENDIF_f1_0004:
+
+                      output s0, portConsole
+
+                      ;:::::::::: Finish testcase ::::::::::
+                      jump terminate
+

@@ -1,0 +1,10 @@
+set -loop_iteration_limit 1000
+run
+-ifn bamse.prj
+-top bamse
+-p xc6slx9tqg144-2
+-ofn bamse.ngc
+-vlgincdir /home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.srcs/sources_1/imports/bamse
+-opt_mode speed
+-opt_level 1
+-netlist_hierarchy rebuilt

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DARoots Version="1" Minor="26">
+  <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sim_1/imports/bamse/bamse_tb.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../bamse_tb.v"/>
+        <Attr Name="ImportTime" Val="1567955155"/>
+        <Attr Name="UsedInSynthesis" Val="1"/>
+        <Attr Name="UsedInImplementation" Val="1"/>
+        <Attr Name="UsedInSimulation" Val="1"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="bamse_tb"/>
+      <Option Name="TopLib" Val="work"/>
+      <Option Name="TopRTLFile" Val="$PSRCDIR/sources_1/imports/bamse/bamse.v"/>
+      <Option Name="SimulationRunTime" Val="10us"/>
+      <Option Name="SrcSet" Val="sources_1"/>
+      <Option Name="FuseNoDebug" Val="1"/>
+    </Config>
+  </FileSet>
+</DARoots>

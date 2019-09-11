@@ -1,0 +1,16 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Tue Sep 10 21:57:35 2019
+//! **************************************************************************
+
+SCHEMATIC START;
+PROHIBIT = SITE "P144";
+PROHIBIT = SITE "P69";
+PROHIBIT = SITE "P60";
+COMP "clk" LOCATE = SITE "P94" LEVEL 1;
+COMP "led" LOCATE = SITE "P134" LEVEL 1;
+COMP "irq" LOCATE = SITE "P132" LEVEL 1;
+COMP "ard_reset" LOCATE = SITE "P139" LEVEL 1;
+COMP "rst" LOCATE = SITE "P133" LEVEL 1;
+NET "clk_BUFGP/IBUFG" PERIOD = 31 ns HIGH 50%;
+SCHEMATIC END;
+

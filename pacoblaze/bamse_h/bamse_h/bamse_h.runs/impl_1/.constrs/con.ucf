@@ -1,0 +1,23 @@
+## Prohibit the automatic placement of pins that are connected to VCC or GND for configuration.
+
+CONFIG PROHIBIT = P144;
+CONFIG PROHIBIT = P69;
+CONFIG PROHIBIT = P60;
+# CLK
+NET "clk" PERIOD = 31 ns;
+NET "clk" LOC = P94;
+NET "clk" IOSTANDARD = LVTTL;
+# ARD_RESET
+NET "ard_reset" LOC = P139;
+NET "ard_reset" IOSTANDARD = LVTTL;
+NET "ard_reset" DRIVE = 8;
+NET "ard_reset" SLEW = SLOW;
+NET "led" LOC = P134;
+NET "led" IOSTANDARD = LVTTL;
+NET "led" PULLUP;
+NET "rst" LOC = P133;
+NET "rst" IOSTANDARD = LVTTL;
+NET "rst" PULLDOWN;
+NET "irq" LOC = P132;
+NET "irq" IOSTANDARD = LVTTL;
+NET "irq" PULLDOWN;

@@ -1,0 +1,29 @@
+Command line:
+   bamse_tb.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  36407
+
+Tue Sep 10 11:24:17 2019
+
+
+ Elaboration Time: 0.01 sec
+
+ Current Memory Usage: 198.353 Meg
+
+ Total Signals          : 195
+ Total Nets             : 588
+ Total Signal Drivers   : 108
+ Total Blocks           : 34
+ Total Primitive Blocks : 11
+ Total Processes        : 152
+ Total Traceable Variables  : 343
+ Total Scalar Nets and Variables : 61351
+Total Line Count : 0
+
+ Total Simulation Time: 0.06 sec
+
+ Current Memory Usage: 273.854 Meg
+
+Tue Sep 10 12:01:17 2019
+

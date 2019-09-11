@@ -1,0 +1,7 @@
+verilog work "/home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.srcs/sources_1/imports/bamse/blockram.v"
+verilog work "/home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.srcs/sources_1/imports/bamse/bamse.v"
+verilog work "/home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.srcs/sources_1/imports/bamse/porta.v"
+verilog work "/home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.srcs/sources_1/imports/bamse/timescale_inc.v"
+verilog work "/home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.srcs/sources_1/new/top.v"
+verilog work "/home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.srcs/sim_1/imports/bamse/bamse_tb.v"
+verilog work /pkg/Xilinx/14.7/ISE_DS/PlanAhead/data/verilog/src/glbl.v

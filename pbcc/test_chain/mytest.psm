@@ -1,0 +1,346 @@
+; Simple LCD Test code
+; rev02 added writing BACKSPACE and cursor and initial text
+; Last modification: 20.01.2011 22:00
+; Generating VHDL files
+VHDL      "ROM_form.vhd", "ProgramROM.vhd", "ProgramROM"
+;
+
+LCD_CHARNUM    DSOUT $00
+LCD_DATA       DSOUT $01
+NULL_PORT      DSOUT $02
+KEYBOARD       DSIN  $03
+
+;inkey   DSROM $50, $53, $32, $74, $6F, $4C, $43, $44, $20, $4A, $4F, $53, $20, $41, $47, $48, $32, $30, $31, $31, $53, $6F, $72, $6F, $63, $6B, $69, $54, $6F, $62, $69, $6A, $61, $73, $69, $65, $77, $69, $63, $7A
+
+char_num_reg   EQU   s0
+data_reg       EQU   s1
+char_mem 	   EQU   sF
+flip		   EQU 	 $01
+tmp_reg        EQU   sE
+
+init:
+              LOAD char_num_reg, $00               ; , Initialise address reg to zero
+              LOAD char_mem, $00
+              LOAD tmp_reg, $00    ; When interrupt is used for the first time clears the screen
+              LOAD data_reg, $00
+               ;OUT  data_reg, NULL_PORT		
+; --- starting text ---
+              CALL write_init_screen
+              LOAD char_mem, $00
+              EINT                      ; , Interrupts enable
+loop:
+              JUMP      loop
+
+; --- interrupt subroutine  ---
+int_keyboard:
+              IN   data_reg, KEYBOARD          ; , Read Keyboard
+
+              COMP data_reg, $00               ; , Do no write if code is 00
+              JUMP Z, interrupt_end
+
+			  XOR  char_mem, flip
+		      COMP char_mem, %00
+		      JUMP Z, skip_lcd_clr
+		      COMP tmp_reg, %00
+		      JUMP NZ, interrupt_end
+			  LOAD char_num_reg, $00		
+lcd_clr:
+              LOAD data_reg, $20                  ; ASCII code for space
+              OUT  char_num_reg, LCD_CHARNUM
+              OUT  data_reg, LCD_DATA
+              OUT  data_reg, NULL_PORT
+              ADD  char_num_reg, $01              ; , Increment address
+              COMP char_num_reg, $28              ; , Check for address 40 (0x28)
+              JUMP NZ, lcd_clr
+              LOAD char_num_reg, $00
+              ADD  tmp_reg, %01
+              JUMP interrupt_end
+skip_lcd_clr: 			
+	          COMP data_reg, $08 				  ; Check if it is BASCKSPACE
+	          JUMP NZ, skip_backspace			  ; If no BACKSPACE jump to skip_backspace
+	
+              LOAD data_reg, $20                  ; If this solution works, cursor will be cleard
+	          OUT  char_num_reg, LCD_CHARNUM      ; , Write LCD Char Address
+              OUT  data_reg, LCD_DATA             ; , Write LCD Data
+              OUT  data_reg, NULL_PORT
+	          	
+	          COMP char_num_reg, $00
+	          JUMP NZ, sub_one
+	          LOAD char_num_reg, $28
+sub_one:
+	          SUB  char_num_reg, $01
+	          LOAD data_reg, $5F
+	          OUT  char_num_reg, LCD_CHARNUM      ; , Write LCD Char Address
+              OUT  data_reg, LCD_DATA             ; , Write LCD Data
+              OUT  data_reg, NULL_PORT
+              JUMP interrupt_end	
+skip_backspace:
+			  OUT  char_num_reg, LCD_CHARNUM      ; , Write LCD Char Address
+              OUT  data_reg, LCD_DATA             ; , Write LCD Data
+              OUT  data_reg, NULL_PORT
+add_one:
+              ADD  char_num_reg, $01              ; , Increment address
+              COMP char_num_reg, $28              ; , Check for address 40 (0x28)
+              JUMP NZ, skip_zero
+              LOAD char_num_reg, $00              ; , Check for address 40 (0x28)
+skip_zero:	
+			  LOAD data_reg, $5F	 			  ; Displays cursor
+			  OUT  char_num_reg, LCD_CHARNUM      ; , Write LCD Char Address
+              OUT  data_reg, LCD_DATA             ; , Write LCD Data
+              OUT  data_reg, NULL_PORT
+interrupt_end:
+              RETI ENABLE                         ; , Back to main loop interrupt enable
+
+
+
+;  --- write initial screen  ---
+write_init_screen:
+               LOAD data_reg, $50                 ; P
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $53                 ; S
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $32                 ; 2
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $74                 ; t
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $6F                 ; o
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $4C                 ; L
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $43                 ; C
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $44                 ; D
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $20                 ;
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $4A                 ; J
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $4F                 ; O
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $53                 ; S
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $20                 ;
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $41                 ; A
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $47                 ; G
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $48                 ; H
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $32                 ; 2
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $30                 ; 0
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $31                 ; 1
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $31                 ; 1
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               ; end of first line
+
+               LOAD data_reg, $53                 ; S
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $6F                 ; o
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $72                 ; r
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $6F                 ; o
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $63                 ; c
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $6B                 ; k
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $69                 ; i
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $54                 ; T
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $6F                 ; o
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $62                 ; b
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $69                 ; i
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $6A                 ; j
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $61                 ; a
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $73                 ; s
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $69                 ; i
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $65                ; e
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $77                 ; w
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $69                 ; i
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $63                 ; c
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ADD  char_num_reg, $01
+
+               LOAD data_reg, $7A                 ; z
+               OUT  char_num_reg, LCD_CHARNUM
+               OUT  data_reg, LCD_DATA
+               OUT  data_reg, NULL_PORT
+               ; end of second line
+               RET
+;  --- end of write initial screen ---
+
+;  --- interrupt vector ---
+
+              ORG $3FF                   		  ; , Interrupt vector adress
+              JUMP int_keyboard         		  ; Jump , to label int_keyboard
+

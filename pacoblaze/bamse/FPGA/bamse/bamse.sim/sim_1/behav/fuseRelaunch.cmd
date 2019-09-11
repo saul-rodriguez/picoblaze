@@ -1,0 +1,1 @@
+-intstyle "pa" -incremental --nodebug --include "/home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.srcs/sources_1/imports/bamse" -L "work" -L "unisims_ver" -L "unimacro_ver" -L "xilinxcorelib_ver" -L "secureip" -o "bamse_tb.exe" --prj "/home/saul/projects/picoblaze/pacoblaze/bamse/FPGA/bamse/bamse.sim/sim_1/behav/bamse_tb.prj" -top "work.bamse_tb" -top "work.glbl" 

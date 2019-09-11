@@ -1,0 +1,12 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Tue Sep 10 12:45:25 2019
+//! **************************************************************************
+
+SCHEMATIC START;
+PROHIBIT = SITE "P144";
+PROHIBIT = SITE "P69";
+PROHIBIT = SITE "P60";
+COMP "irq" LOCATE = SITE "P132" LEVEL 1;
+COMP "rst" LOCATE = SITE "P133" LEVEL 1;
+SCHEMATIC END;
+

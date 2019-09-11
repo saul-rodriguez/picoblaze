@@ -1,0 +1,8 @@
+INTSTYLE=pa
+INFILE=/home/saul/projects/picoblaze/pacoblaze/bamse_h/bamse_h/bamse_h.runs/impl_1/top_routed.ncd
+OUTFILE=/home/saul/projects/picoblaze/pacoblaze/bamse_h/bamse_h/bamse_h.runs/impl_1/top.bit
+FAMILY=Spartan6
+PART=xc6slx9-2tqg144
+WORKINGDIR=/home/saul/projects/picoblaze/pacoblaze/bamse_h/bamse_h/bamse_h.runs/impl_1
+LICENSE=WebPack
+USER_INFO=211786813_0_0_631
