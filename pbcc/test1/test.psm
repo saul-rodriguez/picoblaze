@@ -1,0 +1,132 @@
+;--------------------------------------------------------
+; File Created by SDCC : free open source ANSI-C Compiler
+; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+; This file was generated Thu Sep 12 00:32:03 2019
+;--------------------------------------------------------
+;--------------------------------------------------------
+; global & static initialisations
+;--------------------------------------------------------
+
+	LOAD	sF, 3f
+	JUMP	__sdcc_program_startup
+;--------------------------------------------------------
+; Home
+;--------------------------------------------------------
+__sdcc_program_startup:
+	CALL	_main
+;	return from main will lock up
+__sdcc_loop:
+	JUMP	__sdcc_loop
+;--------------------------------------------------------
+; code
+;--------------------------------------------------------
+	;	device/include/pblaze/delay.h:51: void delay(unsigned char time)
+_delay:
+	LOAD	s0, sB
+	;	device/include/pblaze/delay.h:53: volatile unsigned char i = time;
+	LOAD	s1, s0
+_L00101:
+	;	device/include/pblaze/delay.h:54: for(; i > 0; i--)
+	LOAD	s0, s1
+	COMPARE	s0, 00
+	JUMP	NZ, _LC00123
+	JUMP	_L00107
+_LC00123:
+	LOAD	s0, 01
+	JUMP	_L00108
+_L00107:
+	LOAD	s0, 00
+_L00108:
+	COMPARE	s0, 00
+	JUMP	NZ, _LC00124
+	JUMP	_L00105
+_LC00124:
+	;	device/include/pblaze/delay.h:72: __endasm;             
+	       LOAD s2, 00
+	       ADD s2, 01
+	       LOAD s1, 00
+	rpt22:
+	       ADD s1, 01
+	       LOAD s0, 00
+	rpt11:
+	       ADD s0, 01
+	       JUMP NZ, rpt11
+	       COMPARE s1, 00
+	       JUMP NZ, rpt22
+	;	device/include/pblaze/delay.h:54: for(; i > 0; i--)
+	SUB	s1, 01
+	JUMP	_L00101
+_L00105:
+	RETURN
+	;	device/include/pblaze/port.h:16: void __port_write(unsigned char port, unsigned char arg) 
+___port_write:
+	;	device/include/pblaze/port.h:24: __endasm;
+	     OUTPUT s1, s0
+	;	device/include/pblaze/port.h:25: delay(MIN_PAUSE);
+	LOAD	sB, 0a
+	CALL	_delay
+	RETURN
+	;	device/include/pblaze/port.h:28: unsigned char __port_read(volatile unsigned char port) 
+___port_read:
+	LOAD	s0, sB
+	;	device/include/pblaze/port.h:30: volatile unsigned char d = 0;
+	LOAD	s1, 00
+	;	device/include/pblaze/port.h:31: volatile unsigned char p = port;
+	LOAD	s2, s0
+	LOAD	s3, s2
+	;	device/include/pblaze/port.h:34: __endasm;
+	     INPUT s1, s3
+	;	device/include/pblaze/port.h:35: delay(MIN_PAUSE);
+	STORE	s0, (sF)
+	SUB	sF, 01
+	STORE	s1, (sF)
+	SUB	sF, 01
+	STORE	s3, (sF)
+	SUB	sF, 01
+	LOAD	sB, 0a
+	CALL	_delay
+	ADD	sF, 01
+	FETCH	s3, (sF)
+	ADD	sF, 01
+	FETCH	s1, (sF)
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	;	device/include/pblaze/port.h:36: return d;
+	LOAD	s2, s1
+	LOAD	sB, s2
+	RETURN
+	;	test.c:8: void main()
+_main:
+	;	test.c:12: aux = 0xaa;
+	LOAD	s0, aa
+	;	test.c:14: while(aux) {
+_L00116:
+	COMPARE	s0, 00
+	JUMP	NZ, _LC00125
+	JUMP	_L00119
+_LC00125:
+	;	test.c:15: __port_write(PORTA,aux);
+	STORE	s0, (sF)
+	SUB	sF, 01
+	LOAD	sB, 00
+	LOAD	sC, s0
+	CALL	___port_write
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	;	test.c:17: delay(1);
+	STORE	s0, (sF)
+	SUB	sF, 01
+	LOAD	sB, 01
+	CALL	_delay
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	;	test.c:18: aux ^= 0xff;
+	LOAD	s1, s0
+	XOR	s1, ff
+	LOAD	s0, s1
+	JUMP	_L00116
+_L00119:
+	RETURN
+;--------------------------------------------------------
+; interrupt vector 
+;--------------------------------------------------------

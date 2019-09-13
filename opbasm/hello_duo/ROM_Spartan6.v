@@ -12,7 +12,8 @@
    // RAMB16BWER: 16k-bit Data and 2k-bit Parity Configurable Synchronous Dual Port Block RAM with Optional Output Registers
    //             Spartan-6
    // Xilinx HDL Language Template, version 14.7
-module {name}(address, instruction, clk, WEA);
+//module {name}(address, instruction, clk, WEA);
+module spartan6_mem(address, instruction, clk, WEA);
 
 input [9:0] address;
 output [17:0] instruction;

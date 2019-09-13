@@ -1,0 +1,41 @@
+;Porta.psm4
+
+include(`setup.m4')
+
+;Set clock frequency Papilio Duo 32 MHz
+define(clock_freq,32)
+use_clock(clock_freq)
+
+;PortA definitions
+define(PORTA,0x01) ;Output port A address 
+
+
+jump main
+
+delay_200ms: 
+ 	delay_ms(200,s4,s5,2) ; adjust 2 bit instructions to account for call and return
+	return
+				
+main:
+	load s0,0f
+	load s1,ff
+		
+	while(s1) {
+		output s0,PORTA
+		call delay_200ms
+		xor s0,55
+		sub s1,1	
+	}
+	
+	jump terminate
+	
+	
+	
+
+
+	
+
+
+
+
+

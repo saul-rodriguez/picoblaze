@@ -1,0 +1,700 @@
+$date
+   Fri Sep 13 00:10:35 2019
+$end
+$version
+  P.20131013
+$end
+$timescale
+  1ps
+$end
+$scope module top_tb $end
+$scope module dut $end
+$var wire 1 E DIR_RIGHT $end
+$var wire 1 F DIR_LEFT $end
+$var wire 1 G CLK $end
+$var wire 1 $ LED0 $end
+$var wire 1 % LED1 $end
+$var wire 1 & LED2 $end
+$var wire 1 ' LED3 $end
+$var wire 1 ( LED4 $end
+$var wire 1 ) LED5 $end
+$var wire 1 * LED6 $end
+$var wire 1 + LED7 $end
+$var wire 1 , SW0 $end
+$var wire 1 - SW1 $end
+$var wire 1 . SW2 $end
+$var wire 1 / SW3 $end
+$var wire 1 0 SW4 $end
+$var wire 1 1 SW5 $end
+$var wire 1 2 SW6 $end
+$var wire 1 3 SW7 $end
+$var wire 1 4 ARDUINO_RESET $end
+$var wire 1 H portA_out [7] $end
+$var wire 1 I portA_out [6] $end
+$var wire 1 J portA_out [5] $end
+$var wire 1 K portA_out [4] $end
+$var wire 1 L portA_out [3] $end
+$var wire 1 M portA_out [2] $end
+$var wire 1 N portA_out [1] $end
+$var wire 1 O portA_out [0] $end
+$var wire 1 P portB_in [7] $end
+$var wire 1 Q portB_in [6] $end
+$var wire 1 R portB_in [5] $end
+$var wire 1 S portB_in [4] $end
+$var wire 1 T portB_in [3] $end
+$var wire 1 U portB_in [2] $end
+$var wire 1 V portB_in [1] $end
+$var wire 1 W portB_in [0] $end
+$scope module bamse1 $end
+$var wire 1 E irq $end
+$var wire 1 F rst $end
+$var wire 1 G clk $end
+$var wire 1 H portA_out [7] $end
+$var wire 1 I portA_out [6] $end
+$var wire 1 J portA_out [5] $end
+$var wire 1 K portA_out [4] $end
+$var wire 1 L portA_out [3] $end
+$var wire 1 M portA_out [2] $end
+$var wire 1 N portA_out [1] $end
+$var wire 1 O portA_out [0] $end
+$var wire 1 P portB_in [7] $end
+$var wire 1 Q portB_in [6] $end
+$var wire 1 R portB_in [5] $end
+$var wire 1 S portB_in [4] $end
+$var wire 1 T portB_in [3] $end
+$var wire 1 U portB_in [2] $end
+$var wire 1 V portB_in [1] $end
+$var wire 1 W portB_in [0] $end
+$var wire 1 X addr [9] $end
+$var wire 1 Y addr [8] $end
+$var wire 1 Z addr [7] $end
+$var wire 1 [ addr [6] $end
+$var wire 1 \ addr [5] $end
+$var wire 1 ] addr [4] $end
+$var wire 1 ^ addr [3] $end
+$var wire 1 _ addr [2] $end
+$var wire 1 ` addr [1] $end
+$var wire 1 a addr [0] $end
+$var wire 1 b pid [7] $end
+$var wire 1 c pid [6] $end
+$var wire 1 d pid [5] $end
+$var wire 1 e pid [4] $end
+$var wire 1 f pid [3] $end
+$var wire 1 g pid [2] $end
+$var wire 1 h pid [1] $end
+$var wire 1 i pid [0] $end
+$var wire 1 j pout [7] $end
+$var wire 1 k pout [6] $end
+$var wire 1 l pout [5] $end
+$var wire 1 m pout [4] $end
+$var wire 1 n pout [3] $end
+$var wire 1 o pout [2] $end
+$var wire 1 p pout [1] $end
+$var wire 1 q pout [0] $end
+$var wire 1 r ren $end
+$var wire 1 s wen $end
+$var wire 1 t iak $end
+$var wire 1 u din [17] $end
+$var wire 1 v din [16] $end
+$var wire 1 w din [15] $end
+$var wire 1 x din [14] $end
+$var wire 1 y din [13] $end
+$var wire 1 z din [12] $end
+$var wire 1 { din [11] $end
+$var wire 1 | din [10] $end
+$var wire 1 } din [9] $end
+$var wire 1 ~ din [8] $end
+$var wire 1 !! din [7] $end
+$var wire 1 "! din [6] $end
+$var wire 1 #! din [5] $end
+$var wire 1 $! din [4] $end
+$var wire 1 %! din [3] $end
+$var wire 1 &! din [2] $end
+$var wire 1 '! din [1] $end
+$var wire 1 (! din [0] $end
+$var wire 1 )! pin [7] $end
+$var wire 1 *! pin [6] $end
+$var wire 1 +! pin [5] $end
+$var wire 1 ,! pin [4] $end
+$var wire 1 -! pin [3] $end
+$var wire 1 .! pin [2] $end
+$var wire 1 /! pin [1] $end
+$var wire 1 0! pin [0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+x-
+x.
+x/
+x0
+x1
+x2
+x3
+0G
+1F
+0E
+x,
+0$
+0%
+0&
+0O
+0N
+0M
+0L
+0K
+0J
+0I
+0H
+xW
+xV
+xU
+xT
+xS
+xR
+xQ
+xP
+xa
+x`
+x_
+x^
+x]
+x\
+x[
+xZ
+xY
+xX
+xi
+xh
+xg
+xf
+xe
+xd
+xc
+xb
+xq
+xp
+xo
+xn
+xm
+xl
+xk
+xj
+xr
+xs
+xt
+x(!
+x'!
+x&!
+x%!
+x$!
+x#!
+x"!
+x!!
+x~
+x}
+x|
+x{
+xz
+xy
+xx
+xw
+xv
+xu
+x0!
+x/!
+x.!
+x-!
+x,!
+x+!
+x*!
+x)!
+0'
+0(
+0)
+0*
+0+
+04
+$end
+#100
+0i
+0h
+0g
+0f
+0e
+0d
+0c
+0b
+0(!
+0'!
+0&!
+0%!
+0$!
+0#!
+0"!
+0!!
+0~
+0}
+0|
+0{
+0z
+0y
+0x
+0w
+0v
+0u
+#15625
+1G
+0r
+0s
+0t
+00!
+0/!
+0.!
+0-!
+0,!
+0+!
+0*!
+0)!
+#31250
+0G
+#46875
+1G
+0a
+0`
+0_
+0^
+0]
+0\
+0[
+0Z
+0Y
+0X
+#62500
+0G
+0F
+#78125
+1G
+#93750
+0G
+#109375
+1G
+#109475
+1i
+1h
+1g
+1f
+1e
+1d
+1(!
+1'!
+1&!
+1%!
+1$!
+1#!
+1~
+1}
+1|
+1{
+#125000
+0G
+#140625
+1G
+1a
+#156250
+0G
+#171875
+1G
+1q
+1p
+1o
+1n
+1m
+1l
+0k
+0j
+#171975
+0i
+0h
+0g
+0f
+0e
+0d
+xq
+xp
+xo
+xn
+xm
+xl
+xk
+xj
+0(!
+0'!
+0&!
+0%!
+0$!
+0#!
+0}
+#187500
+0G
+#203125
+1G
+0a
+1`
+#218750
+0G
+#234375
+1G
+0q
+0p
+0o
+0n
+0m
+0l
+0k
+0j
+#234475
+1h
+1g
+xq
+xp
+xo
+xn
+xm
+xl
+xk
+xj
+1'!
+1&!
+0~
+0|
+0{
+1x
+1v
+1u
+#250000
+0G
+#265625
+1G
+1_
+#281250
+0G
+#296875
+1G
+#296975
+1i
+1f
+1e
+1(!
+1%!
+1$!
+#312500
+0G
+#328125
+1G
+1a
+1^
+1]
+#343750
+0G
+#359375
+1G
+#359475
+0e
+0$!
+0x
+0v
+0u
+#375000
+0G
+#390625
+1G
+0a
+0`
+0_
+0^
+0]
+1\
+#406250
+0G
+#421875
+1G
+1q
+1p
+1o
+1n
+0m
+0l
+0k
+0j
+#421975
+1e
+1d
+1c
+1b
+xq
+xp
+xo
+xn
+xm
+xl
+xk
+xj
+1$!
+1#!
+1"!
+1!!
+1~
+#437500
+0G
+#453125
+1G
+1a
+#468750
+0G
+#484375
+1G
+1q
+1p
+1o
+1n
+1m
+1l
+1k
+1j
+#484475
+0i
+0h
+0g
+0f
+0e
+0d
+0c
+0b
+0(!
+0'!
+0&!
+0%!
+0$!
+0#!
+0"!
+0!!
+1x
+1v
+#500000
+0G
+#515625
+1G
+0a
+1`
+#531250
+0G
+#546875
+1G
+#546975
+xi
+xh
+xg
+xf
+xe
+xd
+xc
+xb
+0m
+0l
+0k
+0j
+1%!
+1#!
+0~
+1z
+1u
+#562500
+0G
+#578125
+1G
+1a
+#593750
+0G
+#609375
+1G
+#609475
+1i
+0h
+0g
+0f
+0e
+0d
+0c
+0b
+1(!
+0%!
+0#!
+0z
+1w
+0v
+#625000
+0G
+#640625
+1G
+1$
+1%
+1&
+1O
+1N
+1M
+1L
+0a
+0`
+1_
+1s
+1'
+#656250
+0G
+#671875
+1G
+0s
+#671975
+1h
+1g
+1'!
+1&!
+0x
+0w
+1v
+#687500
+0G
+#703125
+1G
+1a
+1`
+0\
+#718750
+0G
+#734375
+1G
+#734475
+1f
+1e
+1d
+1c
+1b
+xq
+xp
+xo
+xn
+xm
+xl
+xk
+xj
+1%!
+1$!
+1#!
+1"!
+1!!
+1|
+0v
+0u
+#750000
+0G
+#765625
+1G
+0a
+0`
+0_
+1^
+#781250
+0G
+#796875
+1G
+1q
+1p
+1o
+1n
+1m
+1l
+1k
+1j
+#796975
+0h
+0g
+0d
+0c
+0b
+xq
+xp
+xo
+xn
+xm
+xl
+xk
+xj
+0'!
+0&!
+0#!
+0"!
+0!!
+1~
+#812500
+0G
+#828125
+1G
+1a
+#843750
+0G
+#859375
+1G
+1q
+0p
+0o
+1n
+1m
+0l
+0k
+0j
+#859475
+1h
+0e
+1p
+1o
+0m
+1'!
+0$!
+0~
+0|
+1v
+1u
+#875000
+0G
+#890625
+1G
+1`
+#906250
+0G
+#921875
+1G
+#921975
+0i
+0h
+1g
+0(!
+0'!
+1&!
+#937500
+0G
+#953125
+1G
+0a
+0`
+1_
+#968750
+0G
+#984375
+1G
+#984475
+1i
+1(!
+#1000000
+0G

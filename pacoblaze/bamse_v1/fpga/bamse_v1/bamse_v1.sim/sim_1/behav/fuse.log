@@ -1,0 +1,55 @@
+Running: /pkg/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle pa -incremental --include /home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog -L work -L unisims_ver -L unimacro_ver -L xilinxcorelib_ver -L secureip -o top_tb.exe --prj /home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.sim/sim_1/behav/top_tb.prj -top work.top_tb -top work.glbl 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 8
+Turning on mult-threading, number of parallel sub-compilation jobs: 16 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" into library work
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v" into library work
+WARNING:HDLCompiler:572 - "pacoblaze.v" Line 55: Macro <operation_is> is redefined.
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/top.v" into library work
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sim_1/imports/iverilog/top_tb.v" into library work
+Analyzing Verilog file "/pkg/Xilinx/14.7/ISE_DS/PlanAhead/data/verilog/src/glbl.v" into library work
+Starting static elaboration
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1716: Element index 2 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1720: Element index 3 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1803: Element index 2 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1807: Element index 3 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1864: Element index 2 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1865: Element index 3 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1916: Element index 2 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1917: Element index 3 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2012: Element index 23 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2013: Element index 2 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2018: Element index 31 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2019: Element index 3 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2122: Element index 23 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2123: Element index 2 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2128: Element index 31 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2129: Element index 3 into memp is out of bounds
+Completed static elaboration
+Fuse Memory Usage: 98328 KB
+Fuse CPU Usage: 870 ms
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1543: Element index 2 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1547: Element index 3 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1629: Element index 2 into memp is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.20131013/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1633: Element index 3 into memp is out of bounds
+Compiling module RAMB16BWER(DATA_WIDTH_A=18,DATA_...
+Compiling module spartan6_mem
+Compiling module pacoblaze3_idu
+Compiling module pacoblaze3_alu
+Compiling module pacoblaze3_register
+Compiling module pacoblaze3_stack
+Compiling module pacoblaze3_scratch
+Compiling module pacoblaze3
+Compiling module outport(ADDR=8'b01)
+Compiling module inport(ADDR0=8'b010)
+Compiling module bamse
+Compiling module top
+Compiling module top_tb
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Compiled 14 Verilog Units
+Built simulation executable top_tb.exe
+Fuse Memory Usage: 1204420 KB
+Fuse CPU Usage: 1030 ms
+GCC CPU Usage: 4110 ms

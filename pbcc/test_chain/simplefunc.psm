@@ -51,7 +51,7 @@ _LC00121:
 	rpt11:
 	       ADD s0, 01
 	       JUMP NZ, rpt11
-	       COMPARE s1, 00
+	       COMP s1, 00
 	       JUMP NZ, rpt22
 	;	device/include/pblaze/delay.h:54: for(; i > 0; i--)
 	SUB	s1, $01
@@ -67,7 +67,7 @@ ___port_write:
 	;	device/include/pblaze/port.h:21: a = arg;
 	LOAD	s0, s1
 	;	device/include/pblaze/port.h:24: __endasm;
-	     OUTPUT _a, _p
+	     OUT _a, _p
 	;	device/include/pblaze/port.h:25: delay(MIN_PAUSE);
 	STORE	s0, sF
 	SUB	sF, $01
