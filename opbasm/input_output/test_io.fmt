@@ -1,0 +1,120 @@
+                      ;Porta.psm4
+
+                      ;:::::::::: Configure test environment ::::::::::
+                      namereg sd, ERRORS             ; Error count
+                      namereg se, TEMP               ; Temp register
+                      namereg sf, SP                 ; Stack pointer
+
+                      constant portConsole, FE
+                      constant portQuit, FF
+                      constant portISR, FC
+
+                      constant portROM_H, fa
+                      constant portROM_L, fb
+
+
+
+
+
+
+
+
+
+
+
+
+                      load SP, 3f
+                      load ERRORS, 00
+
+                      jump init_done
+
+                      ;:::::::::: Finish testcase ::::::::::
+
+           terminate: output ERRORS, portQuit        ; End normally
+                      jump terminate
+
+                      default_jump exec_error
+          exec_error: jump exec_error                ; End by exceeding instruction limit
+
+           init_done:
+
+
+                      ;Set clock frequency Papilio Duo 32 MHz
+
+
+
+                      ;PortA definitions
+                      ;Output port A address
+
+                      ;PortB definitions
+                      ;Input port B address
+
+
+                      jump main
+
+         delay_200ms:
+                      ; Delay for 200 ms at 32 MHz
+                      load s4, ff                    ; 65305
+                      load s5, 19
+     &&DELAY_f1_0001: ; Total loop delay: 49 instructions
+                      call &&DTREE_f1_0002_4         ; Delay for 33 cycles
+                      jump &&DTREE_f1_0002_end
+   &&DTREE_f1_0002_4: call &&DTREE_f1_0002_3
+   &&DTREE_f1_0002_3: call &&DTREE_f1_0002_2
+   &&DTREE_f1_0002_2: call &&DTREE_f1_0002_1
+   &&DTREE_f1_0002_1: call &&DTREE_f1_0002_0
+   &&DTREE_f1_0002_0: return
+ &&DTREE_f1_0002_end:
+                      call &&DTREE_f1_0003_2         ; Delay for 9 cycles
+                      jump &&DTREE_f1_0003_end
+   &&DTREE_f1_0003_2: call &&DTREE_f1_0003_1
+   &&DTREE_f1_0003_1: call &&DTREE_f1_0003_0
+   &&DTREE_f1_0003_0: return
+ &&DTREE_f1_0003_end:
+                      load TEMP, TEMP                ; NOP
+                      load TEMP, TEMP                ; NOP
+                      load TEMP, TEMP                ; NOP
+                      load TEMP, TEMP                ; NOP
+
+                      sub s5, 01                     ; 1
+                      subcy s4, 00
+                      jump nc, &&DELAY_f1_0001
+                      ; Adjust delay with 2 additional instruction cycles
+                      load TEMP, TEMP                ; NOP
+                      load TEMP, TEMP                ; NOP
+                      ; adjust 2 bit instructions to account for call and return
+                      return
+
+                main:
+                      ;load s0,0f
+                      load s1, ff
+
+     &&WHILE_f1_0004:
+                      ; If s1 != 0
+                      compare s1, 00
+                      jump z, &&EQ_f1_0006
+
+                      input s0, 0x02
+                      output s0, 0x01
+                      ;call delay_200ms
+
+                      jump &&WHILE_f1_0004
+
+        &&EQ_f1_0006:
+
+
+   &&ENDLOOP_f1_0005:
+
+                      jump terminate
+
+
+
+
+
+
+
+
+
+
+
+

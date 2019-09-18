@@ -1,0 +1,56 @@
+;--------------------------------------------------------
+; File Created by SDCC : free open source ANSI-C Compiler
+; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+; This file was generated Sat Sep 14 02:12:24 2019
+;--------------------------------------------------------
+;--------------------------------------------------------
+; global & static initialisations
+;--------------------------------------------------------
+
+	LOAD	sF, 3f
+	JUMP	__sdcc_program_startup
+;--------------------------------------------------------
+; Home
+;--------------------------------------------------------
+__sdcc_program_startup:
+	CALL	_main
+;	return from main will lock up
+__sdcc_loop:
+	JUMP	__sdcc_loop
+;--------------------------------------------------------
+; code
+;--------------------------------------------------------
+	;	device/include/pblaze/intr.h:30: void pbcc_enable_interrupt(void)
+_pbcc_enable_interrupt:
+	;	device/include/pblaze/intr.h:34: __endasm;
+	       ENABLE INTERRUPT
+	RETURN
+	;	device/include/pblaze/intr.h:37: void pbcc_disable_interrupt(void)
+_pbcc_disable_interrupt:
+	;	device/include/pblaze/intr.h:41: __endasm;
+	;
+	      DISABLE INTERRUPT
+	RETURN
+	;	interrupt.c:15: void main()
+_main:
+	;	interrupt.c:17: pbcc_enable_interrupt();
+	CALL	_pbcc_enable_interrupt
+	;	interrupt.c:19: while(1) {	
+_L00106:
+	JUMP	_L00106
+	;	interrupt.c:24: void _interrupt_handler(void) __interrupt (1)
+_interrupt_handler:
+	;	interrupt.c:27: a = PBLAZEPORT[2];
+	STORE	s0, (sF)
+	SUB	sF, 01
+	INPUT	s0, 02
+	;	interrupt.c:28: PBLAZEPORT[1] = a;	
+	OUTPUT	s0, 01
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	RETURNI ENABLE
+;--------------------------------------------------------
+; interrupt vector 
+;--------------------------------------------------------
+	ADDRESS	3ff
+	JUMP	_interrupt_handler

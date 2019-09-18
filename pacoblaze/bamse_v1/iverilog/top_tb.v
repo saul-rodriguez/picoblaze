@@ -1,7 +1,7 @@
 `define PACOBLAZE3
 
 `ifndef TEST_FILE
-`define TEST_FILE "/home/saul/projects/picoblaze/opbasm/hello_duo/firmware.hex"
+`define TEST_FILE "/home/saul/projects/picoblaze/opbasm/hello_duo/hello.hex"
 `endif
 
 `ifndef TEST_CYCLES

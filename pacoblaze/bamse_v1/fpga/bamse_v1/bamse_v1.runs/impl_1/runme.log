@@ -57,38 +57,38 @@ Total REAL time at the beginning of Placer: 2 secs
 Total CPU  time at the beginning of Placer: 2 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:3d581631) REAL time: 3 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:3d581631) REAL time: 2 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:3d581631) REAL time: 3 secs 
+Phase 2.7  Design Feasibility Check (Checksum:3d581631) REAL time: 2 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:3d581631) REAL time: 3 secs 
+Phase 3.31  Local Placement Optimization (Checksum:3d581631) REAL time: 2 secs 
 
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:64705283) REAL time: 4 secs 
+(Checksum:64705283) REAL time: 3 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:64705283) REAL time: 4 secs 
+Phase 5.36  Local Placement Optimization (Checksum:64705283) REAL time: 3 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:64705283) REAL time: 4 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:64705283) REAL time: 3 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:64705283) REAL time: 4 secs 
+Phase 7.3  Local Placement Optimization (Checksum:64705283) REAL time: 3 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:64705283) REAL time: 4 secs 
+Phase 8.5  Local Placement Optimization (Checksum:64705283) REAL time: 3 secs 
 
 Phase 9.8  Global Placement
 ...................
 ......
-Phase 9.8  Global Placement (Checksum:38eeee5f) REAL time: 4 secs 
+Phase 9.8  Global Placement (Checksum:38eeee5f) REAL time: 3 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:38eeee5f) REAL time: 4 secs 
+Phase 10.5  Local Placement Optimization (Checksum:38eeee5f) REAL time: 3 secs 
 
 Phase 11.18  Placement Optimization
 Phase 11.18  Placement Optimization (Checksum:93514cc7) REAL time: 4 secs 
@@ -400,7 +400,7 @@ Loading device for application Rf_Device from file '6slx9.nph' in environment
 /pkg/Xilinx/14.7/ISE_DS/ISE/.
    "top" is an NCD, version 3.2, device xc6slx9, package tqg144, speed -2
 
-Analysis completed Fri Sep 13 00:12:30 2019
+Analysis completed Sat Sep 14 02:19:30 2019
 --------------------------------------------------------------------------------
 
 Generating Report ...

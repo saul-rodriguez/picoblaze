@@ -4,8 +4,8 @@
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/imports/hello_duo/firmware.v">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../../../opbasm/hello_duo/firmware.v"/>
-        <Attr Name="ImportTime" Val="1568322354"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../pbcc/input_output_c/firmware.v"/>
+        <Attr Name="ImportTime" Val="1568420327"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>

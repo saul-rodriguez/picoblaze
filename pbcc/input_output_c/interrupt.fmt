@@ -1,0 +1,56 @@
+                      ;--------------------------------------------------------
+                      ; File Created by SDCC : free open source ANSI-C Compiler
+                      ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+                      ; This file was generated Sat Sep 14 02:12:24 2019
+                      ;--------------------------------------------------------
+                      ;--------------------------------------------------------
+                      ; global & static initialisations
+                      ;--------------------------------------------------------
+
+                      load sf, 3f
+                      jump __sdcc_program_startup
+                      ;--------------------------------------------------------
+                      ; Home
+                      ;--------------------------------------------------------
+ __sdcc_program_startup:
+                      call _main
+                      ;	return from main will lock up
+         __sdcc_loop:
+                      jump __sdcc_loop
+                      ;--------------------------------------------------------
+                      ; code
+                      ;--------------------------------------------------------
+                      ;	device/include/pblaze/intr.h:30: void pbcc_enable_interrupt(void)
+ _pbcc_enable_interrupt:
+                      ;	device/include/pblaze/intr.h:34: __endasm;
+                      enable INTERRUPT
+                      return
+                      ;	device/include/pblaze/intr.h:37: void pbcc_disable_interrupt(void)
+ _pbcc_disable_interrupt:
+                      ;	device/include/pblaze/intr.h:41: __endasm;
+                      ;
+                      ;REMOVED: disable INTERRUPT
+                      ;REMOVED: return
+                      ;	interrupt.c:15: void main()
+               _main:
+                      ;	interrupt.c:17: pbcc_enable_interrupt();
+                      call _pbcc_enable_interrupt
+                      ;	interrupt.c:19: while(1) {
+             _L00106:
+                      jump _L00106
+                      ;	interrupt.c:24: void _interrupt_handler(void) __interrupt (1)
+  _interrupt_handler:
+                      ;	interrupt.c:27: a = PBLAZEPORT[2];
+                      store s0, (sf)
+                      sub sf, 01
+                      input s0, 02
+                      ;	interrupt.c:28: PBLAZEPORT[1] = a;
+                      output s0, 01
+                      add sf, 01
+                      fetch s0, (sf)
+                      returni ENABLE
+                      ;--------------------------------------------------------
+                      ; interrupt vector
+                      ;--------------------------------------------------------
+                      address 3ff
+                      jump _interrupt_handler

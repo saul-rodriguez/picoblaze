@@ -8,10 +8,10 @@
 <msg type="warning" file="HDLCompiler" num="572" delta="new" >"/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze.v" Line 55: Macro &lt;<arg fmt="%s" index="1">operation_is</arg>&gt; is redefined.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" Line 175: Assignment to <arg fmt="%s" index="1">DOB</arg> ignored, since the identifier is never used
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" Line 178: Assignment to <arg fmt="%s" index="1">DOB</arg> ignored, since the identifier is never used
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" Line 176: Assignment to <arg fmt="%s" index="1">DOPB</arg> ignored, since the identifier is never used
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" Line 179: Assignment to <arg fmt="%s" index="1">DOPB</arg> ignored, since the identifier is never used
 </msg>
 
 <msg type="warning" file="HDLCompiler" num="1308" delta="new" >"/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze_idu.v" Line 169: Found full_case directive in module <arg fmt="%s" index="1">pacoblaze3_idu</arg>. Use of full_case directives may cause differences between RTL and post-synthesis simulation
