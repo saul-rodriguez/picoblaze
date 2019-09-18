@@ -2,13 +2,15 @@
 `include "gio.v"
 
 `define PORTD_IN 8'h03
-`define PORTD_IOC_POS_CONF 8'hff
-`define PORTD_IOC_NEG_CONF 8'hff
+`define PORTD_IOC_POS_CONF 3'b000
+`define PORTD_IOC_NEG_CONF 3'b111
+
+`define PORTD_WIDTH 3
 
 module inport_ioc_tb;
 
 reg [7:0] address;
-reg [7:0] port_in;		
+reg [`PORTD_WIDTH-1:0] port_in;		
 reg ren;
 reg rst;
 reg clk;
@@ -16,10 +18,10 @@ reg clk;
 //reg [7:0] ioc_neg_conf;		
 reg int_ack;
 
-wire [7:0] port_out;
+wire [`PORTD_WIDTH-1:0] port_out;
 wire int_out;
 
-inport_ioc #(.ADDR(`PORTD_IN)) PortD (
+inport_ioc #(.ADDR(`PORTD_IN), .WIDTH(3)) PortD (
 	.address(address),
 	.port_in(port_in),
 	.port_out(port_out),

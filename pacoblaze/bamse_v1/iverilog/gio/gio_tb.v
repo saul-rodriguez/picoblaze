@@ -14,17 +14,18 @@ reg wen;
 reg rst;
 
 reg [7:0] value_in;
-reg [7:0] portA_in;
-reg [7:0] portB_in;
+reg [3:0] portA_in;
+reg [3:0] portB_in;
 reg ren;
 reg clk;
 
 //output wires
 wire [7:0] portC_out;
-wire [7:0] portA_in_core;
-wire [7:0] portB_in_core;
+wire [3:0] portA_in_core;
+wire [3:0] portB_in_core;
+wire [7:0] port_out;
 
-outport #(.ADDR(`PORTC_OUT)) PortC(
+outport #(.ADDR(`PORTC_OUT), .WIDTH(8)) PortC(
 	.address(address),
 	.value_in(value_in),
 	.wen(wen),
@@ -32,7 +33,7 @@ outport #(.ADDR(`PORTC_OUT)) PortC(
 	.port_out(portC_out)	
 );
 	
-inport #(.ADDR(`PORTA_IN)) PortA(
+inport #(.ADDR(`PORTA_IN), .WIDTH(4)) PortA(
 	.address(address),
 	.port_in(portA_in),
 	.port_out(portA_in_core),
@@ -41,7 +42,7 @@ inport #(.ADDR(`PORTA_IN)) PortA(
 	.clk(clk)	
 );
 
-inport #(.ADDR(`PORTB_IN)) PortB(
+inport #(.ADDR(`PORTB_IN), .WIDTH(4)) PortB(
 	.address(address),
 	.port_in(portB_in),
 	.port_out(portB_in_core),
@@ -50,11 +51,19 @@ inport #(.ADDR(`PORTB_IN)) PortB(
 	.clk(clk)	
 );
 
+wire [7:0] in_portA_bus;
+wire [7:0] in_portB_bus;
+
+assign in_portA_bus = {{4{1'b0}},portA_in_core};
+assign in_portB_bus = {{4{1'b0}},portB_in_core};
+
+
 in_port_selector #(.ADDR0(`PORTA_IN), .ADDR1(`PORTB_IN))
 	input_ports(
 		.address(address),
-		.in_port0(portA_in_core),
-		.in_port1(portB_in_core)
+		.in_port0(in_portA_bus),
+		.in_port1(in_portB_bus),
+		.out_port(port_out)
 ); 
 
 

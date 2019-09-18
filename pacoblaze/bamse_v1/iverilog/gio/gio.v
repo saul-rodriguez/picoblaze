@@ -9,12 +9,13 @@ module outport(
 	port_out // output 
 );
 	parameter ADDR = 8'b0000_0000; //This parameter must be initialized during instantiation!
+	parameter WIDTH = 8;
 	
 	input [7:0] address;
-	input [7:0] value_in;
+	input [WIDTH-1:0] value_in;
 	input wen;
 	input rst;
-	output reg [7:0] port_out;
+	output reg [WIDTH-1:0] port_out;
 
     always @(*) begin
 		if (rst) begin
@@ -42,9 +43,11 @@ module inport(
 
 	//More input ports are added here. Addresses must be initalized during instantiation! 
 	parameter ADDR = 8'b0000_0000; 	
+	parameter WIDTH = 8;
+	
 	input [7:0] address;	
-	input [7:0] port_in;	
-	output reg [7:0] port_out;
+	input [WIDTH-1:0] port_in;	
+	output reg [WIDTH-1:0] port_out;
 	input ren;
 	input rst;
 	input clk;
@@ -80,25 +83,27 @@ endmodule
 );	
 
 	parameter ADDR = 8'b0000_0000; 	
+	parameter WIDTH = 3;
+	
 	input [7:0] address;
-	input [7:0] port_in;		
-	output [7:0] port_out;
+	input [WIDTH-1:0] port_in;		
+	output [WIDTH-1:0] port_out;
 	input ren;
 	input rst;
 	input clk;
-	input [7:0] ioc_pos_conf;
-	input [7:0] ioc_neg_conf;	
+	input [WIDTH-1:0] ioc_pos_conf;
+	input [WIDTH-1:0] ioc_neg_conf;	
 	output reg int_out;
 	input int_ack;
 	
-	reg [7:0] sync_port;
-	reg [7:0] c1_port;
-	reg [7:0] c2_port;	
+	reg [WIDTH-1:0] sync_port;
+	reg [WIDTH-1:0] c1_port;
+	reg [WIDTH-1:0] c2_port;	
 	
-	reg [7:0] port_out; 
+	reg [WIDTH-1:0] port_out; 
 	
-	wire [7:0] up_port;
-	wire [7:0] down_port;
+	wire [WIDTH-1:0] up_port;
+	wire [WIDTH-1:0] down_port;
 	
 	//Synchronization 
 	always @(posedge clk) begin
@@ -119,7 +124,7 @@ endmodule
 	end
 	
 	assign up_port = c1_port & ~c2_port & ioc_pos_conf;
-	assign down_port = ~c1_port & c2_port & ioc_pos_conf;
+	assign down_port = ~c1_port & c2_port & ioc_neg_conf;
 	
 	//Interrupt
 	always @(posedge clk) begin
@@ -138,6 +143,10 @@ endmodule
 
 endmodule
 
+//Note of in_port_selector are 7 bits, however the inputs can be of
+// variable WIDTH and therefore a concat bus
+// with a size 7:0 needs to be created and passed as input.
+ 
 module in_port_selector(
 	address,
 	in_port0,
@@ -145,6 +154,7 @@ module in_port_selector(
 	//add more ports here
 	out_port
 );
+
 // These parameters must be initialized during instantiation!
 parameter ADDR0 = 8'h00;
 parameter ADDR1 = 8'h01;
