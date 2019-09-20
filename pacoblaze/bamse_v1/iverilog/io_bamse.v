@@ -16,6 +16,7 @@ module io_bamse(
 	port_out,  // to input port in Pacoblaze 
 	port_in, // from output port in Pacoblaze
 	interrupt, // to interrupt in Pacoblaze 
+	ioc_flags, // to interrupt register input in Pacoblaze
 	//interrupt_ack, // from interrupt ack Pacoblaze
 	clk,
 	rst,
@@ -31,6 +32,7 @@ input [7:0]	port_id;
 output [7:0] port_out;
 input [7:0]	port_in;
 output interrupt;
+output [`PORTA_IN_WIDTH-1:0] ioc_flags;
 //input  interrupt_ack;
 input clk;
 input rst;
@@ -75,7 +77,8 @@ inport_ioc #(.ADDR(`PORTA_IN), .WIDTH(`PORTA_IN_WIDTH)) Port_A (
 	.clk(clk),
 	.ioc_pos_conf(portA_IOC_Pos_bus),
 	.ioc_neg_conf(portA_IOC_Neg_bus),
-	.int_out(interrupt)
+	.int_out(interrupt),
+	.int_flags(ioc_flags)
 	//.int_ack(interrupt_ack)
 );
 

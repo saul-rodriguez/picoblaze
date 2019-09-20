@@ -18,13 +18,15 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+`include "bamse.v"
 
 module top(
-    input DIR_RIGHT, //irq (H)
-    input DIR_LEFT, //rst (H)
+    input DIR_RIGHT, 
+    input DIR_LEFT, 
+    input DIR_UP, 
+    input DIR_DOWN,
     input CLK, //32 MHz
-     output LED0,
+    output LED0, 
     output LED1,
     output LED2,
     output LED3,
@@ -45,19 +47,27 @@ module top(
 
 //connect Papillio duo pins to bamse;
 
-wire [7:0] portA_out;
-wire [7:0] portB_in;
+wire [2:0] portA;
+wire [7:0] portB;
+wire [7:0] portC;
 
-assign {LED7,LED6,LED5,LED4,LED3,LED2,LED1,LED0} = portA_out;
-assign portB_in = {SW7,SW6,SW5,SW4,SW3,SW2,SW1,SW0};
+// PORTA
+assign portA = {DIR_LEFT, DIR_DOWN, DIR_RIGHT}; //The pbuttons are pull-down
+
+// PORTB
+assign portB = {SW7,SW6,SW5,SW4,SW3,SW2,SW1,SW0}; //The switches are pull-up
+
+// PORTC
+assign {LED7,LED6,LED5,LED4,LED3,LED2,LED1,LED0} = portC;
+
 
 //Keep arduino's pin in the Papilio board at reset
 assign ARDUINO_RESET = 0;
 
-bamse bamse1(.irq(DIR_RIGHT),
-             .rst(DIR_LEFT),
+bamse bamse1(.rst(DIR_UP),
              .clk(CLK), 
-             .portA_out(portA_out),
-             .portB_in(portB_in)
+             .PortA(portA),
+             .PortB(portB),
+             .PortC(portC)
           );    
 endmodule

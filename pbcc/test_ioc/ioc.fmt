@@ -1,0 +1,136 @@
+                      ;--------------------------------------------------------
+                      ; File Created by SDCC : free open source ANSI-C Compiler
+                      ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+                      ; This file was generated Fri Sep 20 23:48:15 2019
+                      ;--------------------------------------------------------
+                      ;--------------------------------------------------------
+                      ; global & static initialisations
+                      ;--------------------------------------------------------
+                      constant _porta, 00
+                      constant _IOC_state, 01
+
+                      load sf, 3f
+                      jump __sdcc_program_startup
+                      ;--------------------------------------------------------
+                      ; Home
+                      ;--------------------------------------------------------
+ __sdcc_program_startup:
+                      call _main
+                      ;	return from main will lock up
+         __sdcc_loop:
+                      jump __sdcc_loop
+                      ;--------------------------------------------------------
+                      ; code
+                      ;--------------------------------------------------------
+                      ;	device/include/pblaze/intr.h:30: void pbcc_enable_interrupt(void)
+ _pbcc_enable_interrupt:
+                      ;	device/include/pblaze/intr.h:34: __endasm;
+                      enable INTERRUPT
+                      return
+                      ;	device/include/pblaze/intr.h:37: void pbcc_disable_interrupt(void)
+ _pbcc_disable_interrupt:
+                      ;	device/include/pblaze/intr.h:41: __endasm;
+                      ;
+                      ;REMOVED: disable INTERRUPT
+                      ;REMOVED: return
+                      ;	ioc.c:25: void main()
+               _main:
+                      ;	ioc.c:29: PBLAZEPORT[PORTA_IOC_POS_CONF] = 0b00000101;
+                      load s0, 05
+                      output s0, 02
+                      ;	ioc.c:30: PBLAZEPORT[PORTA_IOC_NEG_CONF] = 0b00000011;
+                      load s0, 03
+                      output s0, 03
+                      ;	ioc.c:32: porta = PBLAZEPORT[PORTA_IN];
+                      input s0, 01
+                      store s0, _porta
+                      ;	ioc.c:33: IOC_state = 0;
+                      load s0, 00
+                      store s0, _IOC_state
+                      ;	ioc.c:35: pbcc_enable_interrupt();
+                      call _pbcc_enable_interrupt
+                      ;	ioc.c:37: while(1) {
+             _L00108:
+                      ;	ioc.c:38: if(IOC_state != IOC_IDLE) {
+                      fetch s0, _IOC_state
+                      compare s0, 00
+                      jump NZ, _LC00129
+                      jump _L00108
+            _LC00129:
+                      ;	ioc.c:39: IOC_handler(IOC_state);
+                      fetch s0, _IOC_state
+                      load sb, s0
+                      call _IOC_handler
+                      ;	ioc.c:40: IOC_state = IOC_IDLE;;
+                      load s1, 00
+                      store s1, _IOC_state
+                      jump _L00108
+                      ;	ioc.c:45: void _interrupt_handler(void) __interrupt (1)
+  _interrupt_handler:
+                      ;	ioc.c:47: IOC_isr();
+                      call _IOC_isr
+                      returni ENABLE
+                      ;	ioc.c:50: void IOC_isr()
+            _IOC_isr:
+                      ;	ioc.c:53: porta_new = PBLAZEPORT[PORTA_IN];
+                      input s0, 01
+                      ;	ioc.c:54: IOC_state = porta ^ porta_new;
+                      fetch s1, _porta
+                      load s2, s1
+                      xor s2, s0
+                      store s2, _IOC_state
+                      ;	ioc.c:55: porta = porta_new;
+                      store s0, _porta
+                      return
+                      ;	ioc.c:58: void IOC_handler(unsigned char porta_state)
+        _IOC_handler:
+                      load s0, sb
+                      ;	ioc.c:61: PBLAZEPORT[PORTC_OUT] = porta_state;
+                      output s0, 05
+                      ;	ioc.c:63: aux = porta_state & IOC_BIT0;
+                      load s1, s0
+                      and s1, 01
+                      ;	ioc.c:64: if (aux) {
+                      compare s1, 00
+                      jump NZ, _LC00130
+                      jump _L00119
+            _LC00130:
+                      ;	ioc.c:65: PBLAZEPORT[PORTC_OUT] = 0x0f;
+                      load s2, 0f
+                      output s2, 05
+             _L00119:
+                      ;	ioc.c:67: aux = porta_state & IOC_BIT1;
+                      load s2, s0
+                      and s2, 02
+                      load s1, s2
+                      ;	ioc.c:68: if (aux) {
+                      compare s1, 00
+                      jump NZ, _LC00131
+                      jump _L00121
+            _LC00131:
+                      ;	ioc.c:69: PBLAZEPORT[PORTC_OUT] = 0x3c;
+                      load s2, 3c
+                      output s2, 05
+             _L00121:
+                      ;	ioc.c:71: aux = porta_state & IOC_BIT2;
+                      load s2, s0
+                      and s2, 04
+                      load s1, s2
+                      ;	ioc.c:72: if (aux) {
+                      compare s1, 00
+                      jump NZ, _LC00132
+                      jump _L00123
+            _LC00132:
+                      ;	ioc.c:73: PBLAZEPORT[PORTC_OUT] = 0xf0;
+                      load s0, f0
+                      output s0, 05
+             _L00123:
+                      ;	ioc.c:76: IOC_state = 0;
+                      load s0, 00
+                      store s0, _IOC_state
+                      return
+                      ;--------------------------------------------------------
+                      ; interrupt vector
+                      ;--------------------------------------------------------
+                      address 3ff
+                      jump _interrupt_handler

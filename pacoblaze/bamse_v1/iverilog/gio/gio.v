@@ -79,7 +79,7 @@ endmodule
 	ioc_pos_conf, //rising-edge detection enable 
 	ioc_neg_conf, //falling-edge detection enable	
 	int_out,	//Interrupt on change 
-	int_ack		//Interrupt acknowledge
+//	int_ack		//Interrupt acknowledge
 );	
 
 	parameter ADDR = 8'b0000_0000; 	
@@ -94,7 +94,7 @@ endmodule
 	input [WIDTH-1:0] ioc_pos_conf;
 	input [WIDTH-1:0] ioc_neg_conf;	
 	output reg int_out;
-	input int_ack;
+//	input int_ack;
 	
 	reg [WIDTH-1:0] sync_port;
 	reg [WIDTH-1:0] c1_port;
@@ -105,6 +105,8 @@ endmodule
 	wire [WIDTH-1:0] up_port;
 	wire [WIDTH-1:0] down_port;
 	
+	reg int_reset;
+	
 	//Synchronization 
 	always @(posedge clk) begin
 		if (rst) begin
@@ -112,13 +114,18 @@ endmodule
 			c1_port <= 0;
 			c2_port <= 0;
 			port_out <= 0;
+			int_reset <= 0;
 		end else begin 
 			sync_port <= port_in;
 			c1_port <= sync_port;
 			c2_port <= c1_port;		
 			if (ren) begin
-				if (address == ADDR)
+				if (address == ADDR) begin
 					port_out <= c1_port;
+					int_reset <= 1;
+				end 
+			end else begin
+				int_reset <= 0;
 			end				
 		end
 	end
@@ -131,7 +138,8 @@ endmodule
 		if (rst) begin
 			int_out <= 0;
 		end else begin
-			if (int_ack) begin
+			//if (int_ack) begin
+			if (int_reset) begin
 				int_out <= 0;
 			end else begin
 				if (up_port | down_port) begin

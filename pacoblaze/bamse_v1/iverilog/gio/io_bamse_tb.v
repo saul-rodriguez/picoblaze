@@ -12,7 +12,7 @@ reg [7:0]	port_id;
 wire [7:0] port_out;
 reg [7:0]	port_in;
 wire interrupt;
-reg  interrupt_ack;
+//reg  interrupt_ack;
 reg clk;
 reg rst;
 reg wen;
@@ -28,7 +28,7 @@ io_bamse ports(
 	.port_out(port_out),  // to input port in Pacoblaze 
 	.port_in(port_in), // from output port in Pacoblaze
 	.interrupt(interrupt), // to interrupt in Pacoblaze 
-	.interrupt_ack(interrupt_ack), // from interrupt ack Pacoblaze
+	//.interrupt_ack(interrupt_ack), // from interrupt ack Pacoblaze
 	.clk(clk),
 	.rst(rst),
 	.wen(wen),
@@ -43,7 +43,7 @@ initial begin
 	PortB = 0;
 	port_id = 0;
 	port_in = 0;
-	interrupt_ack = 0;
+//	interrupt_ack = 0;
 	clk = 0;
 	rst = 0;
 	wen = 0; 
@@ -78,34 +78,50 @@ task interrupt_read_PORTA;
 	begin
 	// Interruption and read of PORTA
 	#10 PortA = 3'b001;
-	#30 interrupt_ack = 1;
-	#10 interrupt_ack = 0;
-	#10 port_id = `PORTA_IN;
+	//#30 interrupt_ack = 1;
+	//#10 interrupt_ack = 0;
+	#40 port_id = `PORTA_IN;
 	#10 ren = 1;
 	#10 ren = 0;
+	#10 port_id = 0;
 	#40 PortA = 0;
-	#30 interrupt_ack = 1;
-	#10 interrupt_ack = 0;
+	#40 port_id = `PORTA_IN;
+	#10 ren = 1;
+	#10 ren = 0;
+	#10 port_id = 0;
+	//#30 interrupt_ack = 1;
+	//#10 interrupt_ack = 0;
 	
 	#10 PortA = 3'b010;
-	#30 interrupt_ack = 1;
-	#10 interrupt_ack = 0;
-	#10 port_id = `PORTA_IN;
+	//#30 interrupt_ack = 1;
+	//#10 interrupt_ack = 0;
+	#40 port_id = `PORTA_IN;
 	#10 ren = 1;
 	#10 ren = 0;
+	#10 port_id = 0;
 	#40 PortA = 0;
-	#30 interrupt_ack = 1;
-	#10 interrupt_ack = 0;
+	#40 port_id = `PORTA_IN;
+	#10 ren = 1;
+	#10 ren = 0;
+	#10 port_id = 0;
+	//#30 interrupt_ack = 1;
+	//#10 interrupt_ack = 0;
 	
 	#10 PortA = 3'b100;
-	#30 interrupt_ack = 1;
-	#10 interrupt_ack = 0;
-	#10 port_id = `PORTA_IN;
+	//#30 interrupt_ack = 1;
+	//#10 interrupt_ack = 0;
+	#40 port_id = `PORTA_IN;
 	#10 ren = 1;
 	#10 ren = 0;
+	#10 port_id = 0;
 	#40 PortA = 0;
-	#30 interrupt_ack = 1;
-	#10 interrupt_ack = 0;
+	#40 port_id = `PORTA_IN;
+	#10 ren = 1;
+	#10 ren = 0;
+	#10 port_id = 0;
+	//#30 interrupt_ack = 1;
+	//#10 interrupt_ack = 0;
+	
 	end
 endtask
 
@@ -128,7 +144,7 @@ task write_PORTC;
 endtask
 
 always begin
-	#4 clk = ~clk;
+	#5 clk = ~clk;
 end
 
 endmodule
