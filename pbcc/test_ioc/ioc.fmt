@@ -1,7 +1,7 @@
                       ;--------------------------------------------------------
                       ; File Created by SDCC : free open source ANSI-C Compiler
                       ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
-                      ; This file was generated Fri Sep 20 23:48:15 2019
+                      ; This file was generated Mon Sep 23 21:57:58 2019
                       ;--------------------------------------------------------
                       ;--------------------------------------------------------
                       ; global & static initialisations
@@ -41,93 +41,94 @@
                       ;	ioc.c:30: PBLAZEPORT[PORTA_IOC_NEG_CONF] = 0b00000011;
                       load s0, 03
                       output s0, 03
-                      ;	ioc.c:32: porta = PBLAZEPORT[PORTA_IN];
+                      ;	ioc.c:33: PBLAZEPORT[INT_OUT_CONFIG] = 0b00000111;
+                      load s0, 07
+                      output s0, 00
+                      ;	ioc.c:35: porta = PBLAZEPORT[PORTA_IN];
                       input s0, 01
                       store s0, _porta
-                      ;	ioc.c:33: IOC_state = 0;
+                      ;	ioc.c:36: IOC_state = 0;
                       load s0, 00
                       store s0, _IOC_state
-                      ;	ioc.c:35: pbcc_enable_interrupt();
+                      ;	ioc.c:38: pbcc_enable_interrupt();
                       call _pbcc_enable_interrupt
-                      ;	ioc.c:37: while(1) {
+                      ;	ioc.c:40: while(1) {
              _L00108:
-                      ;	ioc.c:38: if(IOC_state != IOC_IDLE) {
+                      ;	ioc.c:41: if(IOC_state != IOC_IDLE) {
                       fetch s0, _IOC_state
                       compare s0, 00
-                      jump NZ, _LC00129
+                      jump NZ, _LC00132
                       jump _L00108
-            _LC00129:
-                      ;	ioc.c:39: IOC_handler(IOC_state);
+            _LC00132:
+                      ;	ioc.c:42: IOC_handler(IOC_state);
                       fetch s0, _IOC_state
                       load sb, s0
                       call _IOC_handler
-                      ;	ioc.c:40: IOC_state = IOC_IDLE;;
+                      ;	ioc.c:43: IOC_state = IOC_IDLE;;
                       load s1, 00
                       store s1, _IOC_state
                       jump _L00108
-                      ;	ioc.c:45: void _interrupt_handler(void) __interrupt (1)
+                      ;	ioc.c:48: void _interrupt_handler(void) __interrupt (1)
   _interrupt_handler:
-                      ;	ioc.c:47: IOC_isr();
+                      ;	ioc.c:50: IOC_isr();
                       call _IOC_isr
                       returni ENABLE
-                      ;	ioc.c:50: void IOC_isr()
+                      ;	ioc.c:53: void IOC_isr()
             _IOC_isr:
-                      ;	ioc.c:53: porta_new = PBLAZEPORT[PORTA_IN];
+                      ;	ioc.c:63: ioc_flags = PBLAZEPORT[INT_IN_FLAGS];
+                      input s0, 00
+                      ;	ioc.c:64: if (ioc_flags) {
+                      compare s0, 00
+                      jump NZ, _LC00133
+                      jump _L00118
+            _LC00133:
+                      ;	ioc.c:65: IOC_state = ioc_flags;
+                      store s0, _IOC_state
+                      ;	ioc.c:66: aux = PBLAZEPORT[PORTA_IN]; //Reset IOC flags
                       input s0, 01
-                      ;	ioc.c:54: IOC_state = porta ^ porta_new;
-                      fetch s1, _porta
-                      load s2, s1
-                      xor s2, s0
-                      store s2, _IOC_state
-                      ;	ioc.c:55: porta = porta_new;
-                      store s0, _porta
+             _L00118:
                       return
-                      ;	ioc.c:58: void IOC_handler(unsigned char porta_state)
+                      ;	ioc.c:71: void IOC_handler(unsigned char state)
         _IOC_handler:
                       load s0, sb
-                      ;	ioc.c:61: PBLAZEPORT[PORTC_OUT] = porta_state;
-                      output s0, 05
-                      ;	ioc.c:63: aux = porta_state & IOC_BIT0;
+                      ;	ioc.c:75: aux = state & IOC_BIT0;
                       load s1, s0
                       and s1, 01
-                      ;	ioc.c:64: if (aux) {
+                      ;	ioc.c:76: if (aux) {
                       compare s1, 00
-                      jump NZ, _LC00130
-                      jump _L00119
-            _LC00130:
-                      ;	ioc.c:65: PBLAZEPORT[PORTC_OUT] = 0x0f;
+                      jump NZ, _LC00134
+                      jump _L00122
+            _LC00134:
+                      ;	ioc.c:77: PBLAZEPORT[PORTC_OUT] = 0x0f;
                       load s2, 0f
                       output s2, 05
-             _L00119:
-                      ;	ioc.c:67: aux = porta_state & IOC_BIT1;
+             _L00122:
+                      ;	ioc.c:79: aux = state & IOC_BIT1;
                       load s2, s0
                       and s2, 02
                       load s1, s2
-                      ;	ioc.c:68: if (aux) {
+                      ;	ioc.c:80: if (aux) {
                       compare s1, 00
-                      jump NZ, _LC00131
-                      jump _L00121
-            _LC00131:
-                      ;	ioc.c:69: PBLAZEPORT[PORTC_OUT] = 0x3c;
+                      jump NZ, _LC00135
+                      jump _L00124
+            _LC00135:
+                      ;	ioc.c:81: PBLAZEPORT[PORTC_OUT] = 0x3c;
                       load s2, 3c
                       output s2, 05
-             _L00121:
-                      ;	ioc.c:71: aux = porta_state & IOC_BIT2;
+             _L00124:
+                      ;	ioc.c:83: aux = state & IOC_BIT2;
                       load s2, s0
                       and s2, 04
                       load s1, s2
-                      ;	ioc.c:72: if (aux) {
+                      ;	ioc.c:84: if (aux) {
                       compare s1, 00
-                      jump NZ, _LC00132
-                      jump _L00123
-            _LC00132:
-                      ;	ioc.c:73: PBLAZEPORT[PORTC_OUT] = 0xf0;
+                      jump NZ, _LC00136
+                      jump _L00127
+            _LC00136:
+                      ;	ioc.c:85: PBLAZEPORT[PORTC_OUT] = 0xf0;
                       load s0, f0
                       output s0, 05
-             _L00123:
-                      ;	ioc.c:76: IOC_state = 0;
-                      load s0, 00
-                      store s0, _IOC_state
+             _L00127:
                       return
                       ;--------------------------------------------------------
                       ; interrupt vector

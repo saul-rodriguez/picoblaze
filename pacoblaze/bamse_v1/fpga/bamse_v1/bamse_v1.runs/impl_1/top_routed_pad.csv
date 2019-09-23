@@ -1,7 +1,7 @@
 #Release 14.7 - par P.20131013 (lin64)
 #Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-#Sat Sep 14 02:19:28 2019
+#Mon Sep 23 22:32:18 2019
 
 #
 ## NOTE: This file is designed to be imported into a spreadsheet program
@@ -150,8 +150,8 @@ P128,,,VCCINT,,,,,,,,1.2,,,,
 P129,,,VCCAUX,,,,,,,,2.5,,,,
 P130,,,GND,,,,,,,,,,,,
 P131,DIR_RIGHT,IOB,IO_L35N_GCLK16_0,INPUT,LVTTL,0,,,,NONE,,LOCATED,NO,NONE,
-P132,,IOBM,IO_L35P_GCLK17_0,UNUSED,,0,,,,,,,,,
-P133,,IOBS,IO_L34N_GCLK18_0,UNUSED,,0,,,,,,,,,
+P132,DIR_UP,IOB,IO_L35P_GCLK17_0,INPUT,LVTTL,0,,,,NONE,,LOCATED,NO,NONE,
+P133,DIR_DOWN,IOB,IO_L34N_GCLK18_0,INPUT,LVTTL,0,,,,NONE,,LOCATED,NO,NONE,
 P134,DIR_LEFT,IOB,IO_L34P_GCLK19_0,INPUT,LVTTL,0,,,,NONE,,LOCATED,NO,NONE,
 P135,,,VCCO_0,,,0,,,,,3.30,,,,
 P136,,,GND,,,,,,,,,,,,

@@ -1,37 +1,41 @@
 //`define PACOBLAZE3
 
+`ifndef BAMSE_V
+`define BAMSE_V
+
 `include "pacoblaze3.v"
 `include "pacoblaze_inc.v"
-`include "gio.v"
+`include "bamse_inc.v"
+`include "io_bamse.v"
 
-//Comment if implementation memory is used for program (FPGA, ASIC)
-//`define PROG_MEM_BEHAVIORAL 
+`ifdef PROG_MEM_BEHAVIORAL
+`include "blockram.v"
+`endif
 
-//I/O devices addresses
-`define PORTA 8'h01 //Digital output
-`define PORTB 8'h02 //Digital input
 
 module bamse(	
-	irq,	//IRQ active H
+	//irq,	//IRQ active H
 	rst, //Reset active H
 	clk,
-	portA_out,
-	portB_in
+	PortA,
+	PortB,
+	PortC
 );
 
-input irq;
+//input irq;
 input rst;  
 input clk;
 
-output [7:0] portA_out; //PortA output
-input [7:0] portB_in; //PortB input
+input [`PORTA_IN_WIDTH-1:0] PortA; 
+input [`PORTB_IN_WIDTH-1:0] PortB; 
+output [`PORTC_OUT_WIDTH-1:0] PortC;
 
 
 wire [`code_depth-1:0] addr; // instruction address
 wire [`operand_width-1:0] pid;   // port id 
 wire [`operand_width-1:0] pout; // port output
-wire ren;  // read strobe, write strobe
-wire wen;
+wire ren;  // read strobe
+wire wen;  // write strobe
 `ifdef HAS_INTERRUPT_ACK
 wire iak; // interrupt acknowledge
 `endif
@@ -39,6 +43,10 @@ wire iak; // interrupt acknowledge
 wire [`code_width-1:0] din; // program data input
 wire [`operand_width-1:0] pin; // port input
 
+wire irq;
+
+//wire [`operand_width-1:0] interrupt_flags;
+//assign interrupt_flags[7:3] = 0;
 
 /* PacoBlaze program memory behavioral model */
 
@@ -79,25 +87,25 @@ pacoblaze3 pblaze(
 `endif
 );
 
-/* Output ports */
-outport #(.ADDR(`PORTA)) portA(
-	.address(pid),
-	.value_in(pout),
+io_bamse ports(
+//Ports 
+	.PortA(PortA),
+	.PortB(PortB),
+	.PortC(PortC),	
+	//Pacoblaze pins
+	.port_id(pid),  //from port address in Pacoblaze
+	.port_out(pin),  // to input port in Pacoblaze 
+	.port_in(pout), // from output port in Pacoblaze
+	.interrupt(irq), // to interrupt in Pacoblaze 
+	//.ioc_flags(interrupt_flags[2:0]),
+	//.interrupt_ack(iak), // from interrupt ack Pacoblaze
+	.clk(clk),
+	.rst(rst),
 	.wen(wen),
-	.rst(rst),
-	.port_out(portA_out)	
-);
-	
-/* Input ports */
-inport #(.ADDR0(`PORTB)) inp_control(
-	.address(pid),
-	.port0_in(portB_in),
-	.value_out(pin),
-	.ren(ren),
-	.rst(rst),
-	.clk(clk)
+	.ren(ren)
 );
 
 endmodule
 
+`endif
 

@@ -14,6 +14,9 @@
 #define PORTC_OUT 0x05
 #define PORTC_OUT_WIDTH 8
 
+#define INT_OUT_CONFIG 0x00 
+#define INT_IN_FLAGS  0x00 
+
 
 #endif
 

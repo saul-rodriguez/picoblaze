@@ -28,16 +28,16 @@ INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on
 Timing constraint: NET "CLK_BUFGP/IBUFG" PERIOD = 31 ns HIGH 50%;
 For more information, see Period Analysis in the Timing Closure User Guide (UG612).
 
- 11123 paths analyzed, 452 endpoints analyzed, 0 failing endpoints
+ 12329 paths analyzed, 482 endpoints analyzed, 0 failing endpoints
  0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
- Minimum period is   9.652ns.
+ Minimum period is  11.255ns.
 --------------------------------------------------------------------------------
-Slack:                  21.348ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  19.745ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.523ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      11.239ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -48,41 +48,42 @@ Slack:                  21.348ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA5    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A3      net (fanout=8)        1.884   bamse1/din[5]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
+    SLICE_X9Y49.D3       net (fanout=40)       2.495   bamse1/din[15]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
     -------------------------------------------------  ---------------------------
-    Total                                      9.523ns (3.440ns logic, 6.083ns route)
-                                                       (36.1% logic, 63.9% route)
+    Total                                     11.239ns (3.801ns logic, 7.438ns route)
+                                                       (33.8% logic, 66.2% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.352ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  19.797ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr3/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.518ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.095ns (0.592 - 0.687)
+  Data Path Delay:      11.187ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -93,42 +94,42 @@ Slack:                  21.352ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr3/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA8    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X16Y42.D2      net (fanout=5)        1.782   bamse1/din[8]
-    SLICE_X16Y42.D       Tilo                  0.254   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr1/SP
-    SLICE_X17Y40.C1      net (fanout=13)       0.771   bamse1/pout[0]
-    SLICE_X17Y40.C       Tilo                  0.259   bamse1/pblaze/alu/N39
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_lut<0>
-    SLICE_X14Y40.A1      net (fanout=1)        0.736   bamse1/pblaze/alu/Madd_addsub_result_Madd_lut[0]
-    SLICE_X14Y40.CMUX    Topac                 0.636   bamse1/pblaze/alu/Madd_addsub_result_Madd_cy[3]
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_lut[0]_rt
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_cy<3>
-    SLICE_X15Y42.A6      net (fanout=1)        0.382   bamse1/pblaze/alu/addsub_result[2]
-    SLICE_X15Y42.A       Tilo                  0.259   bamse1/pblaze/alu/result[2]
-                                                       bamse1/pblaze/alu/result<2>5
-    SLICE_X15Y42.C2      net (fanout=2)        0.538   bamse1/pblaze/alu_result[2]
-    SLICE_X15Y42.C       Tilo                  0.259   bamse1/pblaze/alu/result[2]
-                                                       bamse1/pblaze/register_x_data_in<2>1
-    SLICE_X12Y42.AI      net (fanout=2)        1.480   bamse1/pblaze/register_x_data_in[2]
-    SLICE_X12Y42.CLK     Tds                   0.062   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr3/DP
+    SLICE_X9Y49.D3       net (fanout=40)       2.495   bamse1/din[15]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
     -------------------------------------------------  ---------------------------
-    Total                                      9.518ns (3.829ns logic, 5.689ns route)
-                                                       (40.2% logic, 59.8% route)
+    Total                                     11.187ns (3.791ns logic, 7.396ns route)
+                                                       (33.9% logic, 66.1% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.374ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  19.883ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_5 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.497ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      11.101ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -139,41 +140,42 @@ Slack:                  21.374ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A2      net (fanout=7)        1.858   bamse1/din[4]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
+    SLICE_X9Y49.D3       net (fanout=40)       2.495   bamse1/din[15]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.B5       net (fanout=5)        0.463   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012761
+                                                       bamse1/pblaze/program_counter_5
     -------------------------------------------------  ---------------------------
-    Total                                      9.497ns (3.440ns logic, 6.057ns route)
-                                                       (36.2% logic, 63.8% route)
+    Total                                     11.101ns (3.801ns logic, 7.300ns route)
+                                                       (34.2% logic, 65.8% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.457ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  19.976ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/SP (RAM)
+  Destination:          bamse1/pblaze/program_counter_9 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.414ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      11.008ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -184,41 +186,42 @@ Slack:                  21.457ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/SP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_9
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA5    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A3      net (fanout=8)        1.884   bamse1/din[5]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                  -0.054   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/SP
+    SLICE_X9Y49.D3       net (fanout=40)       2.495   bamse1/din[15]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.D3       net (fanout=5)        0.380   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n0127101
+                                                       bamse1/pblaze/program_counter_9
     -------------------------------------------------  ---------------------------
-    Total                                      9.414ns (3.331ns logic, 6.083ns route)
-                                                       (35.4% logic, 64.6% route)
+    Total                                     11.008ns (3.791ns logic, 7.217ns route)
+                                                       (34.4% logic, 65.6% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.483ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.080ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/SP (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.388ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.904ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -229,41 +232,410 @@ Slack:                  21.483ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/SP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOPA1   Trcko_DOPA            2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A2      net (fanout=7)        1.858   bamse1/din[4]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                  -0.054   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/SP
+    SLICE_X9Y49.D4       net (fanout=49)       2.160   bamse1/din[17]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
     -------------------------------------------------  ---------------------------
-    Total                                      9.388ns (3.331ns logic, 6.057ns route)
+    Total                                     10.904ns (3.801ns logic, 7.103ns route)
+                                                       (34.9% logic, 65.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.132ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.852ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOPA1   Trcko_DOPA            2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.D4       net (fanout=49)       2.160   bamse1/din[17]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
+    -------------------------------------------------  ---------------------------
+    Total                                     10.852ns (3.791ns logic, 7.061ns route)
+                                                       (34.9% logic, 65.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.194ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_7 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.790ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_7
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.D3       net (fanout=40)       2.495   bamse1/din[15]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.B6       net (fanout=5)        0.162   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012781
+                                                       bamse1/pblaze/program_counter_7
+    -------------------------------------------------  ---------------------------
+    Total                                     10.790ns (3.791ns logic, 6.999ns route)
+                                                       (35.1% logic, 64.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.218ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_5 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.766ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_5
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOPA1   Trcko_DOPA            2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.D4       net (fanout=49)       2.160   bamse1/din[17]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.B5       net (fanout=5)        0.463   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012761
+                                                       bamse1/pblaze/program_counter_5
+    -------------------------------------------------  ---------------------------
+    Total                                     10.766ns (3.801ns logic, 6.965ns route)
+                                                       (35.3% logic, 64.7% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.246ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.738ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.C3       net (fanout=40)       2.462   bamse1/din[15]
+    SLICE_X9Y49.C        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW3
+    SLICE_X5Y46.B4       net (fanout=1)        0.874   bamse1/pblaze/N80
+    SLICE_X5Y46.B        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001221
+    SLICE_X4Y45.A2       net (fanout=5)        1.128   bamse1/pblaze/stack/n0012[1]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
+    -------------------------------------------------  ---------------------------
+    Total                                     10.738ns (3.782ns logic, 6.956ns route)
+                                                       (35.2% logic, 64.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.261ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.723ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.C3       net (fanout=8)        0.740   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
+    -------------------------------------------------  ---------------------------
+    Total                                     10.723ns (3.777ns logic, 6.946ns route)
+                                                       (35.2% logic, 64.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.298ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.686ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.C3       net (fanout=40)       2.462   bamse1/din[15]
+    SLICE_X9Y49.C        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW3
+    SLICE_X5Y46.B4       net (fanout=1)        0.874   bamse1/pblaze/N80
+    SLICE_X5Y46.B        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001221
+    SLICE_X4Y45.A2       net (fanout=5)        1.128   bamse1/pblaze/stack/n0012[1]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
+    -------------------------------------------------  ---------------------------
+    Total                                     10.686ns (3.772ns logic, 6.914ns route)
+                                                       (35.3% logic, 64.7% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.302ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.682ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.D5       net (fanout=8)        0.859   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.D        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001241
+    SLICE_X4Y45.A4       net (fanout=5)        1.268   bamse1/pblaze/stack/n0012[3]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
+    -------------------------------------------------  ---------------------------
+    Total                                     10.682ns (3.758ns logic, 6.924ns route)
+                                                       (35.2% logic, 64.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.311ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_9 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.673ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_9
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOPA1   Trcko_DOPA            2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.D4       net (fanout=49)       2.160   bamse1/din[17]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.D3       net (fanout=5)        0.380   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n0127101
+                                                       bamse1/pblaze/program_counter_9
+    -------------------------------------------------  ---------------------------
+    Total                                     10.673ns (3.791ns logic, 6.882ns route)
                                                        (35.5% logic, 64.5% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.508ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.313ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.363ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.671ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -274,41 +646,42 @@ Slack:                  21.508ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA5    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A3      net (fanout=8)        1.884   bamse1/din[5]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X18Y41.B5      net (fanout=2)        0.476   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X18Y41.B       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/alu/result<7>6_SW1
-    SLICE_X18Y41.C3      net (fanout=1)        1.162   bamse1/pblaze/N48
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.C3       net (fanout=8)        0.740   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
     -------------------------------------------------  ---------------------------
-    Total                                      9.363ns (3.440ns logic, 5.923ns route)
-                                                       (36.7% logic, 63.3% route)
+    Total                                     10.671ns (3.767ns logic, 6.904ns route)
+                                                       (35.3% logic, 64.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.534ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.354ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.337ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.630ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -319,41 +692,42 @@ Slack:                  21.534ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A2      net (fanout=7)        1.858   bamse1/din[4]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X18Y41.B5      net (fanout=2)        0.476   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X18Y41.B       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/alu/result<7>6_SW1
-    SLICE_X18Y41.C3      net (fanout=1)        1.162   bamse1/pblaze/N48
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.D5       net (fanout=8)        0.859   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.D        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001241
+    SLICE_X4Y45.A4       net (fanout=5)        1.268   bamse1/pblaze/stack/n0012[3]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
     -------------------------------------------------  ---------------------------
-    Total                                      9.337ns (3.440ns logic, 5.897ns route)
-                                                       (36.8% logic, 63.2% route)
+    Total                                     10.630ns (3.748ns logic, 6.882ns route)
+                                                       (35.3% logic, 64.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.543ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.384ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_5 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.328ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.600ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -364,41 +738,42 @@ Slack:                  21.543ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA6    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A4      net (fanout=10)       1.689   bamse1/din[6]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
+    SLICE_X9Y49.C3       net (fanout=40)       2.462   bamse1/din[15]
+    SLICE_X9Y49.C        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW3
+    SLICE_X5Y46.B4       net (fanout=1)        0.874   bamse1/pblaze/N80
+    SLICE_X5Y46.B        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001221
+    SLICE_X4Y45.A2       net (fanout=5)        1.128   bamse1/pblaze/stack/n0012[1]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.B5       net (fanout=5)        0.463   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012761
+                                                       bamse1/pblaze/program_counter_5
     -------------------------------------------------  ---------------------------
-    Total                                      9.328ns (3.440ns logic, 5.888ns route)
-                                                       (36.9% logic, 63.1% route)
+    Total                                     10.600ns (3.782ns logic, 6.818ns route)
+                                                       (35.7% logic, 64.3% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.570ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.385ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.301ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.599ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -409,41 +784,42 @@ Slack:                  21.570ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA6    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.B4      net (fanout=10)       1.894   bamse1/din[6]
-    SLICE_X12Y42.BMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
-    SLICE_X17Y42.D6      net (fanout=3)        0.449   bamse1/pblaze/register_y_data_out[3]
-    SLICE_X17Y42.D       Tilo                  0.259   bamse1/pblaze/carry
-                                                       bamse1/pblaze/port_id<3>1
-    SLICE_X16Y40.B4      net (fanout=12)       1.011   bamse1/pid[3]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.D5       net (fanout=8)        0.859   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.D        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001241
+    SLICE_X4Y45.C4       net (fanout=5)        0.939   bamse1/pblaze/stack/n0012[3]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
     -------------------------------------------------  ---------------------------
-    Total                                      9.301ns (3.464ns logic, 5.837ns route)
-                                                       (37.2% logic, 62.8% route)
+    Total                                     10.599ns (3.777ns logic, 6.822ns route)
+                                                       (35.6% logic, 64.4% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.595ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.398ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.276ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.586ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -454,41 +830,42 @@ Slack:                  21.595ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.B2      net (fanout=7)        1.869   bamse1/din[4]
-    SLICE_X12Y42.BMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
-    SLICE_X17Y42.D6      net (fanout=3)        0.449   bamse1/pblaze/register_y_data_out[3]
-    SLICE_X17Y42.D       Tilo                  0.259   bamse1/pblaze/carry
-                                                       bamse1/pblaze/port_id<3>1
-    SLICE_X16Y40.B4      net (fanout=12)       1.011   bamse1/pid[3]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.B1       net (fanout=8)        0.903   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.B        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001221
+    SLICE_X4Y45.A2       net (fanout=5)        1.128   bamse1/pblaze/stack/n0012[1]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
     -------------------------------------------------  ---------------------------
-    Total                                      9.276ns (3.464ns logic, 5.812ns route)
-                                                       (37.3% logic, 62.7% route)
+    Total                                     10.586ns (3.758ns logic, 6.828ns route)
+                                                       (35.5% logic, 64.5% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.617ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.399ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/SP (RAM)
+  Destination:          bamse1/pblaze/program_counter_5 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.254ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.585ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -499,41 +876,88 @@ Slack:                  21.617ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/SP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA5    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A3      net (fanout=8)        1.884   bamse1/din[5]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X18Y41.B5      net (fanout=2)        0.476   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X18Y41.B       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/alu/result<7>6_SW1
-    SLICE_X18Y41.C3      net (fanout=1)        1.162   bamse1/pblaze/N48
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                  -0.054   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/SP
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.C3       net (fanout=8)        0.740   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.B5       net (fanout=5)        0.463   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012761
+                                                       bamse1/pblaze/program_counter_5
     -------------------------------------------------  ---------------------------
-    Total                                      9.254ns (3.331ns logic, 5.923ns route)
+    Total                                     10.585ns (3.777ns logic, 6.808ns route)
+                                                       (35.7% logic, 64.3% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.414ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.570ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.C3       net (fanout=40)       2.462   bamse1/din[15]
+    SLICE_X9Y49.C        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW3
+    SLICE_X5Y46.B4       net (fanout=1)        0.874   bamse1/pblaze/N80
+    SLICE_X5Y46.B        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001221
+    SLICE_X4Y45.C2       net (fanout=5)        0.714   bamse1/pblaze/stack/n0012[1]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
+    -------------------------------------------------  ---------------------------
+    Total                                     10.570ns (3.801ns logic, 6.769ns route)
                                                        (36.0% logic, 64.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.626ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.437ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.245ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.547ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -544,41 +968,42 @@ Slack:                  21.626ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA7    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A5      net (fanout=8)        1.606   bamse1/din[7]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.D5       net (fanout=8)        0.859   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.D        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001241
+    SLICE_X4Y45.C4       net (fanout=5)        0.939   bamse1/pblaze/stack/n0012[3]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
     -------------------------------------------------  ---------------------------
-    Total                                      9.245ns (3.440ns logic, 5.805ns route)
-                                                       (37.2% logic, 62.8% route)
+    Total                                     10.547ns (3.767ns logic, 6.780ns route)
+                                                       (35.7% logic, 64.3% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.639ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.440ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr4/DP (RAM)
+  Destination:          bamse1/pblaze/program_counter_5 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.231ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.095ns (0.592 - 0.687)
+  Data Path Delay:      10.544ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -589,42 +1014,42 @@ Slack:                  21.639ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr4/DP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA8    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X16Y42.D2      net (fanout=5)        1.782   bamse1/din[8]
-    SLICE_X16Y42.D       Tilo                  0.254   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr1/SP
-    SLICE_X17Y40.C1      net (fanout=13)       0.771   bamse1/pout[0]
-    SLICE_X17Y40.C       Tilo                  0.259   bamse1/pblaze/alu/N39
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_lut<0>
-    SLICE_X14Y40.A1      net (fanout=1)        0.736   bamse1/pblaze/alu/Madd_addsub_result_Madd_lut[0]
-    SLICE_X14Y40.DMUX    Topad                 0.667   bamse1/pblaze/alu/Madd_addsub_result_Madd_cy[3]
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_lut[0]_rt
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_cy<3>
-    SLICE_X15Y43.C4      net (fanout=1)        0.742   bamse1/pblaze/alu/addsub_result[3]
-    SLICE_X15Y43.C       Tilo                  0.259   bamse1/pblaze/zero
-                                                       bamse1/pblaze/alu/result<3>5
-    SLICE_X14Y42.D5      net (fanout=2)        0.441   bamse1/pblaze/alu_result[3]
-    SLICE_X14Y42.D       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/register_x_data_in<3>1
-    SLICE_X12Y42.DX      net (fanout=1)        0.930   bamse1/pblaze/register_x_data_in[3]
-    SLICE_X12Y42.CLK     Tds                   0.055   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.D5       net (fanout=8)        0.859   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.D        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001241
+    SLICE_X4Y45.A4       net (fanout=5)        1.268   bamse1/pblaze/stack/n0012[3]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.B5       net (fanout=5)        0.463   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012761
+                                                       bamse1/pblaze/program_counter_5
     -------------------------------------------------  ---------------------------
-    Total                                      9.231ns (3.829ns logic, 5.402ns route)
-                                                       (41.5% logic, 58.5% route)
+    Total                                     10.544ns (3.758ns logic, 6.786ns route)
+                                                       (35.6% logic, 64.4% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.643ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.448ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/SP (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.228ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.536ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -635,41 +1060,42 @@ Slack:                  21.643ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/SP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA14   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A2      net (fanout=7)        1.858   bamse1/din[4]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X18Y41.B5      net (fanout=2)        0.476   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X18Y41.B       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/alu/result<7>6_SW1
-    SLICE_X18Y41.C3      net (fanout=1)        1.162   bamse1/pblaze/N48
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                  -0.054   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/SP
+    SLICE_X9Y49.D6       net (fanout=35)       1.792   bamse1/din[14]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
     -------------------------------------------------  ---------------------------
-    Total                                      9.228ns (3.331ns logic, 5.897ns route)
+    Total                                     10.536ns (3.801ns logic, 6.735ns route)
                                                        (36.1% logic, 63.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.652ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.450ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/SP (RAM)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.219ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
+  Data Path Delay:      10.534ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -680,41 +1106,272 @@ Slack:                  21.652ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/SP
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA6    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A4      net (fanout=10)       1.689   bamse1/din[6]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                  -0.054   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/SP
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.B1       net (fanout=8)        0.903   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.B        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001221
+    SLICE_X4Y45.A2       net (fanout=5)        1.128   bamse1/pblaze/stack/n0012[1]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
     -------------------------------------------------  ---------------------------
-    Total                                      9.219ns (3.331ns logic, 5.888ns route)
+    Total                                     10.534ns (3.748ns logic, 6.786ns route)
+                                                       (35.6% logic, 64.4% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.460ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.524ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA10   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X6Y45.C4       net (fanout=5)        2.106   bamse1/din[10]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.C3       net (fanout=8)        0.740   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
+    -------------------------------------------------  ---------------------------
+    Total                                     10.524ns (3.777ns logic, 6.747ns route)
+                                                       (35.9% logic, 64.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.466ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.518ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.C3       net (fanout=40)       2.462   bamse1/din[15]
+    SLICE_X9Y49.C        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW3
+    SLICE_X5Y46.B4       net (fanout=1)        0.874   bamse1/pblaze/N80
+    SLICE_X5Y46.B        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001221
+    SLICE_X4Y45.C2       net (fanout=5)        0.714   bamse1/pblaze/stack/n0012[1]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
+    -------------------------------------------------  ---------------------------
+    Total                                     10.518ns (3.791ns logic, 6.727ns route)
+                                                       (36.0% logic, 64.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.477ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_9 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.507ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_9
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.C3       net (fanout=40)       2.462   bamse1/din[15]
+    SLICE_X9Y49.C        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW3
+    SLICE_X5Y46.B4       net (fanout=1)        0.874   bamse1/pblaze/N80
+    SLICE_X5Y46.B        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001221
+    SLICE_X4Y45.A2       net (fanout=5)        1.128   bamse1/pblaze/stack/n0012[1]
+    SLICE_X4Y45.AMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMA
+    SLICE_X2Y46.A2       net (fanout=1)        1.137   bamse1/pblaze/stack_data_out[0]
+    SLICE_X2Y46.A        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012611
+    SLICE_X0Y45.A2       net (fanout=6)        0.754   bamse1/pblaze/Madd_n0164[10:0]_cy[0]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.D3       net (fanout=5)        0.380   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n0127101
+                                                       bamse1/pblaze/program_counter_9
+    -------------------------------------------------  ---------------------------
+    Total                                     10.507ns (3.772ns logic, 6.735ns route)
+                                                       (35.9% logic, 64.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.492ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_9 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.492ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_9
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA12   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X6Y45.C3       net (fanout=33)       2.305   bamse1/din[12]
+    SLICE_X6Y45.C        Tilo                  0.235   bamse1/pblaze/ptr_4
+                                                       bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o1
+    SLICE_X5Y46.C3       net (fanout=8)        0.740   bamse1/pblaze/idu_conditional_idu_condition_flags[1]_OR_98_o
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.D3       net (fanout=5)        0.380   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n0127101
+                                                       bamse1/pblaze/program_counter_9
+    -------------------------------------------------  ---------------------------
+    Total                                     10.492ns (3.767ns logic, 6.725ns route)
+                                                       (35.9% logic, 64.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  20.496ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
+  Destination:          bamse1/pblaze/program_counter_6 (FF)
+  Requirement:          31.000ns
+  Data Path Delay:      10.488ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
+  Source Clock:         CLK_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_BUFGP rising at 31.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    RAMB16_X1Y22.DOA15   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+                                                       bamse1/mem/RAMB16BWER_inst
+    SLICE_X9Y49.D3       net (fanout=40)       2.495   bamse1/din[15]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.B3       net (fanout=5)        1.186   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.BMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMB
+    SLICE_X2Y46.D3       net (fanout=1)        0.782   bamse1/pblaze/stack_data_out[2]
+    SLICE_X2Y46.D        Tilo                  0.235   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+                                                       bamse1/pblaze/Mmux_n012631
+    SLICE_X0Y45.A3       net (fanout=4)        0.600   bamse1/pblaze/Madd_n0164[10:0]_lut[2]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X2Y45.C4       net (fanout=5)        0.601   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X2Y45.CLK      Tas                   0.349   bamse1/addr[6]
+                                                       bamse1/pblaze/Mmux_n012771
+                                                       bamse1/pblaze/program_counter_6
+    -------------------------------------------------  ---------------------------
+    Total                                     10.488ns (3.782ns logic, 6.706ns route)
                                                        (36.1% logic, 63.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  21.659ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  20.500ns (requirement - (data path - clock path skew + uncertainty))
   Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/zero (FF)
+  Destination:          bamse1/pblaze/program_counter_8 (FF)
   Requirement:          31.000ns
-  Data Path Delay:      9.215ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.091ns (0.596 - 0.687)
+  Data Path Delay:      10.484ns (Levels of Logic = 6)
+  Clock Path Skew:      0.019ns (0.643 - 0.624)
   Source Clock:         CLK_BUFGP rising at 0.000ns
   Destination Clock:    CLK_BUFGP rising at 31.000ns
   Clock Uncertainty:    0.035ns
@@ -725,664 +1382,34 @@ Slack:                  21.659ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/zero
+  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_8
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA8    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
+    RAMB16_X1Y22.DOA14   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
                                                        bamse1/mem/RAMB16BWER_inst
-    SLICE_X16Y42.D2      net (fanout=5)        1.782   bamse1/din[8]
-    SLICE_X16Y42.D       Tilo                  0.254   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr1/SP
-    SLICE_X17Y40.C1      net (fanout=13)       0.771   bamse1/pout[0]
-    SLICE_X17Y40.C       Tilo                  0.259   bamse1/pblaze/alu/N39
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_lut<0>
-    SLICE_X14Y40.A1      net (fanout=1)        0.736   bamse1/pblaze/alu/Madd_addsub_result_Madd_lut[0]
-    SLICE_X14Y40.COUT    Topcya                0.472   bamse1/pblaze/alu/Madd_addsub_result_Madd_cy[3]
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_lut[0]_rt
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_cy<3>
-    SLICE_X14Y41.CIN     net (fanout=1)        0.003   bamse1/pblaze/alu/Madd_addsub_result_Madd_cy[3]
-    SLICE_X14Y41.DQ      Tito_logic            0.763   bamse1/pblaze/addsub_result[7]
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_cy<7>
-                                                       bamse1/pblaze/addsub_result[7]_rt
-    SLICE_X19Y41.C6      net (fanout=2)        0.421   bamse1/pblaze/addsub_result[7]
-    SLICE_X19Y41.C       Tilo                  0.259   bamse1/pin[7]
-                                                       bamse1/pblaze/alu/result<7>6
-    SLICE_X15Y43.A1      net (fanout=1)        1.022   bamse1/pblaze/alu_result[7]
-    SLICE_X15Y43.CLK     Tas                   0.373   bamse1/pblaze/zero
-                                                       bamse1/pblaze/Mmux_zero_idu_operation[4]_MUX_133_o1
-                                                       bamse1/pblaze/zero
+    SLICE_X9Y49.D6       net (fanout=35)       1.792   bamse1/din[14]
+    SLICE_X9Y49.D        Tilo                  0.259   bamse1/pblaze/interrupt_latch
+                                                       bamse1/pblaze/conditional_match_is_returni_OR_108_o1_SW2
+    SLICE_X5Y46.C1       net (fanout=1)        1.042   bamse1/pblaze/N78
+    SLICE_X5Y46.C        Tilo                  0.259   bamse1/pblaze/ptr_3
+                                                       bamse1/pblaze/stack/Mmux_n001231
+    SLICE_X4Y45.C3       net (fanout=5)        1.182   bamse1/pblaze/stack/n0012[2]
+    SLICE_X4Y45.CMUX     Tilo                  0.326   bamse1/pblaze/stack_data_out[5]
+                                                       bamse1/pblaze/stack/Mram_spr1_RAMC
+    SLICE_X4Y44.A1       net (fanout=1)        0.774   bamse1/pblaze/stack_data_out[4]
+    SLICE_X4Y44.A        Tilo                  0.254   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+                                                       bamse1/pblaze/Mmux_n012651
+    SLICE_X0Y45.A1       net (fanout=2)        1.344   bamse1/pblaze/Madd_n0164[10:0]_lut[4]
+    SLICE_X0Y45.A        Tilo                  0.254   bamse1/addr[9]
+                                                       bamse1/pblaze/Madd_n0164[10:0]_cy<4>11
+    SLICE_X0Y45.C1       net (fanout=5)        0.559   bamse1/pblaze/Madd_n0164[10:0]_cy[4]
+    SLICE_X0Y45.CLK      Tas                   0.339   bamse1/addr[9]
+                                                       bamse1/pblaze/Mmux_n012791
+                                                       bamse1/pblaze/program_counter_8
     -------------------------------------------------  ---------------------------
-    Total                                      9.215ns (4.480ns logic, 4.735ns route)
-                                                       (48.6% logic, 51.4% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.679ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/SP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.192ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/SP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA6    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.B4      net (fanout=10)       1.894   bamse1/din[6]
-    SLICE_X12Y42.BMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
-    SLICE_X17Y42.D6      net (fanout=3)        0.449   bamse1/pblaze/register_y_data_out[3]
-    SLICE_X17Y42.D       Tilo                  0.259   bamse1/pblaze/carry
-                                                       bamse1/pblaze/port_id<3>1
-    SLICE_X16Y40.B4      net (fanout=12)       1.011   bamse1/pid[3]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                  -0.054   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/SP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.192ns (3.355ns logic, 5.837ns route)
-                                                       (36.5% logic, 63.5% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.689ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr3/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.181ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.095ns (0.592 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr3/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA8    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.C2      net (fanout=5)        1.995   bamse1/din[8]
-    SLICE_X12Y42.C       Tilo                  0.255   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr3/SP
-    SLICE_X13Y41.A3      net (fanout=9)        1.288   bamse1/pout[2]
-    SLICE_X13Y41.A       Tilo                  0.259   bamse1/pid[4]
-                                                       bamse1/pblaze/alu/result<2>3
-    SLICE_X15Y42.A4      net (fanout=1)        0.686   bamse1/pblaze/alu/result<2>2
-    SLICE_X15Y42.A       Tilo                  0.259   bamse1/pblaze/alu/result[2]
-                                                       bamse1/pblaze/alu/result<2>5
-    SLICE_X15Y42.C2      net (fanout=2)        0.538   bamse1/pblaze/alu_result[2]
-    SLICE_X15Y42.C       Tilo                  0.259   bamse1/pblaze/alu/result[2]
-                                                       bamse1/pblaze/register_x_data_in<2>1
-    SLICE_X12Y42.AI      net (fanout=2)        1.480   bamse1/pblaze/register_x_data_in[2]
-    SLICE_X12Y42.CLK     Tds                   0.062   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr3/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.181ns (3.194ns logic, 5.987ns route)
-                                                       (34.8% logic, 65.2% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.691ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.180ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X16Y42.B2      net (fanout=7)        1.594   bamse1/din[4]
-    SLICE_X16Y42.B       Tilo                  0.254   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr1/DP
-    SLICE_X18Y43.B5      net (fanout=3)        0.483   bamse1/pblaze/register_y_data_out[0]
-    SLICE_X18Y43.B       Tilo                  0.235   bamse1/pblaze/N53
-                                                       bamse1/pblaze/port_id<0>1
-    SLICE_X16Y40.B1      net (fanout=15)       1.252   bamse1/pid[0]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.180ns (3.368ns logic, 5.812ns route)
-                                                       (36.7% logic, 63.3% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.694ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr4/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.176ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.095ns (0.592 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr4/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA8    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.D2      net (fanout=5)        2.057   bamse1/din[8]
-    SLICE_X12Y42.DMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/SP
-    SLICE_X20Y42.A4      net (fanout=9)        1.312   bamse1/pout[3]
-    SLICE_X20Y42.A       Tilo                  0.254   bamse1/pblaze/alu/result<7>2
-                                                       bamse1/pblaze/alu/result<3>1
-    SLICE_X15Y43.D5      net (fanout=1)        0.805   bamse1/pblaze/alu/result[3]
-    SLICE_X15Y43.D       Tilo                  0.259   bamse1/pblaze/zero
-                                                       bamse1/pblaze/alu/result<3>2
-    SLICE_X15Y43.C6      net (fanout=1)        0.143   bamse1/pblaze/alu/result<3>1
-    SLICE_X15Y43.C       Tilo                  0.259   bamse1/pblaze/zero
-                                                       bamse1/pblaze/alu/result<3>5
-    SLICE_X14Y42.D5      net (fanout=2)        0.441   bamse1/pblaze/alu_result[3]
-    SLICE_X14Y42.D       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/register_x_data_in<3>1
-    SLICE_X12Y42.DX      net (fanout=1)        0.930   bamse1/pblaze/register_x_data_in[3]
-    SLICE_X12Y42.CLK     Tds                   0.055   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.176ns (3.488ns logic, 5.688ns route)
-                                                       (38.0% logic, 62.0% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.695ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr3/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.175ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.095ns (0.592 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr3/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA9    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X16Y42.D3      net (fanout=5)        1.439   bamse1/din[9]
-    SLICE_X16Y42.D       Tilo                  0.254   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr1/SP
-    SLICE_X17Y40.C1      net (fanout=13)       0.771   bamse1/pout[0]
-    SLICE_X17Y40.C       Tilo                  0.259   bamse1/pblaze/alu/N39
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_lut<0>
-    SLICE_X14Y40.A1      net (fanout=1)        0.736   bamse1/pblaze/alu/Madd_addsub_result_Madd_lut[0]
-    SLICE_X14Y40.CMUX    Topac                 0.636   bamse1/pblaze/alu/Madd_addsub_result_Madd_cy[3]
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_lut[0]_rt
-                                                       bamse1/pblaze/alu/Madd_addsub_result_Madd_cy<3>
-    SLICE_X15Y42.A6      net (fanout=1)        0.382   bamse1/pblaze/alu/addsub_result[2]
-    SLICE_X15Y42.A       Tilo                  0.259   bamse1/pblaze/alu/result[2]
-                                                       bamse1/pblaze/alu/result<2>5
-    SLICE_X15Y42.C2      net (fanout=2)        0.538   bamse1/pblaze/alu_result[2]
-    SLICE_X15Y42.C       Tilo                  0.259   bamse1/pblaze/alu/result[2]
-                                                       bamse1/pblaze/register_x_data_in<2>1
-    SLICE_X12Y42.AI      net (fanout=2)        1.480   bamse1/pblaze/register_x_data_in[2]
-    SLICE_X12Y42.CLK     Tds                   0.062   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr3/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.175ns (3.829ns logic, 5.346ns route)
-                                                       (41.7% logic, 58.3% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.702ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.169ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA5    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.B3      net (fanout=8)        1.762   bamse1/din[5]
-    SLICE_X12Y42.BMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
-    SLICE_X17Y42.D6      net (fanout=3)        0.449   bamse1/pblaze/register_y_data_out[3]
-    SLICE_X17Y42.D       Tilo                  0.259   bamse1/pblaze/carry
-                                                       bamse1/pblaze/port_id<3>1
-    SLICE_X16Y40.B4      net (fanout=12)       1.011   bamse1/pid[3]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.169ns (3.464ns logic, 5.705ns route)
-                                                       (37.8% logic, 62.2% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.703ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.168ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA6    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A4      net (fanout=10)       1.689   bamse1/din[6]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X18Y41.B5      net (fanout=2)        0.476   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X18Y41.B       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/alu/result<7>6_SW1
-    SLICE_X18Y41.C3      net (fanout=1)        1.162   bamse1/pblaze/N48
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.168ns (3.440ns logic, 5.728ns route)
-                                                       (37.5% logic, 62.5% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.703ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.168ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA5    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A3      net (fanout=8)        1.884   bamse1/din[5]
-    SLICE_X12Y42.A       Tilo                  0.254   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr3/DP
-    SLICE_X15Y40.C4      net (fanout=3)        0.752   bamse1/pblaze/register_y_data_out[2]
-    SLICE_X15Y40.C       Tilo                  0.259   bamse1/pid[2]
-                                                       bamse1/pblaze/port_id<2>1
-    SLICE_X16Y40.B3      net (fanout=12)       0.657   bamse1/pid[2]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.168ns (3.392ns logic, 5.776ns route)
-                                                       (37.0% logic, 63.0% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.704ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/SP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.167ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/SP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.B2      net (fanout=7)        1.869   bamse1/din[4]
-    SLICE_X12Y42.BMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
-    SLICE_X17Y42.D6      net (fanout=3)        0.449   bamse1/pblaze/register_y_data_out[3]
-    SLICE_X17Y42.D       Tilo                  0.259   bamse1/pblaze/carry
-                                                       bamse1/pblaze/port_id<3>1
-    SLICE_X16Y40.B4      net (fanout=12)       1.011   bamse1/pid[3]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                  -0.054   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/SP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.167ns (3.355ns logic, 5.812ns route)
-                                                       (36.6% logic, 63.4% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.725ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.146ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X16Y42.A2      net (fanout=7)        1.616   bamse1/din[4]
-    SLICE_X16Y42.AMUX    Tilo                  0.326   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr6/DP
-    SLICE_X18Y42.B5      net (fanout=3)        0.467   bamse1/register_y_data_out[5]
-    SLICE_X18Y42.B       Tilo                  0.235   bamse1/pblaze/N31
-                                                       bamse1/pblaze/port_id<5>1
-    SLICE_X16Y40.B6      net (fanout=12)       1.140   bamse1/pid[5]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.146ns (3.440ns logic, 5.706ns route)
-                                                       (37.6% logic, 62.4% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.729ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.142ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA4    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A2      net (fanout=7)        1.858   bamse1/din[4]
-    SLICE_X12Y42.A       Tilo                  0.254   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr3/DP
-    SLICE_X15Y40.C4      net (fanout=3)        0.752   bamse1/pblaze/register_y_data_out[2]
-    SLICE_X15Y40.C       Tilo                  0.259   bamse1/pid[2]
-                                                       bamse1/pblaze/port_id<2>1
-    SLICE_X16Y40.B3      net (fanout=12)       0.657   bamse1/pid[2]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.142ns (3.392ns logic, 5.750ns route)
-                                                       (37.1% logic, 62.9% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.730ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.141ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA6    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.B4      net (fanout=10)       1.894   bamse1/din[6]
-    SLICE_X12Y42.BMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
-    SLICE_X17Y42.D6      net (fanout=3)        0.449   bamse1/pblaze/register_y_data_out[3]
-    SLICE_X17Y42.D       Tilo                  0.259   bamse1/pblaze/carry
-                                                       bamse1/pblaze/port_id<3>1
-    SLICE_X16Y40.B4      net (fanout=12)       1.011   bamse1/pid[3]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X18Y41.B5      net (fanout=2)        0.476   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X18Y41.B       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/alu/result<7>6_SW1
-    SLICE_X18Y41.C3      net (fanout=1)        1.162   bamse1/pblaze/N48
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                   0.055   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.141ns (3.464ns logic, 5.677ns route)
-                                                       (37.9% logic, 62.1% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.735ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr8/SP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.136ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.094ns (0.593 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr8/SP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA7    Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.A5      net (fanout=8)        1.606   bamse1/din[7]
-    SLICE_X12Y42.AMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr2/DP
-    SLICE_X14Y43.D5      net (fanout=3)        0.517   bamse1/pblaze/register_y_data_out[1]
-    SLICE_X14Y43.D       Tilo                  0.235   bamse1/pblaze/zero_saved
-                                                       bamse1/pblaze/port_id<1>1
-    SLICE_X16Y40.B2      net (fanout=13)       1.199   bamse1/pid[1]
-    SLICE_X16Y40.B       Tilo                  0.254   bamse1/pblaze/scratch_data_out[6]
-                                                       bamse1/pblaze/scratch/Mram_spr8
-    SLICE_X14Y42.A1      net (fanout=2)        0.959   bamse1/pblaze/scratch_data_out[7]
-    SLICE_X14Y42.A       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/alu/result<7>6_SW0
-    SLICE_X18Y41.C4      net (fanout=1)        0.839   bamse1/pblaze/N47
-    SLICE_X18Y41.C       Tilo                  0.235   bamse1/pid[7]
-                                                       bamse1/pblaze/register_x_data_in<7>1
-    SLICE_X16Y42.DX      net (fanout=1)        0.685   bamse1/pblaze/register_x_data_in[7]
-    SLICE_X16Y42.CLK     Tds                  -0.054   bamse1/pout[0]
-                                                       bamse1/pblaze/register/Mram_dpr8/SP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.136ns (3.331ns logic, 5.805ns route)
-                                                       (36.5% logic, 63.5% route)
-
---------------------------------------------------------------------------------
-Slack:                  21.739ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:          bamse1/pblaze/register/Mram_dpr4/DP (RAM)
-  Requirement:          31.000ns
-  Data Path Delay:      9.131ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.095ns (0.592 - 0.687)
-  Source Clock:         CLK_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_BUFGP rising at 31.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/register/Mram_dpr4/DP
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    RAMB16_X1Y24.DOA11   Trcko_DOA             2.100   bamse1/mem/RAMB16BWER_inst
-                                                       bamse1/mem/RAMB16BWER_inst
-    SLICE_X12Y42.D5      net (fanout=5)        2.012   bamse1/din[11]
-    SLICE_X12Y42.DMUX    Tilo                  0.326   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/SP
-    SLICE_X20Y42.A4      net (fanout=9)        1.312   bamse1/pout[3]
-    SLICE_X20Y42.A       Tilo                  0.254   bamse1/pblaze/alu/result<7>2
-                                                       bamse1/pblaze/alu/result<3>1
-    SLICE_X15Y43.D5      net (fanout=1)        0.805   bamse1/pblaze/alu/result[3]
-    SLICE_X15Y43.D       Tilo                  0.259   bamse1/pblaze/zero
-                                                       bamse1/pblaze/alu/result<3>2
-    SLICE_X15Y43.C6      net (fanout=1)        0.143   bamse1/pblaze/alu/result<3>1
-    SLICE_X15Y43.C       Tilo                  0.259   bamse1/pblaze/zero
-                                                       bamse1/pblaze/alu/result<3>5
-    SLICE_X14Y42.D5      net (fanout=2)        0.441   bamse1/pblaze/alu_result[3]
-    SLICE_X14Y42.D       Tilo                  0.235   bamse1/pblaze/carry_saved
-                                                       bamse1/pblaze/register_x_data_in<3>1
-    SLICE_X12Y42.DX      net (fanout=1)        0.930   bamse1/pblaze/register_x_data_in[3]
-    SLICE_X12Y42.CLK     Tds                   0.055   bamse1/pout[4]
-                                                       bamse1/pblaze/register/Mram_dpr4/DP
-    -------------------------------------------------  ---------------------------
-    Total                                      9.131ns (3.488ns logic, 5.643ns route)
-                                                       (38.2% logic, 61.8% route)
+    Total                                     10.484ns (3.791ns logic, 6.693ns route)
+                                                       (36.2% logic, 63.8% route)
 
 --------------------------------------------------------------------------------
 
@@ -1393,7 +1420,7 @@ Slack: 27.430ns (period - min period limit)
   Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
   Physical resource: bamse1/mem/RAMB16BWER_inst/CLKA
   Logical resource: bamse1/mem/RAMB16BWER_inst/CLKA
-  Location pin: RAMB16_X1Y24.CLKA
+  Location pin: RAMB16_X1Y22.CLKA
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 27.430ns (period - min period limit)
@@ -1401,7 +1428,7 @@ Slack: 27.430ns (period - min period limit)
   Min period limit: 3.570ns (280.112MHz) (Trper_CLKB(Fmax))
   Physical resource: bamse1/mem/RAMB16BWER_inst/CLKB
   Logical resource: bamse1/mem/RAMB16BWER_inst/CLKB
-  Location pin: RAMB16_X1Y24.CLKB
+  Location pin: RAMB16_X1Y22.CLKB
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 28.334ns (period - min period limit)
@@ -1415,73 +1442,9 @@ Slack: 28.334ns (period - min period limit)
 Slack: 29.743ns (period - min period limit)
   Period: 31.000ns
   Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[4]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr2/DP/CLK
-  Location pin: SLICE_X12Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[4]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr3/DP/CLK
-  Location pin: SLICE_X12Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[4]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr4/DP/CLK
-  Location pin: SLICE_X12Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[4]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr5/DP/CLK
-  Location pin: SLICE_X12Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[4]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr2/SP/CLK
-  Location pin: SLICE_X12Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[4]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr3/SP/CLK
-  Location pin: SLICE_X12Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[4]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr4/SP/CLK
-  Location pin: SLICE_X12Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[4]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr5/SP/CLK
-  Location pin: SLICE_X12Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/stack_data_out[5]/CLK
   Logical resource: bamse1/pblaze/stack/Mram_spr1_RAMA/CLK
-  Location pin: SLICE_X12Y51.CLK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1489,7 +1452,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/stack_data_out[5]/CLK
   Logical resource: bamse1/pblaze/stack/Mram_spr1_RAMA_D1/CLK
-  Location pin: SLICE_X12Y51.CLK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1497,7 +1460,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/stack_data_out[5]/CLK
   Logical resource: bamse1/pblaze/stack/Mram_spr1_RAMB/CLK
-  Location pin: SLICE_X12Y51.CLK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1505,7 +1468,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/stack_data_out[5]/CLK
   Logical resource: bamse1/pblaze/stack/Mram_spr1_RAMB_D1/CLK
-  Location pin: SLICE_X12Y51.CLK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1513,7 +1476,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/stack_data_out[5]/CLK
   Logical resource: bamse1/pblaze/stack/Mram_spr1_RAMC/CLK
-  Location pin: SLICE_X12Y51.CLK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1521,7 +1484,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/stack_data_out[5]/CLK
   Logical resource: bamse1/pblaze/stack/Mram_spr1_RAMC_D1/CLK
-  Location pin: SLICE_X12Y51.CLK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1529,7 +1492,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/stack_data_out[5]/CLK
   Logical resource: bamse1/pblaze/stack/Mram_spr1_RAMD/CLK
-  Location pin: SLICE_X12Y51.CLK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1537,7 +1500,71 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/stack_data_out[5]/CLK
   Logical resource: bamse1/pblaze/stack/Mram_spr1_RAMD_D1/CLK
-  Location pin: SLICE_X12Y51.CLK
+  Location pin: SLICE_X4Y45.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/stack_data_out[9]/CLK
+  Logical resource: bamse1/pblaze/stack/Mram_spr21/DP/CLK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/stack_data_out[9]/CLK
+  Logical resource: bamse1/pblaze/stack/Mram_spr22/DP/CLK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/stack_data_out[9]/CLK
+  Logical resource: bamse1/pblaze/stack/Mram_spr23/DP/CLK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/stack_data_out[9]/CLK
+  Logical resource: bamse1/pblaze/stack/Mram_spr24/DP/CLK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/stack_data_out[9]/CLK
+  Logical resource: bamse1/pblaze/stack/Mram_spr21/SP/CLK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/stack_data_out[9]/CLK
+  Logical resource: bamse1/pblaze/stack/Mram_spr22/SP/CLK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/stack_data_out[9]/CLK
+  Logical resource: bamse1/pblaze/stack/Mram_spr23/SP/CLK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/stack_data_out[9]/CLK
+  Logical resource: bamse1/pblaze/stack/Mram_spr24/SP/CLK
+  Location pin: SLICE_X4Y46.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1545,7 +1572,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/scratch_data_out[6]/CLK
   Logical resource: bamse1/pblaze/scratch/Mram_spr5/CLK
-  Location pin: SLICE_X16Y40.CLK
+  Location pin: SLICE_X12Y46.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1553,7 +1580,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/scratch_data_out[6]/CLK
   Logical resource: bamse1/pblaze/scratch/Mram_spr8/CLK
-  Location pin: SLICE_X16Y40.CLK
+  Location pin: SLICE_X12Y46.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1561,7 +1588,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/scratch_data_out[6]/CLK
   Logical resource: bamse1/pblaze/scratch/Mram_spr6/CLK
-  Location pin: SLICE_X16Y40.CLK
+  Location pin: SLICE_X12Y46.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1569,7 +1596,39 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pblaze/scratch_data_out[6]/CLK
   Logical resource: bamse1/pblaze/scratch/Mram_spr7/CLK
-  Location pin: SLICE_X16Y40.CLK
+  Location pin: SLICE_X12Y46.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/scratch_data_out[1]/CLK
+  Logical resource: bamse1/pblaze/scratch/Mram_spr1/CLK
+  Location pin: SLICE_X12Y47.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/scratch_data_out[1]/CLK
+  Logical resource: bamse1/pblaze/scratch/Mram_spr3/CLK
+  Location pin: SLICE_X12Y47.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/scratch_data_out[1]/CLK
+  Logical resource: bamse1/pblaze/scratch/Mram_spr4/CLK
+  Location pin: SLICE_X12Y47.CLK
+  Clock network: CLK_BUFGP
+--------------------------------------------------------------------------------
+Slack: 29.743ns (period - min period limit)
+  Period: 31.000ns
+  Min period limit: 1.257ns (795.545MHz) (Tcp)
+  Physical resource: bamse1/pblaze/scratch_data_out[1]/CLK
+  Logical resource: bamse1/pblaze/scratch/Mram_spr2/CLK
+  Location pin: SLICE_X12Y47.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1577,7 +1636,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pout[0]/CLK
   Logical resource: bamse1/pblaze/register/Mram_dpr6/DP/CLK
-  Location pin: SLICE_X16Y42.CLK
+  Location pin: SLICE_X16Y44.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1585,7 +1644,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pout[0]/CLK
   Logical resource: bamse1/pblaze/register/Mram_dpr7/DP/CLK
-  Location pin: SLICE_X16Y42.CLK
+  Location pin: SLICE_X16Y44.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 Slack: 29.743ns (period - min period limit)
@@ -1593,39 +1652,7 @@ Slack: 29.743ns (period - min period limit)
   Min period limit: 1.257ns (795.545MHz) (Tcp)
   Physical resource: bamse1/pout[0]/CLK
   Logical resource: bamse1/pblaze/register/Mram_dpr8/DP/CLK
-  Location pin: SLICE_X16Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[0]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr1/DP/CLK
-  Location pin: SLICE_X16Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[0]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr6/SP/CLK
-  Location pin: SLICE_X16Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[0]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr7/SP/CLK
-  Location pin: SLICE_X16Y42.CLK
-  Clock network: CLK_BUFGP
---------------------------------------------------------------------------------
-Slack: 29.743ns (period - min period limit)
-  Period: 31.000ns
-  Min period limit: 1.257ns (795.545MHz) (Tcp)
-  Physical resource: bamse1/pout[0]/CLK
-  Logical resource: bamse1/pblaze/register/Mram_dpr8/SP/CLK
-  Location pin: SLICE_X16Y42.CLK
+  Location pin: SLICE_X16Y44.CLK
   Clock network: CLK_BUFGP
 --------------------------------------------------------------------------------
 
@@ -1642,7 +1669,7 @@ Clock to Setup on destination clock CLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |    9.652|         |         |         |
+CLK            |   11.255|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
@@ -1651,16 +1678,16 @@ Timing summary:
 
 Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
 
-Constraints cover 11123 paths, 0 nets, and 922 connections
+Constraints cover 12329 paths, 0 nets, and 1036 connections
 
 Design statistics:
-   Minimum period:   9.652ns{1}   (Maximum frequency: 103.605MHz)
+   Minimum period:  11.255ns{1}   (Maximum frequency:  88.849MHz)
 
 
 ------------------------------------Footnotes-----------------------------------
 1)  The minimum period statistic assumes all single cycle delays.
 
-Analysis completed Sat Sep 14 02:19:30 2019 
+Analysis completed Mon Sep 23 22:32:20 2019 
 --------------------------------------------------------------------------------
 
 Trace Settings:

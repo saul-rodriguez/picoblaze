@@ -1,5 +1,8 @@
 //`define PACOBLAZE3
 
+`ifndef BAMSE
+`define BAMSE
+
 `include "pacoblaze3.v"
 `include "pacoblaze_inc.v"
 `include "bamse_inc.v"
@@ -41,9 +44,9 @@ wire [`code_width-1:0] din; // program data input
 wire [`operand_width-1:0] pin; // port input
 
 wire irq;
-wire [`operand_width-1:0] interrupt_flags;
 
-assign interrupt_flags[7:3] = 0;
+//wire [`operand_width-1:0] interrupt_flags;
+//assign interrupt_flags[7:3] = 0;
 
 /* PacoBlaze program memory behavioral model */
 
@@ -94,7 +97,7 @@ io_bamse ports(
 	.port_out(pin),  // to input port in Pacoblaze 
 	.port_in(pout), // from output port in Pacoblaze
 	.interrupt(irq), // to interrupt in Pacoblaze 
-	.ioc_flags(interrupt_flags[2:0]),
+	//.ioc_flags(interrupt_flags[2:0]),
 	//.interrupt_ack(iak), // from interrupt ack Pacoblaze
 	.clk(clk),
 	.rst(rst),
@@ -104,4 +107,5 @@ io_bamse ports(
 
 endmodule
 
+`endif
 

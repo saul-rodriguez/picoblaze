@@ -21,4 +21,8 @@
 `define PORTC_OUT_WIDTH 8
 `define PORTC_OUT 8'h05
 
+// Interrupts
+`define INT_OUT_CONFIG 8'h00 // address interrupt config. register
+`define INT_IN_FLAGS  8'h00 //address interrupt flags
+
 `endif

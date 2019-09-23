@@ -12,7 +12,7 @@ volatile unsigned char porta, IOC_state;
 extern volatile char PBLAZEPORT[]; 
 
 void IOC_isr();
-void IOC_handler(unsigned char porta_state);
+void IOC_handler(unsigned char state);
 
 enum IOC {
 	IOC_IDLE = 0x00,
@@ -28,6 +28,9 @@ void main()
 	//configure IOC 
 	PBLAZEPORT[PORTA_IOC_POS_CONF] = 0b00000101;
 	PBLAZEPORT[PORTA_IOC_NEG_CONF] = 0b00000011;
+	
+	//configure Interrupts
+	PBLAZEPORT[INT_OUT_CONFIG] = 0b00000111;
 	
 	porta = PBLAZEPORT[PORTA_IN];
 	IOC_state = 0;
@@ -49,31 +52,40 @@ void _interrupt_handler(void) __interrupt (1)
 
 void IOC_isr()
 {	
+	/*
 	unsigned char porta_new;
 	porta_new = PBLAZEPORT[PORTA_IN];
 	IOC_state = porta ^ porta_new; 			
 	porta = porta_new;
+	*/
+	unsigned char ioc_flags, aux;
+	
+	ioc_flags = PBLAZEPORT[INT_IN_FLAGS];
+	if (ioc_flags) {
+		IOC_state = ioc_flags;
+		aux = PBLAZEPORT[PORTA_IN]; //Reset IOC flags
+		
+	}
 }
 
-void IOC_handler(unsigned char porta_state)
+void IOC_handler(unsigned char state)
 {
 	unsigned char aux;
-	PBLAZEPORT[PORTC_OUT] = porta_state;
 	
-	aux = porta_state & IOC_BIT0;
+	aux = state & IOC_BIT0;
 	if (aux) {
 		PBLAZEPORT[PORTC_OUT] = 0x0f;
 	}
-	aux = porta_state & IOC_BIT1;
+	aux = state & IOC_BIT1;
 	if (aux) {
 		PBLAZEPORT[PORTC_OUT] = 0x3c;
 	}
-	aux = porta_state & IOC_BIT2;
+	aux = state & IOC_BIT2;
 	if (aux) {
 		PBLAZEPORT[PORTC_OUT] = 0xf0;
 	} 
 	
-	IOC_state = 0;	
+	//IOC_state = 0;	
 	/*
 	switch(IOC_state) {
 		case IOC_BIT0: PBLAZEPORT[PORTC_OUT] = 0x0f;

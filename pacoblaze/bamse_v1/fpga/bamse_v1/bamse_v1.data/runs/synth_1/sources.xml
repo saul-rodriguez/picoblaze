@@ -2,10 +2,53 @@
 <DARoots Version="1" Minor="26">
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/imports/iverilog/bamse_inc.v">
+      <FileInfo SFType="VHeader">
+        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/bamse_inc.v"/>
+        <Attr Name="ImportTime" Val="1569186232"/>
+        <Attr Name="UsedInSynthesis" Val="1"/>
+        <Attr Name="UsedInSimulation" Val="1"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/iverilog/top.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/top.v"/>
+        <Attr Name="ImportTime" Val="1569269481"/>
+        <Attr Name="UsedInSynthesis" Val="1"/>
+        <Attr Name="UsedInImplementation" Val="1"/>
+        <Attr Name="UsedInSimulation" Val="1"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/iverilog/bamse.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/bamse.v"/>
+        <Attr Name="ImportTime" Val="1569269316"/>
+        <Attr Name="UsedInSynthesis" Val="1"/>
+        <Attr Name="UsedInImplementation" Val="1"/>
+        <Attr Name="UsedInSimulation" Val="1"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/iverilog/gio.v">
+      <FileInfo SFType="VHeader">
+        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/gio.v"/>
+        <Attr Name="ImportTime" Val="1569269245"/>
+        <Attr Name="UsedInSynthesis" Val="1"/>
+        <Attr Name="UsedInSimulation" Val="1"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/iverilog/io_bamse.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/io_bamse.v"/>
+        <Attr Name="ImportTime" Val="1569191344"/>
+        <Attr Name="UsedInSynthesis" Val="1"/>
+        <Attr Name="UsedInImplementation" Val="1"/>
+        <Attr Name="UsedInSimulation" Val="1"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/imports/hello_duo/firmware.v">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../../../pbcc/input_output_c/firmware.v"/>
-        <Attr Name="ImportTime" Val="1568420327"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../pbcc/test_ioc/firmware.v"/>
+        <Attr Name="ImportTime" Val="1569270703"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
@@ -51,14 +94,6 @@
         <Attr Name="UsedInSimulation" Val="1"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/imports/iverilog/gio.v">
-      <FileInfo SFType="VHeader">
-        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/gio.v"/>
-        <Attr Name="ImportTime" Val="1568318134"/>
-        <Attr Name="UsedInSynthesis" Val="1"/>
-        <Attr Name="UsedInSimulation" Val="1"/>
-      </FileInfo>
-    </File>
     <File Path="$PSRCDIR/sources_1/imports/iverilog/pacoblaze_idu.v">
       <FileInfo SFType="VHeader">
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/pacoblaze_idu.v"/>
@@ -80,24 +115,6 @@
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/pacoblaze_scratch.v"/>
         <Attr Name="ImportTime" Val="1140841512"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
-        <Attr Name="UsedInSimulation" Val="1"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/iverilog/bamse.v">
-      <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/bamse.v"/>
-        <Attr Name="ImportTime" Val="1568318756"/>
-        <Attr Name="UsedInSynthesis" Val="1"/>
-        <Attr Name="UsedInImplementation" Val="1"/>
-        <Attr Name="UsedInSimulation" Val="1"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/iverilog/top.v">
-      <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/top.v"/>
-        <Attr Name="ImportTime" Val="1568323910"/>
-        <Attr Name="UsedInSynthesis" Val="1"/>
-        <Attr Name="UsedInImplementation" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
       </FileInfo>
     </File>

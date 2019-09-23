@@ -4,7 +4,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.01 secs
+Total CPU time to Xst completion: 0.02 secs
  
 --> 
 Reading design: top.prj
@@ -56,10 +56,9 @@ Netlist Hierarchy                  : rebuilt
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" into library work
-Parsing module <spartan6_mem>.
-Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v" into library work
-Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze3.v" included at line 3.
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/top.v" into library work
+Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v" included at line 21.
+Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze3.v" included at line 6.
 Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze.v" included at line 16.
 Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze_inc.v" included at line 36.
 Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze_idu.v" included at line 38.
@@ -79,13 +78,25 @@ Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bams
 Parsing module <pacoblaze3_scratch>.
 WARNING:HDLCompiler:572 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze.v" Line 55: Macro <operation_is> is redefined.
 Parsing module <pacoblaze3>.
-Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze_inc.v" included at line 4.
-Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v" included at line 5.
+Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze_inc.v" included at line 7.
+Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse_inc.v" included at line 8.
+Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/io_bamse.v" included at line 9.
+Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse_inc.v" included at line 6.
+Parsing verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v" included at line 7.
 Parsing module <outport>.
 Parsing module <inport>.
+Parsing module <inport_ioc>.
+Parsing module <in_port_selector>.
+Parsing module <io_bamse>.
 Parsing module <bamse>.
-Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/top.v" into library work
 Parsing module <top>.
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v" into library work
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/io_bamse.v" into library work
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" into library work
+Parsing module <spartan6_mem>.
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/blockram.v" into library work
+Parsing module <blockram>.
+Analyzing Verilog file "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/timescale_inc.v" into library work
 
 =========================================================================
 *                            HDL Elaboration                            *
@@ -98,9 +109,9 @@ Elaborating module <bamse>.
 Elaborating module <spartan6_mem>.
 
 Elaborating module
-<RAMB16BWER(DATA_WIDTH_A=18,DATA_WIDTH_B=18,DOA_REG=0,DOB_REG=0,EN_RSTRAM_A="TRUE",EN_RSTRAM_B="TRUE",INITP_00=256'b0110001100001101111101111111100,INITP_01=256'b0,INITP_02=256'b0,INITP_03=256'b0,INITP_04=256'b0,INITP_05=256'b0,INITP_06=256'b0,INITP_07=256'b1100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,INIT_00=256'b0100000000000000101110000111100001000111100000001110000000000000101000000000000101100111100000001111100001111000001000000000001110000000000000100101000000000000011000000000000010100000000000011000000000000011001000000000000100000111100111111,INIT_01=256'b0,INIT_02=256'b0,INIT_03=256'b0,INIT_04=256'b0,INIT_05=256'b0,INIT_06=256'b0,INIT_07=256'b0,INIT_08=256'b0,INIT_09=256'b0,INIT_0A=256'b0,INIT_0B=256'b0,INIT_0C=256'b0,INIT_0D=256'b0,INIT_0E=256'b0,INIT_0F=256'b0,INIT_10=256'b0,INIT_11=256'b0
-,INIT_12=256'b0,INIT_13=256'b0,INIT_14=256'b0,INIT_15=256'b0,INIT_16=256'b0,INIT_17=256'b0,INIT_18=256'b0,INIT_19=256'b0,INIT_1A=256'b0,INIT_1B=256'b0,INIT_1C=256'b0,INIT_1D=256'b0,INIT_1E=256'b0,INIT_1F=256'b0,INIT_20=256'b0,INIT_21=256'b0,INIT_22=256'b0,INIT_23=256'b0,INIT_24=256'b0,INIT_25=256'b0,INIT_26=256'b0,INIT_27=256'b0,INIT_28=256'b0,INIT_29=256'b0,INIT_2A=256'b0,INIT_2B=256'b0,INIT_2C=256'b0,INIT_2D=256'b0,INIT_2E=256'b0,INIT_2F=256'b0,INIT_30=256'b0,INIT_31=256'b0,INIT_32=256'b0,INIT_33=256'b0,INIT_34=256'b0,INIT_35=256'b0,INIT_36=256'b0,INIT_37=256'b0,INIT_38=256'b0,INIT_39=256'b0,INIT_3A=256'b0,INIT_3B=256'b0,INIT_3C=256'b0,INIT_3D=256'b0,INIT_3E=256'b0,INIT_3F=256'b0100000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,INIT_A=36'b0,INIT_B=36'b0,INIT_FILE="NONE",RSTTYPE="SYNC",RST_PRIORITY_A="CE",
-RST_PRIORITY_B="CE",SIM_COLLISION_CHECK="ALL",SIM_DEVICE="SPARTAN6",SRVAL_A=36'b0,SRVAL_B=36'b0,WRITE_MODE_A="WRITE_FIRST",WRITE_MODE_B="WRITE_FIRST")>.
+<RAMB16BWER(DATA_WIDTH_A=18,DATA_WIDTH_B=18,DOA_REG=0,DOB_REG=0,EN_RSTRAM_A="TRUE",EN_RSTRAM_B="TRUE",INITP_00=256'b010100011110100000010001111010000001000111101000000100010111101001111111000110000111101001110001000100010001000101111111100,INITP_01=256'b0,INITP_02=256'b0,INITP_03=256'b0,INITP_04=256'b0,INITP_05=256'b0,INITP_06=256'b0,INITP_07=256'b1100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,INIT_00=256'b1110000000000001000000000000000011100000000000000100000000000001110000000000000000000000000001111100000000000011000000000000001111000000000000100000000000000101101000000000000011000000000000010100000000000011000000000000011001000000000000100000111100111111,INIT_01=256'b01010100001000010100000000000000010000000000000010000000000000010000000000011101010000000001000111100001000000010000000100000000000000
+00001001000001101100000000011000000000000101000000000100010101010000010101010000000000000001100000000000010000000000000100,INIT_02=256'b0100000100000000000100010010000010100010000000100001001000000000110000100000010100000010000011110100000000101100010101000010101001000001000000001010000100000001000100010000000000010000101100001010000000000000010000000000000111100000000000010100000000100011,INIT_03=256'b01010000000000000110000000000010100000000111100000100000000111100010101000011101001000001000000000001000100100000101000100000010000010010000000001100001000000101000000100011110001000000001101000101010000110010,INIT_04=256'b0,INIT_05=256'b0,INIT_06=256'b0,INIT_07=256'b0,INIT_08=256'b0,INIT_09=256'b0,INIT_0A=256'b0,INIT_0B=256'b0,INIT_0C=256'b0,INIT_0D=256'b0,INIT_0E=256'b0,INIT_0F=256'b0,INIT_10=256'b0,INIT_11=256'b0,INIT_12=256'b0,INIT_13=256'b0,INIT_14=256'b0,INIT_15=256'b0,INIT_16=256'b0,INIT_17=256'b0,INIT_18=256'b0,INIT_19=256'b0,INIT_1A=256'b0,INIT_1B=256'b0,INIT_1C=256'b0,INIT_1D=256'b0,INIT_1E=256'b0,INI
+T_1F=256'b0,INIT_20=256'b0,INIT_21=256'b0,INIT_22=256'b0,INIT_23=256'b0,INIT_24=256'b0,INIT_25=256'b0,INIT_26=256'b0,INIT_27=256'b0,INIT_28=256'b0,INIT_29=256'b0,INIT_2A=256'b0,INIT_2B=256'b0,INIT_2C=256'b0,INIT_2D=256'b0,INIT_2E=256'b0,INIT_2F=256'b0,INIT_30=256'b0,INIT_31=256'b0,INIT_32=256'b0,INIT_33=256'b0,INIT_34=256'b0,INIT_35=256'b0,INIT_36=256'b0,INIT_37=256'b0,INIT_38=256'b0,INIT_39=256'b0,INIT_3A=256'b0,INIT_3B=256'b0,INIT_3C=256'b0,INIT_3D=256'b0,INIT_3E=256'b0,INIT_3F=256'b0100000000011011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,INIT_A=36'b0,INIT_B=36'b0,INIT_FILE="NONE",RSTTYPE="SYNC",RST_PRIORITY_A="CE",RST_PRIORITY_B="CE",SIM_COLLISION_CHECK="ALL",SIM_DEVICE="SPARTAN6",SRVAL_A=36'b0,SRVAL_B=36'b0,WRITE_MODE_A="WRITE_FIRST",WRITE_MODE_B="WRITE_FIRST")>.
 WARNING:HDLCompiler:1127 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" Line 178: Assignment to DOB ignored, since the identifier is never used
 WARNING:HDLCompiler:1127 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/hello_duo/firmware.v" Line 179: Assignment to DOPB ignored, since the identifier is never used
 
@@ -119,11 +130,26 @@ Elaborating module <pacoblaze3_scratch>.
 WARNING:HDLCompiler:413 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze.v" Line 251: Result of 32-bit expression is truncated to fit in 1-bit target.
 WARNING:HDLCompiler:413 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze.v" Line 268: Result of 32-bit expression is truncated to fit in 10-bit target.
 WARNING:HDLCompiler:413 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/pacoblaze.v" Line 274: Result of 32-bit expression is truncated to fit in 10-bit target.
-WARNING:HDLCompiler:1127 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v" Line 78: Assignment to iak ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v" Line 86: Assignment to iak ignored, since the identifier is never used
+WARNING:HDLCompiler:1016 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/io_bamse.v" Line 72: Port int_out is not connected to this instance
 
-Elaborating module <outport(ADDR=8'b01)>.
+Elaborating module <io_bamse>.
 
-Elaborating module <inport(ADDR0=8'b010)>.
+Elaborating module <outport(ADDR=8'b010,WIDTH=3)>.
+
+Elaborating module <outport(ADDR=8'b011,WIDTH=3)>.
+
+Elaborating module <inport_ioc(ADDR=8'b01,WIDTH=3)>.
+
+Elaborating module <inport(ADDR=8'b0100,WIDTH=8)>.
+
+Elaborating module <outport(ADDR=8'b0101,WIDTH=8)>.
+
+Elaborating module <outport(ADDR=8'b0)>.
+
+Elaborating module <inport(ADDR=8'b0)>.
+
+Elaborating module <in_port_selector(ADDR0=8'b0,ADDR1=8'b01,ADDR2=8'b0100)>.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -137,7 +163,7 @@ Unit <top> synthesized.
 
 Synthesizing Unit <bamse>.
     Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v".
-INFO:Xst:3210 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v" line 66: Output port <interrupt_ack> of the instance <pblaze> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/bamse.v" line 74: Output port <interrupt_ack> of the instance <pblaze> is unconnected or connected to loadless signal.
     Summary:
 	no macro.
 Unit <bamse> synthesized.
@@ -166,8 +192,8 @@ Synthesizing Unit <pacoblaze3>.
     Found 1-bit register for signal <carry_saved>.
     Found 2-bit register for signal <reset_latch>.
     Found 11-bit adder for signal <n0164[10:0]> created at line 278.
-    Found 32x5-bit Read Only RAM for signal <_n0260>
-    Found 8-bit 3-to-1 multiplexer for signal <_n0186> created at line 199.
+    Found 32x5-bit Read Only RAM for signal <_n0259>
+    Found 8-bit 3-to-1 multiplexer for signal <_n0185> created at line 199.
     Summary:
 	inferred   1 RAM(s).
 	inferred   1 Adder/Subtractor(s).
@@ -223,9 +249,64 @@ WARNING:Xst:647 - Input <reset> is never used. This port will be preserved and l
 	inferred   1 RAM(s).
 Unit <pacoblaze3_scratch> synthesized.
 
-Synthesizing Unit <outport>.
+Synthesizing Unit <io_bamse>.
+    Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/io_bamse.v".
+INFO:Xst:3210 - "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/io_bamse.v" line 72: Output port <int_out> of the instance <Port_A> is unconnected or connected to loadless signal.
+    Summary:
+	no macro.
+Unit <io_bamse> synthesized.
+
+Synthesizing Unit <outport_1>.
+    Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v".
+        ADDR = 8'b00000010
+        WIDTH = 3
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Summary:
+	inferred   3 Latch(s).
+Unit <outport_1> synthesized.
+
+Synthesizing Unit <outport_2>.
+    Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v".
+        ADDR = 8'b00000011
+        WIDTH = 3
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Summary:
+	inferred   3 Latch(s).
+Unit <outport_2> synthesized.
+
+Synthesizing Unit <inport_ioc>.
     Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v".
         ADDR = 8'b00000001
+        WIDTH = 3
+    Found 3-bit register for signal <c1_port>.
+    Found 3-bit register for signal <c2_port>.
+    Found 3-bit register for signal <port_out>.
+    Found 1-bit register for signal <int_reset>.
+    Found 1-bit register for signal <int_out>.
+    Found 3-bit register for signal <int_flags>.
+    Found 3-bit register for signal <sync_port>.
+    Summary:
+	inferred  17 D-type flip-flop(s).
+Unit <inport_ioc> synthesized.
+
+Synthesizing Unit <inport_1>.
+    Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v".
+        ADDR = 8'b00000100
+        WIDTH = 8
+WARNING:Xst:647 - Input <ren> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 8-bit register for signal <port_out>.
+    Summary:
+	inferred   8 D-type flip-flop(s).
+Unit <inport_1> synthesized.
+
+Synthesizing Unit <outport_3>.
+    Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v".
+        ADDR = 8'b00000101
+        WIDTH = 8
 WARNING:Xst:737 - Found 1-bit latch for signal <port_out<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <port_out<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <port_out<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -236,15 +317,43 @@ WARNING:Xst:737 - Found 1-bit latch for signal <port_out<0>>. Latches may be gen
 WARNING:Xst:737 - Found 1-bit latch for signal <port_out<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
     Summary:
 	inferred   8 Latch(s).
-Unit <outport> synthesized.
+Unit <outport_3> synthesized.
 
-Synthesizing Unit <inport>.
+Synthesizing Unit <outport_4>.
     Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v".
-        ADDR0 = 8'b00000010
-    Found 8-bit register for signal <value_out>.
+        ADDR = 8'b00000000
+        WIDTH = 8
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <port_out<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Summary:
+	inferred   8 Latch(s).
+Unit <outport_4> synthesized.
+
+Synthesizing Unit <inport_2>.
+    Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v".
+        ADDR = 8'b00000000
+        WIDTH = 8
+WARNING:Xst:647 - Input <ren> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 8-bit register for signal <port_out>.
     Summary:
 	inferred   8 D-type flip-flop(s).
-Unit <inport> synthesized.
+Unit <inport_2> synthesized.
+
+Synthesizing Unit <in_port_selector>.
+    Related source file is "/home/saul/projects/picoblaze/pacoblaze/bamse_v1/fpga/bamse_v1/bamse_v1.srcs/sources_1/imports/iverilog/gio.v".
+        ADDR0 = 8'b00000000
+        ADDR1 = 8'b00000001
+        ADDR2 = 8'b00000100
+    Found 8-bit 4-to-1 multiplexer for signal <_n0026> created at line 195.
+    Summary:
+	inferred   2 Multiplexer(s).
+Unit <in_port_selector> synthesized.
 
 =========================================================================
 HDL Synthesis Report
@@ -260,21 +369,23 @@ Macro Statistics
  6-bit adder                                           : 1
  6-bit subtractor                                      : 1
  9-bit adder                                           : 2
-# Registers                                            : 17
- 1-bit register                                        : 13
+# Registers                                            : 25
+ 1-bit register                                        : 15
  10-bit register                                       : 1
  2-bit register                                        : 1
+ 3-bit register                                        : 5
  5-bit register                                        : 1
- 8-bit register                                        : 1
-# Latches                                              : 8
- 1-bit latch                                           : 8
-# Multiplexers                                         : 24
+ 8-bit register                                        : 2
+# Latches                                              : 22
+ 1-bit latch                                           : 22
+# Multiplexers                                         : 26
  1-bit 2-to-1 multiplexer                              : 9
  1-bit 4-to-1 multiplexer                              : 1
  32-bit 2-to-1 multiplexer                             : 8
  6-bit 2-to-1 multiplexer                              : 1
- 8-bit 2-to-1 multiplexer                              : 4
+ 8-bit 2-to-1 multiplexer                              : 5
  8-bit 3-to-1 multiplexer                              : 1
+ 8-bit 4-to-1 multiplexer                              : 1
 # Xors                                                 : 2
  1-bit xor8                                            : 1
  8-bit xor2                                            : 1
@@ -287,7 +398,7 @@ Macro Statistics
 
 
 Synthesizing (advanced) Unit <pacoblaze3>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0260> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0259> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -382,15 +493,16 @@ Macro Statistics
  6-bit adder                                           : 1
  6-bit subtractor                                      : 1
  9-bit adder carry in                                  : 1
-# Registers                                            : 38
- Flip-Flops                                            : 38
-# Multiplexers                                         : 19
+# Registers                                            : 63
+ Flip-Flops                                            : 63
+# Multiplexers                                         : 21
  1-bit 2-to-1 multiplexer                              : 4
  1-bit 4-to-1 multiplexer                              : 1
  32-bit 2-to-1 multiplexer                             : 8
  6-bit 2-to-1 multiplexer                              : 1
- 8-bit 2-to-1 multiplexer                              : 4
+ 8-bit 2-to-1 multiplexer                              : 5
  8-bit 3-to-1 multiplexer                              : 1
+ 8-bit 4-to-1 multiplexer                              : 1
 # Xors                                                 : 2
  1-bit xor8                                            : 1
  8-bit xor2                                            : 1
@@ -400,23 +512,37 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
+INFO:Xst:2261 - The FF/Latch <port_out_3> in Unit <inport_2> is equivalent to the following 4 FFs/Latches, which will be removed : <port_out_4> <port_out_5> <port_out_6> <port_out_7> 
+WARNING:Xst:1710 - FF/Latch <port_out_3> (without init value) has a constant value of 0 in block <inport_2>. This FF/Latch will be trimmed during the optimization process.
 
 Optimizing unit <top> ...
 
-Optimizing unit <inport> ...
+Optimizing unit <io_bamse> ...
+
+Optimizing unit <inport_ioc> ...
+
+Optimizing unit <inport_1> ...
+
+Optimizing unit <outport_3> ...
+
+Optimizing unit <outport_4> ...
 
 Optimizing unit <pacoblaze3> ...
 
 Optimizing unit <pacoblaze3_stack> ...
 
 Optimizing unit <pacoblaze3_alu> ...
-
-Optimizing unit <outport> ...
+WARNING:Xst:2677 - Node <bamse1/ports/Port_A/int_out> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <bamse1/ports/IntCon/port_out_7> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <bamse1/ports/IntCon/port_out_3> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <bamse1/ports/IntCon/port_out_4> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <bamse1/ports/IntCon/port_out_5> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <bamse1/ports/IntCon/port_out_6> of sequential type is unconnected in block <top>.
 WARNING:Xst:2677 - Node <bamse1/pblaze/interrupt_ack> of sequential type is unconnected in block <top>.
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 0) on block top, actual ratio is 2.
+Found area constraint ratio of 100 (+ 0) on block top, actual ratio is 3.
 
 Final Macro Processing ...
 
@@ -424,8 +550,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 37
- Flip-Flops                                            : 37
+# Registers                                            : 56
+ Flip-Flops                                            : 56
 
 =========================================================================
 
@@ -448,23 +574,23 @@ Top Level Output File Name         : top.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 164
+# BELS                             : 185
 #      GND                         : 4
 #      INV                         : 2
-#      LUT2                        : 8
-#      LUT3                        : 19
-#      LUT4                        : 11
-#      LUT5                        : 22
-#      LUT6                        : 81
+#      LUT2                        : 9
+#      LUT3                        : 20
+#      LUT4                        : 14
+#      LUT5                        : 21
+#      LUT6                        : 98
 #      MUXCY                       : 8
 #      VCC                         : 1
 #      XORCY                       : 8
-# FlipFlops/Latches                : 45
+# FlipFlops/Latches                : 73
 #      FDE                         : 2
-#      FDR                         : 7
-#      FDRE                        : 26
+#      FDR                         : 17
+#      FDRE                        : 35
 #      FDS                         : 2
-#      LDCE                        : 8
+#      LDCE                        : 17
 # RAMS                             : 22
 #      RAM16X1D                    : 8
 #      RAM32M                      : 1
@@ -473,8 +599,8 @@ Primitive and Black Box Usage:
 #      RAMB16BWER                  : 1
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 19
-#      IBUF                        : 10
+# IO Buffers                       : 21
+#      IBUF                        : 12
 #      OBUF                        : 9
 
 Device utilization summary:
@@ -484,22 +610,22 @@ Selected Device : 6slx9tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              37  out of  11440     0%  
- Number of Slice LUTs:                  179  out of   5720     3%  
-    Number used as Logic:               143  out of   5720     2%  
+ Number of Slice Registers:              65  out of  11440     0%  
+ Number of Slice LUTs:                  200  out of   5720     3%  
+    Number used as Logic:               164  out of   5720     2%  
     Number used as Memory:               36  out of   1440     2%  
        Number used as RAM:               36
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    194
-   Number with an unused Flip Flop:     157  out of    194    80%  
-   Number with an unused LUT:            15  out of    194     7%  
-   Number of fully used LUT-FF pairs:    22  out of    194    11%  
-   Number of unique control sets:        11
+ Number of LUT Flip Flop pairs used:    239
+   Number with an unused Flip Flop:     174  out of    239    72%  
+   Number with an unused LUT:            39  out of    239    16%  
+   Number of fully used LUT-FF pairs:    26  out of    239    10%  
+   Number of unique control sets:        18
 
 IO Utilization: 
- Number of IOs:                          20
- Number of bonded IOBs:                  20  out of    102    19%  
+ Number of IOs:                          22
+ Number of bonded IOBs:                  22  out of    102    21%  
     IOB Flip Flops/Latches:               8
 
 Specific Feature Utilization:
@@ -525,12 +651,12 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
------------------------------------+------------------------------+-------+
-Clock Signal                       | Clock buffer(FF name)        | Load  |
------------------------------------+------------------------------+-------+
-CLK                                | BUFGP                        | 59    |
-bamse1/pblaze/write_strobe         | NONE(bamse1/portA/port_out_7)| 8     |
------------------------------------+------------------------------+-------+
+-----------------------------------+-------------------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                           | Load  |
+-----------------------------------+-------------------------------------------------+-------+
+CLK                                | BUFGP                                           | 78    |
+bamse1/pblaze/write_strobe         | NONE(bamse1/ports/PortA_IOC_Pos_Conf/port_out_2)| 17    |
+-----------------------------------+-------------------------------------------------+-------+
 INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
 Asynchronous Control Signals Information:
@@ -541,8 +667,8 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 9.125ns (Maximum Frequency: 109.589MHz)
-   Minimum input arrival time before clock: 4.648ns
+   Minimum period: 9.235ns (Maximum Frequency: 108.284MHz)
+   Minimum input arrival time before clock: 4.821ns
    Maximum output required time after clock: 4.174ns
    Maximum combinational path delay: No path found
 
@@ -552,91 +678,99 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'CLK'
-  Clock period: 9.125ns (frequency: 109.589MHz)
-  Total number of paths / destination ports: 6630 / 298
+  Clock period: 9.235ns (frequency: 108.284MHz)
+  Total number of paths / destination ports: 7436 / 318
 -------------------------------------------------------------------------
-Delay:               9.125ns (Levels of Logic = 6)
+Delay:               9.235ns (Levels of Logic = 9)
   Source:            bamse1/mem/RAMB16BWER_inst (RAM)
-  Destination:       bamse1/pblaze/program_counter_9 (FF)
+  Destination:       bamse1/pblaze/zero (FF)
   Source Clock:      CLK rising
   Destination Clock: CLK rising
 
-  Data Path: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/program_counter_9
+  Data Path: bamse1/mem/RAMB16BWER_inst to bamse1/pblaze/zero
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     RAMB16BWER:CLKA->DOA12   23   2.100   1.586  RAMB16BWER_inst (din<12>)
-     end scope: 'bamse1/mem:din<12>'
-     begin scope: 'bamse1/pblaze:din<12>'
-     LUT5:I2->O            8   0.235   0.944  idu_conditional_idu_condition_flags[1]_OR_98_o1 (idu_conditional_idu_condition_flags[1]_OR_98_o)
-     LUT5:I4->O           12   0.254   1.177  conditional_match_is_returni_OR_108_o1 (conditional_match_is_returni_OR_108_o)
-     LUT6:I4->O            2   0.250   1.156  Mmux_n012651 (Madd_n0164[10:0]_lut<4>)
-     LUT5:I0->O            5   0.254   0.841  Madd_n0164[10:0]_cy<4>11 (Madd_n0164[10:0]_cy<4>)
-     LUT3:I2->O            1   0.254   0.000  Mmux_n012761 (n0127<5>)
-     FDRE:D                    0.074          program_counter_5
+     RAMB16BWER:CLKA->DOA8   25   2.100   1.402  RAMB16BWER_inst (din<8>)
+     end scope: 'bamse1/mem:din<8>'
+     begin scope: 'bamse1/pblaze:din<8>'
+     begin scope: 'bamse1/pblaze/register:x_address<0>'
+     RAM16X1D:A0->SPO     12   0.235   1.069  Mram_dpr2 (x_data_out<1>)
+     end scope: 'bamse1/pblaze/register:x_data_out<1>'
+     begin scope: 'bamse1/pblaze/alu:operand_a<1>'
+     LUT6:I5->O            1   0.254   0.790  result<1>1 (result<1>)
+     LUT6:I4->O            1   0.250   0.682  result<1>2 (result<1>1)
+     LUT5:I4->O            2   0.254   0.954  result<1>5 (alu_result<1>)
+     end scope: 'bamse1/pblaze/alu:result<1>'
+     LUT6:I3->O            1   0.235   0.682  Mmux_zero_idu_operation[4]_MUX_133_o1_SW0_SW0 (N58)
+     LUT6:I5->O            1   0.254   0.000  Mmux_zero_idu_operation[4]_MUX_133_o1 (zero_idu_operation[4]_MUX_133_o)
+     FDRE:D                    0.074          zero
     ----------------------------------------
-    Total                      9.125ns (3.421ns logic, 5.704ns route)
-                                       (37.5% logic, 62.5% route)
-
-=========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
-  Total number of paths / destination ports: 29 / 29
--------------------------------------------------------------------------
-Offset:              4.648ns (Levels of Logic = 3)
-  Source:            DIR_LEFT (PAD)
-  Destination:       bamse1/inp_control/value_out_7 (FF)
-  Destination Clock: CLK rising
-
-  Data Path: DIR_LEFT to bamse1/inp_control/value_out_7
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     IBUF:I->O            17   1.328   1.664  DIR_LEFT_IBUF (DIR_LEFT_IBUF)
-     begin scope: 'bamse1:rst'
-     begin scope: 'bamse1/inp_control:rst'
-     LUT6:I0->O            8   0.254   0.943  Reset_OR_DriverANDClockEnable (Reset_OR_DriverANDClockEnable)
-     FDRE:R                    0.459          value_out_0
-    ----------------------------------------
-    Total                      4.648ns (2.041ns logic, 2.607ns route)
-                                       (43.9% logic, 56.1% route)
+    Total                      9.235ns (3.656ns logic, 5.579ns route)
+                                       (39.6% logic, 60.4% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'bamse1/pblaze/write_strobe'
-  Total number of paths / destination ports: 8 / 8
+  Total number of paths / destination ports: 17 / 17
 -------------------------------------------------------------------------
-Offset:              2.995ns (Levels of Logic = 2)
-  Source:            DIR_LEFT (PAD)
-  Destination:       bamse1/portA/port_out_7 (LATCH)
+Offset:              3.607ns (Levels of Logic = 3)
+  Source:            DIR_UP (PAD)
+  Destination:       bamse1/ports/PortA_IOC_Pos_Conf/port_out_2 (LATCH)
   Destination Clock: bamse1/pblaze/write_strobe falling
 
-  Data Path: DIR_LEFT to bamse1/portA/port_out_7
+  Data Path: DIR_UP to bamse1/ports/PortA_IOC_Pos_Conf/port_out_2
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            17   1.328   1.208  DIR_LEFT_IBUF (DIR_LEFT_IBUF)
+     IBUF:I->O            50   1.328   1.820  DIR_UP_IBUF (DIR_UP_IBUF)
      begin scope: 'bamse1:rst'
-     begin scope: 'bamse1/portA:rst'
-     LDCE:CLR                  0.459          port_out_6
+     begin scope: 'bamse1/ports:rst'
+     begin scope: 'bamse1/ports/PortA_IOC_Pos_Conf:rst'
+     LDCE:CLR                  0.459          port_out_2
     ----------------------------------------
-    Total                      2.995ns (1.787ns logic, 1.208ns route)
-                                       (59.7% logic, 40.3% route)
+    Total                      3.607ns (1.787ns logic, 1.820ns route)
+                                       (49.5% logic, 50.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
+  Total number of paths / destination ports: 50 / 50
+-------------------------------------------------------------------------
+Offset:              4.821ns (Levels of Logic = 4)
+  Source:            DIR_UP (PAD)
+  Destination:       bamse1/pblaze/stack/Mram_spr24 (RAM)
+  Destination Clock: CLK rising
+
+  Data Path: DIR_UP to bamse1/pblaze/stack/Mram_spr24
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            50   1.328   2.049  DIR_UP_IBUF (DIR_UP_IBUF)
+     begin scope: 'bamse1:rst'
+     begin scope: 'bamse1/pblaze:reset'
+     begin scope: 'bamse1/pblaze/stack:reset'
+     LUT3:I0->O            5   0.235   0.840  Mmux_BUS_000211 (BUS_0002)
+     RAM32M:WE                 0.369          Mram_spr1
+    ----------------------------------------
+    Total                      4.821ns (1.932ns logic, 2.889ns route)
+                                       (40.1% logic, 59.9% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'bamse1/pblaze/write_strobe'
   Total number of paths / destination ports: 8 / 8
 -------------------------------------------------------------------------
-Offset:              4.174ns (Levels of Logic = 2)
-  Source:            bamse1/portA/port_out_0 (LATCH)
+Offset:              4.174ns (Levels of Logic = 3)
+  Source:            bamse1/ports/Port_C/port_out_0 (LATCH)
   Destination:       LED0 (PAD)
   Source Clock:      bamse1/pblaze/write_strobe falling
 
-  Data Path: bamse1/portA/port_out_0 to LED0
+  Data Path: bamse1/ports/Port_C/port_out_0 to LED0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      LDCE:G->Q             1   0.581   0.681  port_out_0 (port_out_0)
-     end scope: 'bamse1/portA:port_out<0>'
-     end scope: 'bamse1:portA_out<0>'
+     end scope: 'bamse1/ports/Port_C:port_out<0>'
+     end scope: 'bamse1/ports:PortC<0>'
+     end scope: 'bamse1:PortC<0>'
      OBUF:I->O                 2.912          LED0_OBUF (LED0)
     ----------------------------------------
     Total                      4.174ns (3.493ns logic, 0.681ns route)
@@ -648,33 +782,34 @@ Cross Clock Domains Report:
 --------------------------
 
 Clock to Setup on destination clock CLK
----------------+---------+---------+---------+---------+
-               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
-Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
----------------+---------+---------+---------+---------+
-CLK            |    9.125|         |         |         |
----------------+---------+---------+---------+---------+
+--------------------------+---------+---------+---------+---------+
+                          | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock              |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+--------------------------+---------+---------+---------+---------+
+CLK                       |    9.235|         |         |         |
+bamse1/pblaze/write_strobe|         |    3.944|         |         |
+--------------------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock bamse1/pblaze/write_strobe
 ---------------+---------+---------+---------+---------+
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |         |         |    7.757|         |
+CLK            |         |         |    8.716|         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 3.68 secs
+Total REAL time to Xst completion: 3.00 secs
+Total CPU time to Xst completion: 3.83 secs
  
 --> 
 
 
-Total memory usage is 398700 kilobytes
+Total memory usage is 399488 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   21 (   0 filtered)
-Number of infos    :    7 (   0 filtered)
+Number of warnings :   45 (   0 filtered)
+Number of infos    :    9 (   0 filtered)
 

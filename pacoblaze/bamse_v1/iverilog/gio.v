@@ -64,9 +64,9 @@ module inport(
 endmodule
 
 /* gio_ioc
- * This module configures the interrupt-on-change for a input port
- * An output port is used as configuration word to mask the bits that produce ioc
- * The inputs are syncrhonized since this port is supposed to be used
+ * This module configures the interrupt-on-change for an input port.
+ * two output ports are used as configuration words in order to mask the bits
+ * that produce ioc. The inputs are syncrhonized since this port is supposed to be used
  * with external signals.
  */
  
@@ -176,6 +176,7 @@ module in_port_selector(
 	address,
 	in_port0,
 	in_port1,
+	in_port2,
 	//add more ports here
 	out_port
 );
@@ -183,17 +184,21 @@ module in_port_selector(
 // These parameters must be initialized during instantiation!
 parameter ADDR0 = 8'h00;
 parameter ADDR1 = 8'h01;
+parameter ADDR2 = 8'h02;
 //parameter ADDR2 = 8'h02;
 
 input [7:0] address;
 input [7:0] in_port0;
 input [7:0] in_port1;
+input [7:0] in_port2;
+
 output reg [7:0] out_port;
 
 always @(*) begin
 	case (address) 
 		ADDR0: out_port = in_port0;
 		ADDR1: out_port = in_port1;
+		ADDR2: out_port = in_port2;
 		default: out_port = 8'h00;	
 	endcase	
 end
