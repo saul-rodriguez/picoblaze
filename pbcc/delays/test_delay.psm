@@ -1,0 +1,110 @@
+;--------------------------------------------------------
+; File Created by SDCC : free open source ANSI-C Compiler
+; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+; This file was generated Wed Sep 25 01:31:59 2019
+;--------------------------------------------------------
+;--------------------------------------------------------
+; global & static initialisations
+;--------------------------------------------------------
+
+	LOAD	sF, 3f
+	JUMP	__sdcc_program_startup
+;--------------------------------------------------------
+; Home
+;--------------------------------------------------------
+__sdcc_program_startup:
+	CALL	_main
+;	return from main will lock up
+__sdcc_loop:
+	JUMP	__sdcc_loop
+;--------------------------------------------------------
+; code
+;--------------------------------------------------------
+	;	../common/delay.h:28: void delay()
+_delay:
+	;	../common/delay.h:35: __endasm;
+	  LOAD S0, 0xb2
+	 rpt11:
+	  ADD S0, 01
+	  JUMP NZ, rpt11
+	RETURN
+	;	../common/delay.h:38: void delay_10us_fixed() 
+_delay_10us_fixed:
+	;	../common/delay.h:45: __endasm;	
+	  LOAD S0, 0xb6
+	  rpt22:
+	  ADD S0, 01
+	  JUMP NZ, rpt11
+	RETURN
+	;	../common/delay.h:48: void delay_10us(unsigned char time)
+_delay_10us:
+	LOAD	s0, sB
+	;	../common/delay.h:52: for (i=0; i<time; i++)  {
+	LOAD	s1, 00
+_L00105:
+	COMPARE	s1, s0
+	JUMP	C, _LC00129
+	JUMP	_L00113
+_LC00129:
+	;	../common/delay.h:53: delay_10us_fixed();		
+	STORE	s0, (sF)
+	SUB	sF, 01
+	STORE	s1, (sF)
+	SUB	sF, 01
+	CALL	_delay_10us_fixed
+	ADD	sF, 01
+	FETCH	s1, (sF)
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	;	../common/delay.h:52: for (i=0; i<time; i++)  {
+	ADD	s1, 01
+	JUMP	_L00105
+_L00113:
+	RETURN
+	;	../common/delay.h:57: void delay_ms(unsigned char time) 
+_delay_ms:
+	LOAD	s0, sB
+	;	../common/delay.h:61: for (i=0; i<time; i++)  {
+	LOAD	s1, 00
+_L00114:
+	COMPARE	s1, s0
+	JUMP	C, _LC00130
+	JUMP	_L00122
+_LC00130:
+	;	../common/delay.h:62: delay_10us(100);
+	STORE	s0, (sF)
+	SUB	sF, 01
+	STORE	s1, (sF)
+	SUB	sF, 01
+	LOAD	sB, 64
+	CALL	_delay_10us
+	ADD	sF, 01
+	FETCH	s1, (sF)
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	;	../common/delay.h:61: for (i=0; i<time; i++)  {
+	ADD	s1, 01
+	JUMP	_L00114
+_L00122:
+	RETURN
+	;	test_delay.c:5: void main()
+_main:
+	;	test_delay.c:11: while(1) {
+_L00124:
+	;	test_delay.c:12: PBLAZEPORT[PORTC_OUT] = 0x00;
+	LOAD	s0, 00
+	OUTPUT	s0, 05
+	;	test_delay.c:13: delay_ms(5);
+	LOAD	sB, 05
+	CALL	_delay_ms
+	;	test_delay.c:14: PBLAZEPORT[PORTC_OUT] = 0xff;
+	LOAD	s0, ff
+	OUTPUT	s0, 05
+	;	test_delay.c:15: delay_ms(5);		
+	LOAD	sB, 05
+	CALL	_delay_ms
+	JUMP	_L00124
+	RETURN
+;--------------------------------------------------------
+; interrupt vector 
+;--------------------------------------------------------

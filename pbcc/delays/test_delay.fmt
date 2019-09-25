@@ -1,0 +1,110 @@
+                      ;--------------------------------------------------------
+                      ; File Created by SDCC : free open source ANSI-C Compiler
+                      ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+                      ; This file was generated Wed Sep 25 01:31:59 2019
+                      ;--------------------------------------------------------
+                      ;--------------------------------------------------------
+                      ; global & static initialisations
+                      ;--------------------------------------------------------
+
+                      load sf, 3f
+                      jump __sdcc_program_startup
+                      ;--------------------------------------------------------
+                      ; Home
+                      ;--------------------------------------------------------
+ __sdcc_program_startup:
+                      call _main
+                      ;	return from main will lock up
+         __sdcc_loop:
+                      jump __sdcc_loop
+                      ;--------------------------------------------------------
+                      ; code
+                      ;--------------------------------------------------------
+                      ;	../common/delay.h:28: void delay()
+              _delay:
+                      ;	../common/delay.h:35: __endasm;
+                      ;REMOVED: load s0, 0xb2
+               rpt11:
+                      add s0, 01
+                      jump NZ, rpt11
+                      return
+                      ;	../common/delay.h:38: void delay_10us_fixed()
+   _delay_10us_fixed:
+                      ;	../common/delay.h:45: __endasm;
+                      load s0, 0xb6
+               rpt22:
+                      add s0, 01
+                      jump NZ, rpt11
+                      return
+                      ;	../common/delay.h:48: void delay_10us(unsigned char time)
+         _delay_10us:
+                      load s0, sb
+                      ;	../common/delay.h:52: for (i=0; i<time; i++)  {
+                      load s1, 00
+             _L00105:
+                      compare s1, s0
+                      jump C, _LC00129
+                      jump _L00113
+            _LC00129:
+                      ;	../common/delay.h:53: delay_10us_fixed();
+                      store s0, (sf)
+                      sub sf, 01
+                      store s1, (sf)
+                      sub sf, 01
+                      call _delay_10us_fixed
+                      add sf, 01
+                      fetch s1, (sf)
+                      add sf, 01
+                      fetch s0, (sf)
+                      ;	../common/delay.h:52: for (i=0; i<time; i++)  {
+                      add s1, 01
+                      jump _L00105
+             _L00113:
+                      return
+                      ;	../common/delay.h:57: void delay_ms(unsigned char time)
+           _delay_ms:
+                      load s0, sb
+                      ;	../common/delay.h:61: for (i=0; i<time; i++)  {
+                      load s1, 00
+             _L00114:
+                      compare s1, s0
+                      jump C, _LC00130
+                      jump _L00122
+            _LC00130:
+                      ;	../common/delay.h:62: delay_10us(100);
+                      store s0, (sf)
+                      sub sf, 01
+                      store s1, (sf)
+                      sub sf, 01
+                      load sb, 64
+                      call _delay_10us
+                      add sf, 01
+                      fetch s1, (sf)
+                      add sf, 01
+                      fetch s0, (sf)
+                      ;	../common/delay.h:61: for (i=0; i<time; i++)  {
+                      add s1, 01
+                      jump _L00114
+             _L00122:
+                      return
+                      ;	test_delay.c:5: void main()
+               _main:
+                      ;	test_delay.c:11: while(1) {
+             _L00124:
+                      ;	test_delay.c:12: PBLAZEPORT[PORTC_OUT] = 0x00;
+                      load s0, 00
+                      output s0, 05
+                      ;	test_delay.c:13: delay_ms(5);
+                      load sb, 05
+                      call _delay_ms
+                      ;	test_delay.c:14: PBLAZEPORT[PORTC_OUT] = 0xff;
+                      load s0, ff
+                      output s0, 05
+                      ;	test_delay.c:15: delay_ms(5);
+                      load sb, 05
+                      call _delay_ms
+                      jump _L00124
+                      ;REMOVED: return
+                      ;--------------------------------------------------------
+                      ; interrupt vector
+                      ;--------------------------------------------------------

@@ -1,7 +1,7 @@
 //ioc.c
 
 #include <intr.h>
-#include "bamse.h"
+#include "../common/bamse.h"
 
 void _interrupt_handler(void) __interrupt (1); 
 
