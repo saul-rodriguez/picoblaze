@@ -19,7 +19,8 @@ module bamse(
 	clk,
 	PortA,
 	PortB,
-	PortC
+	PortC,
+	RxUART
 );
 
 //input irq;
@@ -29,6 +30,7 @@ input clk;
 input [`PORTA_IN_WIDTH-1:0] PortA; 
 input [`PORTB_IN_WIDTH-1:0] PortB; 
 output [`PORTC_OUT_WIDTH-1:0] PortC;
+input RxUART;
 
 
 wire [`code_depth-1:0] addr; // instruction address
@@ -92,6 +94,7 @@ io_bamse ports(
 	.PortA(PortA),
 	.PortB(PortB),
 	.PortC(PortC),	
+	.RxUART(RxUART),
 	//Pacoblaze pins
 	.port_id(pid),  //from port address in Pacoblaze
 	.port_out(pin),  // to input port in Pacoblaze 

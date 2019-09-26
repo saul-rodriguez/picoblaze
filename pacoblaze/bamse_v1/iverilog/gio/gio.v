@@ -55,17 +55,18 @@ module inport(
 	always @(posedge clk) begin
 		if (rst) begin
 			port_out <= 0;
-		end else if (ren) begin
-			if (address == ADDR)
+		//end else if (ren) begin
+		//	if (address == ADDR)
+		end else if (address == ADDR) begin
 				port_out <= port_in;
 		end
 	end
 endmodule
 
 /* gio_ioc
- * This module configures the interrupt-on-change for a input port
- * An output port is used as configuration word to mask the bits that produce ioc
- * The inputs are syncrhonized since this port is supposed to be used
+ * This module configures the interrupt-on-change for an input port.
+ * two output ports are used as configuration words in order to mask the bits
+ * that produce ioc. The inputs are syncrhonized since this port is supposed to be used
  * with external signals.
  */
  
@@ -79,6 +80,7 @@ endmodule
 	ioc_pos_conf, //rising-edge detection enable 
 	ioc_neg_conf, //falling-edge detection enable	
 	int_out,	//Interrupt on change 
+	int_flags
 //	int_ack		//Interrupt acknowledge
 );	
 
@@ -94,6 +96,7 @@ endmodule
 	input [WIDTH-1:0] ioc_pos_conf;
 	input [WIDTH-1:0] ioc_neg_conf;	
 	output reg int_out;
+	output reg [WIDTH-1:0] int_flags;
 //	input int_ack;
 	
 	reg [WIDTH-1:0] sync_port;
@@ -103,10 +106,11 @@ endmodule
 	reg [WIDTH-1:0] port_out; 
 	
 	wire [WIDTH-1:0] up_port;
-	wire [WIDTH-1:0] down_port;
-	
+	wire [WIDTH-1:0] down_port;	
+	wire [WIDTH-1:0] int_detection;
+		
 	reg int_reset;
-	
+		
 	//Synchronization 
 	always @(posedge clk) begin
 		if (rst) begin
@@ -119,35 +123,51 @@ endmodule
 			sync_port <= port_in;
 			c1_port <= sync_port;
 			c2_port <= c1_port;		
-			if (ren) begin
+		/*	if (ren) begin
 				if (address == ADDR) begin
 					port_out <= c1_port;
 					int_reset <= 1;
 				end 
 			end else begin
 				int_reset <= 0;
-			end				
+			end*/
+			if (address == ADDR) begin
+				port_out <= c1_port;
+				if (ren) int_reset <= 1; //interrupt signal and interrupt flag is reset on a port read
+			end 
+			
+			if (int_reset) begin
+				int_reset <= 0;  // reset after 1 clk
+			end
+						
 		end
 	end
 	
 	assign up_port = c1_port & ~c2_port & ioc_pos_conf;
 	assign down_port = ~c1_port & c2_port & ioc_neg_conf;
+	assign int_detection = up_port | down_port;
 	
 	//Interrupt
+		
 	always @(posedge clk) begin
 		if (rst) begin
 			int_out <= 0;
+			int_flags <= 0;
 		end else begin
 			//if (int_ack) begin
 			if (int_reset) begin
 				int_out <= 0;
-			end else begin
-				if (up_port | down_port) begin
+				int_flags <= 0;
+			end else begin				
+				if (int_detection) begin
 					int_out <= 1;
+					int_flags <= int_detection;
 				end
 			end
 		end
 	end		
+	
+	
 
 endmodule
 
@@ -159,6 +179,7 @@ module in_port_selector(
 	address,
 	in_port0,
 	in_port1,
+	in_port2,
 	//add more ports here
 	out_port
 );
@@ -166,17 +187,21 @@ module in_port_selector(
 // These parameters must be initialized during instantiation!
 parameter ADDR0 = 8'h00;
 parameter ADDR1 = 8'h01;
+parameter ADDR2 = 8'h02;
 //parameter ADDR2 = 8'h02;
 
 input [7:0] address;
 input [7:0] in_port0;
 input [7:0] in_port1;
+input [7:0] in_port2;
+
 output reg [7:0] out_port;
 
 always @(*) begin
 	case (address) 
 		ADDR0: out_port = in_port0;
 		ADDR1: out_port = in_port1;
+		ADDR2: out_port = in_port2;
 		default: out_port = 8'h00;	
 	endcase	
 end

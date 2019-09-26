@@ -1,0 +1,89 @@
+;--------------------------------------------------------
+; File Created by SDCC : free open source ANSI-C Compiler
+; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+; This file was generated Thu Sep 26 21:19:52 2019
+;--------------------------------------------------------
+;--------------------------------------------------------
+; global & static initialisations
+;--------------------------------------------------------
+
+	LOAD	sF, 3f
+	JUMP	__sdcc_program_startup
+;--------------------------------------------------------
+; Home
+;--------------------------------------------------------
+__sdcc_program_startup:
+	CALL	_main
+;	return from main will lock up
+__sdcc_loop:
+	JUMP	__sdcc_loop
+;--------------------------------------------------------
+; code
+;--------------------------------------------------------
+	;	../common/serial.h:21: void UART_setupRx()
+_UART_setupRx:
+	;	../common/serial.h:23: PBLAZEPORT[UART_OUT_CONFIG_L] = UART_CLK_BIT_L;
+	LOAD	s0, 05
+	OUTPUT	s0, 07
+	;	../common/serial.h:24: PBLAZEPORT[UART_OUT_CONFIG_H] = UART_CLK_BIT_H;
+	LOAD	s0, 0d
+	OUTPUT	s0, 08
+	RETURN
+	;	../common/serial.h:27: unsigned char getchar()
+_getchar:
+	;	../common/serial.h:31: aux = 0;
+	LOAD	s0, 00
+	;	../common/serial.h:32: while (!aux) {
+_L00103:
+	COMPARE	s0, 00
+	JUMP	Z, _LC00120
+	JUMP	_L00105
+_LC00120:
+	;	../common/serial.h:33: aux = PBLAZEPORT[INT_IN_FLAGS];
+	INPUT	s1, 00
+	LOAD	s0, s1
+	;	../common/serial.h:34: aux = aux & UART_RX_INT_FLAG_BIT;
+	LOAD	s1, s0
+	AND	s1, 08
+	LOAD	s0, s1
+	JUMP	_L00103
+_L00105:
+	;	../common/serial.h:37: aux = PBLAZEPORT[UART_RX];
+	INPUT	s1, 06
+	LOAD	s0, s1
+	;	../common/serial.h:38: return aux;
+	LOAD	sB, s0
+	RETURN
+	;	test_serial.c:5: void main()
+_main:
+	;	test_serial.c:11: UART_setupRx();
+	CALL	_UART_setupRx
+	;	test_serial.c:15: rx = 0;
+	LOAD	s0, 00
+	;	test_serial.c:18: while (!rx) {
+_L00110:
+	COMPARE	s0, 00
+	JUMP	Z, _LC00121
+	JUMP	_L00112
+_LC00121:
+	;	test_serial.c:19: flags = PBLAZEPORT[INT_IN_FLAGS];
+	INPUT	s1, 00
+	LOAD	s2, s1
+	;	test_serial.c:20: rx = flags & UART_RX_INT_FLAG_BIT;
+	LOAD	s1, s2
+	AND	s1, 08
+	LOAD	s0, s1
+	JUMP	_L00110
+_L00112:
+	;	test_serial.c:22: rx = 0;
+	LOAD	s0, 00
+	;	test_serial.c:24: data = PBLAZEPORT[UART_RX];
+	INPUT	s1, 06
+	LOAD	s2, s1
+	;	test_serial.c:25: PBLAZEPORT[PORTC_OUT] = data;		
+	OUTPUT	s2, 05
+	JUMP	_L00110
+	RETURN
+;--------------------------------------------------------
+; interrupt vector 
+;--------------------------------------------------------

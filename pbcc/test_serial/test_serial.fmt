@@ -1,0 +1,89 @@
+                      ;--------------------------------------------------------
+                      ; File Created by SDCC : free open source ANSI-C Compiler
+                      ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+                      ; This file was generated Thu Sep 26 21:19:52 2019
+                      ;--------------------------------------------------------
+                      ;--------------------------------------------------------
+                      ; global & static initialisations
+                      ;--------------------------------------------------------
+
+                      load sf, 3f
+                      jump __sdcc_program_startup
+                      ;--------------------------------------------------------
+                      ; Home
+                      ;--------------------------------------------------------
+ __sdcc_program_startup:
+                      call _main
+                      ;	return from main will lock up
+         __sdcc_loop:
+                      jump __sdcc_loop
+                      ;--------------------------------------------------------
+                      ; code
+                      ;--------------------------------------------------------
+                      ;	../common/serial.h:21: void UART_setupRx()
+       _UART_setupRx:
+                      ;	../common/serial.h:23: PBLAZEPORT[UART_OUT_CONFIG_L] = UART_CLK_BIT_L;
+                      load s0, 05
+                      output s0, 07
+                      ;	../common/serial.h:24: PBLAZEPORT[UART_OUT_CONFIG_H] = UART_CLK_BIT_H;
+                      load s0, 0d
+                      output s0, 08
+                      return
+                      ;	../common/serial.h:27: unsigned char getchar()
+            _getchar:
+                      ;	../common/serial.h:31: aux = 0;
+                      ;REMOVED: load s0, 00
+                      ;	../common/serial.h:32: while (!aux) {
+             _L00103:
+                      ;REMOVED: compare s0, 00
+                      ;REMOVED: jump Z, _LC00120
+                      ;REMOVED: jump _L00105
+            _LC00120:
+                      ;	../common/serial.h:33: aux = PBLAZEPORT[INT_IN_FLAGS];
+                      ;REMOVED: input s1, 00
+                      ;REMOVED: load s0, s1
+                      ;	../common/serial.h:34: aux = aux & UART_RX_INT_FLAG_BIT;
+                      ;REMOVED: load s1, s0
+                      ;REMOVED: and s1, 08
+                      ;REMOVED: load s0, s1
+                      ;REMOVED: jump _L00103
+             _L00105:
+                      ;	../common/serial.h:37: aux = PBLAZEPORT[UART_RX];
+                      ;REMOVED: input s1, 06
+                      ;REMOVED: load s0, s1
+                      ;	../common/serial.h:38: return aux;
+                      ;REMOVED: load sb, s0
+                      ;REMOVED: return
+                      ;	test_serial.c:5: void main()
+               _main:
+                      ;	test_serial.c:11: UART_setupRx();
+                      call _UART_setupRx
+                      ;	test_serial.c:15: rx = 0;
+                      load s0, 00
+                      ;	test_serial.c:18: while (!rx) {
+             _L00110:
+                      compare s0, 00
+                      jump Z, _LC00121
+                      jump _L00112
+            _LC00121:
+                      ;	test_serial.c:19: flags = PBLAZEPORT[INT_IN_FLAGS];
+                      input s1, 00
+                      load s2, s1
+                      ;	test_serial.c:20: rx = flags & UART_RX_INT_FLAG_BIT;
+                      load s1, s2
+                      and s1, 08
+                      load s0, s1
+                      jump _L00110
+             _L00112:
+                      ;	test_serial.c:22: rx = 0;
+                      load s0, 00
+                      ;	test_serial.c:24: data = PBLAZEPORT[UART_RX];
+                      input s1, 06
+                      load s2, s1
+                      ;	test_serial.c:25: PBLAZEPORT[PORTC_OUT] = data;
+                      output s2, 05
+                      jump _L00110
+                      ;REMOVED: return
+                      ;--------------------------------------------------------
+                      ; interrupt vector
+                      ;--------------------------------------------------------

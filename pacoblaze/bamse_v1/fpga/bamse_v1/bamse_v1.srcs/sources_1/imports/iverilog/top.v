@@ -41,7 +41,7 @@ module top(
     input SW4,
     input SW5,
     input SW6,
-    input SW7,
+    input SW7, //UART_RX
     output ARDUINO_RESET   
 );
 
@@ -55,10 +55,12 @@ wire [7:0] portC;
 assign portA = {DIR_LEFT, DIR_DOWN, DIR_RIGHT}; //The pbuttons are pull-down
 
 // PORTB
-assign portB = {SW7,SW6,SW5,SW4,SW3,SW2,SW1,SW0}; //The switches are pull-up
+assign portB = {1'b0,SW6,SW5,SW4,SW3,SW2,SW1,SW0}; //The switches are pull-up
 
 // PORTC
 assign {LED7,LED6,LED5,LED4,LED3,LED2,LED1,LED0} = portC;
+
+//UART
 
 
 //Keep arduino's pin in the Papilio board at reset
@@ -68,6 +70,7 @@ bamse bamse1(.rst(DIR_UP),
              .clk(CLK), 
              .PortA(portA),
              .PortB(portB),
-             .PortC(portC)
+             .PortC(portC),
+             .RxUART(SW7)
           );    
 endmodule

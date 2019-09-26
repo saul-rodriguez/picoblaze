@@ -134,9 +134,12 @@ endmodule
 			if (address == ADDR) begin
 				port_out <= c1_port;
 				if (ren) int_reset <= 1; //interrupt signal and interrupt flag is reset on a port read
-			end else begin
-				int_reset <= 0;	
-			end 			
+			end 
+			
+			if (int_reset) begin
+				int_reset <= 0;  // reset after 1 clk
+			end
+						
 		end
 	end
 	
@@ -177,6 +180,7 @@ module in_port_selector(
 	in_port0,
 	in_port1,
 	in_port2,
+	in_port3,
 	//add more ports here
 	out_port
 );
@@ -185,12 +189,14 @@ module in_port_selector(
 parameter ADDR0 = 8'h00;
 parameter ADDR1 = 8'h01;
 parameter ADDR2 = 8'h02;
+parameter ADDR3 = 8'h03;
 //parameter ADDR2 = 8'h02;
 
 input [7:0] address;
 input [7:0] in_port0;
 input [7:0] in_port1;
 input [7:0] in_port2;
+input [7:0] in_port3;
 
 output reg [7:0] out_port;
 
@@ -199,6 +205,7 @@ always @(*) begin
 		ADDR0: out_port = in_port0;
 		ADDR1: out_port = in_port1;
 		ADDR2: out_port = in_port2;
+		ADDR3: out_port = in_port3;
 		default: out_port = 8'h00;	
 	endcase	
 end

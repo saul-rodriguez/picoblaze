@@ -2,12 +2,12 @@
 
 `ifndef TEST_FILE
 //`define TEST_FILE "/home/saul/projects/picoblaze/opbasm/hello_duo/hello.hex"
-//`define TEST_FILE "/home/saul/projects/picoblaze/pbcc/test_ioc/ioc.hex"
-`define TEST_FILE "/home/saul/projects/picoblaze/pbcc/delays/test_delay.hex"
+`define TEST_FILE "/home/saul/projects/picoblaze/pbcc/test_ioc/ioc.hex"
+//`define TEST_FILE "/home/saul/projects/picoblaze/pbcc/delays/test_delay.hex"
 `endif
 
 `ifndef TEST_CYCLES
-`define TEST_CYCLES 1000000
+`define TEST_CYCLES 10000
 `endif
 
 `include "timescale_inc.v"
@@ -61,7 +61,7 @@ initial begin
 	$dumpfile("dump.vcd");
 	//$dumpvars(-1, dut);
 	$dumpvars(1,dut);
-	$dumpvars(1,dut.bamse1, dut.bamse1.ports, dut.bamse1.din);
+	$dumpvars(1,dut.bamse1, dut.bamse1.ports, dut.bamse1.ports.Port_A, dut.bamse1.din);
 	
 	for(idx = 0; idx < `register_size; idx = idx + 1) begin
 	    $dumpvars(0,dut.bamse1.pblaze.register.dpr[idx]);
