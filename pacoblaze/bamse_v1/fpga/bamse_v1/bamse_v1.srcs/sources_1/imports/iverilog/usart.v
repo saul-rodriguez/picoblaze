@@ -8,7 +8,7 @@ module UART_TX
    input       i_TX_DV,
    input [7:0] i_TX_Byte,
    input [11:0] i_Clk_per_bit, 
-   output reg  o_TX_Active,
+   output reg  o_TX_Active_L,
    output reg  o_TX_Serial,
    output reg  o_TX_Done
    );
@@ -32,7 +32,7 @@ module UART_TX
     begin
       r_SM_Main <= 3'b000;
       o_TX_Done <= 1'b0;
-      o_TX_Active <= 1'b0;
+      o_TX_Active_L <= 1'b1;
     end
     else
     begin
@@ -46,7 +46,7 @@ module UART_TX
           
           if (i_TX_DV == 1'b1)
           begin
-            o_TX_Active <= 1'b1;
+            o_TX_Active_L <= 1'b0;
             r_TX_Data   <= i_TX_Byte;
             r_SM_Main   <= TX_START_BIT;
           end
@@ -119,7 +119,7 @@ module UART_TX
             o_TX_Done     <= 1'b1;
             r_Clock_Count <= 0;
             r_SM_Main     <= CLEANUP;
-            o_TX_Active   <= 1'b0;
+            //o_TX_Active   <= 1'b0;
           end 
         end // case: TX_STOP_BIT
       
@@ -129,6 +129,7 @@ module UART_TX
         begin
           o_TX_Done <= 1'b1;
           r_SM_Main <= IDLE;
+          o_TX_Active_L   <= 1'b1;
         end
       
       
@@ -293,7 +294,6 @@ module USART_RX_BAMSE (
 	clk,
 	clk_per_bit,
 	port_out,
-	//rx_ready,
 	address,		
 	ren,
 	int_rx,

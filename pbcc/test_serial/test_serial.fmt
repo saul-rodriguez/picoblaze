@@ -1,7 +1,7 @@
                       ;--------------------------------------------------------
                       ; File Created by SDCC : free open source ANSI-C Compiler
                       ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
-                      ; This file was generated Thu Sep 26 21:19:52 2019
+                      ; This file was generated Fri Sep 27 01:39:25 2019
                       ;--------------------------------------------------------
                       ;--------------------------------------------------------
                       ; global & static initialisations
@@ -36,9 +36,9 @@
                       ;	../common/serial.h:32: while (!aux) {
              _L00103:
                       ;REMOVED: compare s0, 00
-                      ;REMOVED: jump Z, _LC00120
+                      ;REMOVED: jump Z, _LC00125
                       ;REMOVED: jump _L00105
-            _LC00120:
+            _LC00125:
                       ;	../common/serial.h:33: aux = PBLAZEPORT[INT_IN_FLAGS];
                       ;REMOVED: input s1, 00
                       ;REMOVED: load s0, s1
@@ -60,28 +60,52 @@
                       call _UART_setupRx
                       ;	test_serial.c:15: rx = 0;
                       load s0, 00
-                      ;	test_serial.c:18: while (!rx) {
+                      ;	test_serial.c:16: tx = 0;
+                      load s1, 00
+                      ;	test_serial.c:18: PBLAZEPORT[PORTC_OUT] = 0x55;
+                      load s2, 55
+                      output s2, 05
+                      ;	test_serial.c:22: while (!rx) {
              _L00110:
                       compare s0, 00
-                      jump Z, _LC00121
+                      jump Z, _LC00126
                       jump _L00112
-            _LC00121:
-                      ;	test_serial.c:19: flags = PBLAZEPORT[INT_IN_FLAGS];
-                      input s1, 00
-                      load s2, s1
-                      ;	test_serial.c:20: rx = flags & UART_RX_INT_FLAG_BIT;
-                      load s1, s2
-                      and s1, 08
-                      load s0, s1
+            _LC00126:
+                      ;	test_serial.c:23: flags = PBLAZEPORT[INT_IN_FLAGS];
+                      input s2, 00
+                      load s3, s2
+                      ;	test_serial.c:24: rx = flags & UART_RX_INT_FLAG_BIT;
+                      load s2, s3
+                      and s2, 08
+                      load s0, s2
                       jump _L00110
              _L00112:
-                      ;	test_serial.c:22: rx = 0;
+                      ;	test_serial.c:26: rx = 0;
                       load s0, 00
-                      ;	test_serial.c:24: data = PBLAZEPORT[UART_RX];
-                      input s1, 06
-                      load s2, s1
-                      ;	test_serial.c:25: PBLAZEPORT[PORTC_OUT] = data;
-                      output s2, 05
+                      ;	test_serial.c:28: data = PBLAZEPORT[UART_RX];
+                      input s2, 06
+                      load s4, s2
+                      ;	test_serial.c:29: PBLAZEPORT[PORTC_OUT] = data;
+                      output s4, 05
+                      ;	test_serial.c:33: while(!tx) {
+             _L00113:
+                      compare s1, 00
+                      jump Z, _LC00127
+                      jump _L00115
+            _LC00127:
+                      ;	test_serial.c:34: flags = PBLAZEPORT[INT_IN_FLAGS];
+                      input s2, 00
+                      load s3, s2
+                      ;	test_serial.c:35: tx = flags & UART_TX_INT_FLAG_BIT;
+                      load s2, s3
+                      and s2, 10
+                      load s1, s2
+                      jump _L00113
+             _L00115:
+                      ;	test_serial.c:37: tx = 0;
+                      load s1, 00
+                      ;	test_serial.c:39: PBLAZEPORT[UART_TX] = data;
+                      output s4, 09
                       jump _L00110
                       ;REMOVED: return
                       ;--------------------------------------------------------

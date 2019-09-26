@@ -25,6 +25,7 @@
 `define UART_RX 8'h06
 `define UART_OUT_CONFIG_L 8'h07
 `define UART_OUT_CONFIG_H 8'h08
+`define UART_TX 8'h09
 
 // Interrupts
 `define INT_OUT_CONFIG 8'h00 // address interrupt config. register

@@ -20,6 +20,7 @@ module bamse(
 	PortA,
 	PortB,
 	PortC,
+	TxUART,
 	RxUART
 );
 
@@ -30,6 +31,7 @@ input clk;
 input [`PORTA_IN_WIDTH-1:0] PortA; 
 input [`PORTB_IN_WIDTH-1:0] PortB; 
 output [`PORTC_OUT_WIDTH-1:0] PortC;
+output TxUART;
 input RxUART;
 
 
@@ -94,6 +96,7 @@ io_bamse ports(
 	.PortA(PortA),
 	.PortB(PortB),
 	.PortC(PortC),	
+	.TxUART(TxUART),
 	.RxUART(RxUART),
 	//Pacoblaze pins
 	.port_id(pid),  //from port address in Pacoblaze

@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-viking::  Thu Sep 26 21:34:53 2019
+viking::  Fri Sep 27 01:41:03 2019
 
 par -intstyle pa -w top.ncd top_routed.ncd 
 
@@ -21,16 +21,16 @@ Device speed data version:  "PRODUCTION 1.23 2013-10-13".
 Device Utilization Summary:
 
 Slice Logic Utilization:
-  Number of Slice Registers:                   116 out of  11,440    1%
-    Number used as Flip Flops:                  93
-    Number used as Latches:                     22
+  Number of Slice Registers:                   153 out of  11,440    1%
+    Number used as Flip Flops:                 121
+    Number used as Latches:                     31
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                1
-  Number of Slice LUTs:                        256 out of   5,720    4%
-    Number used as logic:                      229 out of   5,720    4%
-      Number using O6 output only:             188
-      Number using O5 output only:              11
-      Number using O5 and O6:                   30
+  Number of Slice LUTs:                        321 out of   5,720    5%
+    Number used as logic:                      293 out of   5,720    5%
+      Number using O6 output only:             203
+      Number using O5 output only:              22
+      Number using O5 and O6:                   68
       Number used as ROM:                        0
     Number used as Memory:                      25 out of   1,440    1%
       Number used as Dual Port RAM:             16
@@ -45,18 +45,18 @@ Slice Logic Utilization:
         Number using O6 output only:             1
         Number using O5 output only:             0
         Number using O5 and O6:                  0
-    Number used exclusively as route-thrus:      2
+    Number used exclusively as route-thrus:      3
       Number with same-slice register load:      0
-      Number with same-slice carry load:         2
+      Number with same-slice carry load:         3
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   121 out of   1,430    8%
-  Number of MUXCYs used:                        44 out of   2,860    1%
-  Number of LUT Flip Flop pairs used:          304
-    Number with an unused Flip Flop:           190 out of     304   62%
-    Number with an unused LUT:                  48 out of     304   15%
-    Number of fully used LUT-FF pairs:          66 out of     304   21%
+  Number of occupied Slices:                   130 out of   1,430    9%
+  Number of MUXCYs used:                        80 out of   2,860    2%
+  Number of LUT Flip Flop pairs used:          366
+    Number with an unused Flip Flop:           232 out of     366   63%
+    Number with an unused LUT:                  45 out of     366   12%
+    Number of fully used LUT-FF pairs:          89 out of     366   24%
     Number of slice register sites lost
       to control set restrictions:               0 out of  11,440    0%
 
@@ -109,23 +109,23 @@ WARNING:Par:288 - The signal bamse1/pblaze/stack/Mram_spr1_RAMD_D1_O has no load
 Starting Router
 
 
-Phase  1  : 1693 unrouted;      REAL time: 2 secs 
+Phase  1  : 1971 unrouted;      REAL time: 2 secs 
 
-Phase  2  : 1440 unrouted;      REAL time: 2 secs 
+Phase  2  : 1662 unrouted;      REAL time: 2 secs 
 
-Phase  3  : 574 unrouted;      REAL time: 3 secs 
+Phase  3  : 694 unrouted;      REAL time: 2 secs 
 
-Phase  4  : 574 unrouted; (Setup:0, Hold:48, Component Switching Limit:0)     REAL time: 3 secs 
+Phase  4  : 694 unrouted; (Setup:0, Hold:5, Component Switching Limit:0)     REAL time: 3 secs 
 
 Updating file: top_routed.ncd with current fully routed design.
 
-Phase  5  : 0 unrouted; (Setup:0, Hold:39, Component Switching Limit:0)     REAL time: 3 secs 
+Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 secs 
 
-Phase  6  : 0 unrouted; (Setup:0, Hold:39, Component Switching Limit:0)     REAL time: 3 secs 
+Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 secs 
 
-Phase  7  : 0 unrouted; (Setup:0, Hold:39, Component Switching Limit:0)     REAL time: 3 secs 
+Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 secs 
 
-Phase  8  : 0 unrouted; (Setup:0, Hold:39, Component Switching Limit:0)     REAL time: 3 secs 
+Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 secs 
 
 Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 secs 
 
@@ -149,9 +149,9 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|           CLK_BUFGP |  BUFGMUX_X2Y2| No   |   55 |  0.119     |  1.510      |
+|           CLK_BUFGP |  BUFGMUX_X2Y2| No   |   59 |  0.105     |  1.500      |
 +---------------------+--------------+------+------+------------+-------------+
-|          bamse1/wen |  BUFGMUX_X2Y3| No   |   17 |  0.708     |  2.132      |
+|          bamse1/wen |  BUFGMUX_X2Y3| No   |   20 |  0.739     |  2.132      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -171,8 +171,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  NET "CLK_BUFGP/IBUFG" PERIOD = 31 ns HIGH | SETUP       |    19.371ns|    11.629ns|       0|           0
-   50%                                      | HOLD        |     0.345ns|            |       0|           0
+  NET "CLK_BUFGP/IBUFG" PERIOD = 31 ns HIGH | SETUP       |    19.877ns|    11.123ns|       0|           0
+   50%                                      | HOLD        |     0.299ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
 
 

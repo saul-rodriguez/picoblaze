@@ -5,7 +5,7 @@
     <File Path="$PSRCDIR/sources_1/imports/iverilog/bamse_inc.v">
       <FileInfo SFType="VHeader">
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/bamse_inc.v"/>
-        <Attr Name="ImportTime" Val="1569525702"/>
+        <Attr Name="ImportTime" Val="1569538344"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
       </FileInfo>
@@ -13,7 +13,7 @@
     <File Path="$PSRCDIR/sources_1/imports/iverilog/top.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/top.v"/>
-        <Attr Name="ImportTime" Val="1569525666"/>
+        <Attr Name="ImportTime" Val="1569540700"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
@@ -22,7 +22,7 @@
     <File Path="$PSRCDIR/sources_1/imports/iverilog/bamse.v">
       <FileInfo SFType="VHeader">
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/bamse.v"/>
-        <Attr Name="ImportTime" Val="1569525770"/>
+        <Attr Name="ImportTime" Val="1569540744"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
       </FileInfo>
@@ -38,7 +38,7 @@
     <File Path="$PSRCDIR/sources_1/imports/iverilog/io_bamse.v">
       <FileInfo SFType="VHeader">
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/io_bamse.v"/>
-        <Attr Name="ImportTime" Val="1569526020"/>
+        <Attr Name="ImportTime" Val="1569540792"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
       </FileInfo>
@@ -46,7 +46,7 @@
     <File Path="$PSRCDIR/sources_1/imports/hello_duo/firmware.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../../../pbcc/test_serial/firmware.v"/>
-        <Attr Name="ImportTime" Val="1569526332"/>
+        <Attr Name="ImportTime" Val="1569541230"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
@@ -136,7 +136,7 @@
     <File Path="$PSRCDIR/sources_1/imports/iverilog/usart.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/usart.v"/>
-        <Attr Name="ImportTime" Val="1569526204"/>
+        <Attr Name="ImportTime" Val="1569540853"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>

@@ -12,7 +12,7 @@ module io_bamse(
 	PortA,
 	PortB,
 	PortC,	
-//	TxUART,
+	TxUART,
 	RxUART,
 	//Pacoblaze pins
 	port_id,  //from port address in Pacoblaze
@@ -30,7 +30,7 @@ module io_bamse(
 input  [`PORTA_IN_WIDTH-1:0] PortA;
 input  [`PORTB_IN_WIDTH-1:0] PortB;
 output [`PORTC_OUT_WIDTH-1:0] PortC;
-//output TxUART;
+output TxUART;
 input  RxUART;	
 	//Pacoblaze pins
 input [7:0]	port_id;
@@ -130,6 +130,8 @@ outport #(.ADDR(`PORTC_OUT), .WIDTH(`PORTC_OUT_WIDTH)) Port_C(
 // 7   6   5   4   3   2   1   0    7   6   5   4   3   2   1   0
 //                 CB11----------------------------------------CB0 
 
+
+// RX
 wire [7:0] uart_config_l;
 
 outport #(.ADDR(`UART_OUT_CONFIG_L)) UART_Config_L(
@@ -166,16 +168,42 @@ USART_RX_BAMSE #(.ADDR(`UART_RX)) rx_uart(
 	.ren(ren),
 	.int_rx(uart_rx_int_flag)
 );
-//RX
 
+// TX
+
+wire [7:0] uart_tx_data;
+
+outport #(.ADDR(`UART_TX)) UART_TX(
+	.address(port_id),
+	.value_in(port_in),
+	.wen(wen),
+	.rst(rst),
+	.port_out(uart_tx_data)	
+);
+
+wire uart_tx_int_flag;
+
+wire start_tx;
+assign start_tx = (port_id == `UART_TX && wen) ? 1'b1 : 1'b0;
+
+UART_TX tx_uart( 
+	  .i_Rst_H(rst),
+      .i_Clock(clk),
+      .i_TX_DV(start_tx),
+	  .i_TX_Byte(uart_tx_data),
+	  .i_Clk_per_bit(clk_per_bit),
+	  .o_TX_Active_L(uart_tx_int_flag),
+	  .o_TX_Serial(TxUART),
+	  .o_TX_Done()
+   );
 
 /******************/
 /*** INTERRUPTS ***/
 /******************/
 
 // Interrupt bits order in IntCon and inflags
-//  B7     B6     B5     B4     B3     B2     B1     B0
-//  -      -      -      -    RX_UART  IOC2  IOC1   IOC0
+//  B7     B6     B5     B4      B3     B2     B1     B0
+//  -      -      -    TX_UART RX_UART  IOC2  IOC1   IOC0
 
 //Iterrupt enable config
 wire [7:0] interrupt_enable; 
@@ -194,7 +222,7 @@ wire [7:0] interrupt_flags;
 assign interrupt_flags[7] = 0;
 assign interrupt_flags[6] = 0;
 assign interrupt_flags[5] = 0;
-assign interrupt_flags[4] = 0;
+assign interrupt_flags[4] = uart_tx_int_flag;
 assign interrupt_flags[3] = uart_rx_int_flag;
 assign interrupt_flags[2] = ioc_flags[2];
 assign interrupt_flags[1] = ioc_flags[1];
