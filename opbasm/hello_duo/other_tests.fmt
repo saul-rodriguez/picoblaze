@@ -1,0 +1,86 @@
+                      ;Porta.psm4
+
+                      ;:::::::::: Configure test environment ::::::::::
+                      namereg sd, ERRORS             ; Error count
+                      namereg se, TEMP               ; Temp register
+                      namereg sf, SP                 ; Stack pointer
+
+                      constant portConsole, FE
+                      constant portQuit, FF
+                      constant portISR, FC
+
+                      constant portROM_H, fa
+                      constant portROM_L, fb
+
+
+
+
+
+
+
+
+
+
+
+
+                      load SP, 3f
+                      load ERRORS, 00
+
+                      jump init_done
+
+                      ;:::::::::: Finish testcase ::::::::::
+
+           terminate: output ERRORS, portQuit        ; End normally
+                      jump terminate
+
+                      default_jump exec_error
+          exec_error: jump exec_error                ; End by exceeding instruction limit
+
+           init_done:
+
+
+                      ; PRAGMA function mul8 [s0, s1 return s3, s2] begin
+                mul8: ; (s3, s2) = s0 * s1
+
+
+
+                      load s3, 00                    ; Var _msb := 0
+                      load s2, 00                    ; Var _lsb := 0
+                      load TEMP, 01                  ; Var _mask := 1
+
+           mul8_loop: test s1, TEMP
+                      jump z, mul8_no_add
+                      add s3, s0
+         mul8_no_add: sra s3
+                      sra s2
+                      sl0 TEMP
+                      jump nz, mul8_loop
+                      return
+                      ; PRAGMA function end
+                      ; (s3, s2) = s0 * s1
+
+
+
+
+                      jump main
+
+
+                main:
+                      load s0, 04
+                      load s1, 05
+                      call mul8
+
+
+                      jump terminate
+
+
+
+
+
+
+
+
+
+
+
+

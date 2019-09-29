@@ -1,11 +1,15 @@
                       ;--------------------------------------------------------
                       ; File Created by SDCC : free open source ANSI-C Compiler
                       ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
-                      ; This file was generated Thu Sep 12 00:32:03 2019
+                      ; This file was generated Sat Sep 28 22:15:24 2019
                       ;--------------------------------------------------------
                       ;--------------------------------------------------------
                       ; global & static initialisations
                       ;--------------------------------------------------------
+                      constant _buf_3, 00
+                      constant _buf_2, 01
+                      constant _buf_1, 02
+                      constant _buf_0, 03
 
                       load sf, 3f
                       jump __sdcc_program_startup
@@ -20,113 +24,131 @@
                       ;--------------------------------------------------------
                       ; code
                       ;--------------------------------------------------------
-                      ;	device/include/pblaze/delay.h:51: void delay(unsigned char time)
-              _delay:
-                      load s0, sb
-                      ;	device/include/pblaze/delay.h:53: volatile unsigned char i = time;
-                      load s1, s0
-             _L00101:
-                      ;	device/include/pblaze/delay.h:54: for(; i > 0; i--)
-                      load s0, s1
-                      compare s0, 00
-                      jump NZ, _LC00123
-                      jump _L00107
-            _LC00123:
-                      load s0, 01
-                      jump _L00108
-             _L00107:
-                      load s0, 00
-             _L00108:
-                      compare s0, 00
-                      jump NZ, _LC00124
-                      jump _L00105
-            _LC00124:
-                      ;	device/include/pblaze/delay.h:72: __endasm;
-                      load s2, 00
-                      add s2, 01
-                      load s1, 00
-               rpt22:
-                      add s1, 01
-                      load s0, 00
-               rpt11:
-                      add s0, 01
-                      jump NZ, rpt11
-                      compare s1, 00
-                      jump NZ, rpt22
-                      ;	device/include/pblaze/delay.h:54: for(; i > 0; i--)
-                      sub s1, 01
-                      jump _L00101
-             _L00105:
-                      return
-                      ;	device/include/pblaze/port.h:16: void __port_write(unsigned char port, unsigned char arg)
-       ___port_write:
-                      ;	device/include/pblaze/port.h:24: __endasm;
-                      output s1, s0
-                      ;	device/include/pblaze/port.h:25: delay(MIN_PAUSE);
-                      load sb, 0a
-                      call _delay
-                      return
-                      ;	device/include/pblaze/port.h:28: unsigned char __port_read(volatile unsigned char port)
-        ___port_read:
-                      load s0, sb
-                      ;	device/include/pblaze/port.h:30: volatile unsigned char d = 0;
-                      load s1, 00
-                      ;	device/include/pblaze/port.h:31: volatile unsigned char p = port;
-                      load s2, s0
-                      load s3, s2
-                      ;	device/include/pblaze/port.h:34: __endasm;
-                      input s1, s3
-                      ;	device/include/pblaze/port.h:35: delay(MIN_PAUSE);
-                      store s0, (sf)
-                      sub sf, 01
-                      store s1, (sf)
-                      sub sf, 01
-                      store s3, (sf)
-                      sub sf, 01
-                      load sb, 0a
-                      call _delay
-                      add sf, 01
-                      fetch s3, (sf)
-                      add sf, 01
-                      fetch s1, (sf)
-                      add sf, 01
-                      fetch s0, (sf)
-                      ;	device/include/pblaze/port.h:36: return d;
-                      load s2, s1
-                      load sb, s2
-                      return
-                      ;	test.c:8: void main()
+                      ;	test.c:13: void main()
                _main:
-                      ;	test.c:12: aux = 0xaa;
-                      load s0, aa
-                      ;	test.c:14: while(aux) {
-             _L00116:
-                      compare s0, 00
-                      jump NZ, _LC00125
-                      jump _L00119
-            _LC00125:
-                      ;	test.c:15: __port_write(PORTA,aux);
-                      store s0, (sf)
-                      sub sf, 01
-                      load sb, 00
-                      load sc, s0
-                      call ___port_write
-                      add sf, 01
-                      fetch s0, (sf)
-                      ;	test.c:17: delay(1);
-                      store s0, (sf)
-                      sub sf, 01
-                      load sb, 01
-                      call _delay
-                      add sf, 01
-                      fetch s0, (sf)
-                      ;	test.c:18: aux ^= 0xff;
-                      load s1, s0
-                      xor s1, ff
-                      load s0, s1
-                      jump _L00116
-             _L00119:
+                      ;	test.c:18: test = 0xff;
+                      load s0, ff
+                      ;	test.c:19: num = 5;
+                      load s1, 05
+                      ;	test.c:20: while(1) {
+             _L00102:
+                      ;	test.c:21: res = test*num;
+                      load s2, s1
+                      load s3, s0
+                      load sb, s3
+                      load sc, s2
+                      call __muluchar
+                      load s2, sb
+                      load s3, sc
+                      load s4, s2
+                      load s5, s3
+                      ;	test.c:23: PBLAZEPORT[0] = (unsigned char)res;
+                      load s2, s4
+                      load s3, s5
+                      output s2, 00
+                      ;	test.c:24: PBLAZEPORT[1] = (unsigned char)(res >> 8);
+                      load s2, s4
+                      load s3, s5
+                      load s6, s3
+                      load s7, 01
+                      output s6, 01
+                      ;	test.c:25: test++;
+                      add s0, 01
+                      jump _L00102
+                      ;	test.c:48: void do_math(unsigned char data)
+            _do_math:
+                      ;REMOVED: load s0, sb
+                      ;	test.c:57: d = (unsigned short)a*b;
+                      ;REMOVED: load s1, 00
+                      ;REMOVED: load sb, s0
+                      ;REMOVED: load sc, s1
+                      ;REMOVED: load sd, 05
+                      ;REMOVED: load se, 00
+                      ;REMOVED: call __mulint
+                      ;REMOVED: load s0, sb
+                      ;REMOVED: load s1, sc
+                      ;	test.c:62: buf[0] = (unsigned char) d;
+                      ;REMOVED: load s2, _buf_3
+                      ;REMOVED: load s3, s0
+                      ;REMOVED: store s3, (s2)
+                      ;	test.c:63: buf[1] = (unsigned char) (d >> 8);
+                      ;REMOVED: load s2, _buf_3
+                      ;REMOVED: add s2, 01
+                      ;REMOVED: load s3, s1
+                      ;REMOVED: load s4, 01
+                      ;REMOVED: store s3, (s2)
+                      ;REMOVED: return
+                      ;	test.c:77: unsigned short mult8(unsigned char a, unsigned char b)
+              _mult8:
+                      ;	test.c:111: __endasm;
+                      ;REMOVED: store s2, (sf)
+                      ;REMOVED: sub sf, 01
+                      ;REMOVED: load s0, sb
+                      ;REMOVED: load s1, sc
+                      ;REMOVED: load sc, 00                    ;msb
+                      ;REMOVED: load sb, 00                    ;lsb
+                      ;REMOVED: load s2, 01
+           mul8_loop:
+                      ;REMOVED: test s1, s2
+                      ;REMOVED: jump z, mul8_no_add
+                      ;REMOVED: add sb, s0
+         mul8_no_add:
+                      ;REMOVED: sra sb
+                      ;REMOVED: sra sc
+                      ;REMOVED: sl0 s2
+                      ;REMOVED: jump nz, mul8_loop
+                      ;REMOVED: add sf, 01
+                      ;REMOVED: fetch s2, (sf)
+                      ;REMOVED: return
+                      ;REMOVED: return
+                      ;	test.c:119: unsigned short mult16(unsigned short a, unsigned short b)
+             _mult16:
+                      ;REMOVED: load s0, sb
+                      ;REMOVED: load s1, sc
+                      ;REMOVED: load s2, sd
+                      ;REMOVED: load s3, se
+                      ;	test.c:123: aux = a + b;
+                      ;REMOVED: add s0, s2
+                      ;REMOVED: addcy s1, s3
+                      ;	test.c:125: return aux;
+                      ;REMOVED: load sc, s1
+                      ;REMOVED: load sb, s0
+                      ;REMOVED: return
+
+          __muluchar:
+                      load se, 08
+                      load sd, sc
+                      load sc, 00
+             _LM0024:
+                      test sb, 01
+                      jump Z, _LM0023
+                      add sc, sd
+             _LM0023:
+                      sr0 sc
+                      sra sb
+                      sub se, 01
+                      jump NZ, _LM0024
                       return
+
+            __mulint:
+                      ;REMOVED: load s7, 10
+                      ;REMOVED: load s8, sd
+                      ;REMOVED: load s9, se
+                      ;REMOVED: load sd, 00
+                      ;REMOVED: load se, 00
+             _LM0026:
+                      ;REMOVED: test sb, 01
+                      ;REMOVED: jump Z, _LM0025
+                      ;REMOVED: add sd, s8
+                      ;REMOVED: addcy se, s9
+             _LM0025:
+                      ;REMOVED: sr0 se
+                      ;REMOVED: sra sd
+                      ;REMOVED: sra sc
+                      ;REMOVED: sra sb
+                      ;REMOVED: sub s7, 01
+                      ;REMOVED: jump NZ, _LM0026
+                      ;REMOVED: return
                       ;--------------------------------------------------------
                       ; interrupt vector
                       ;--------------------------------------------------------

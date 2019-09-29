@@ -1,0 +1,30 @@
+;Porta.psm4
+
+include(`setup.m4')
+
+   use_multiply8x8(mul8, s0, s1, s3, s2) ; (s3, s2) = s0 * s1
+
+
+
+
+jump main
+
+				
+main:
+	 load s0, 04
+	 load s1, 05
+	 call mul8
+	
+	
+	jump terminate
+	
+	
+	
+
+
+	
+
+
+
+
+

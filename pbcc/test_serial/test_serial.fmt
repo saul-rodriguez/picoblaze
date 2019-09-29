@@ -1,12 +1,53 @@
                       ;--------------------------------------------------------
                       ; File Created by SDCC : free open source ANSI-C Compiler
                       ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
-                      ; This file was generated Fri Sep 27 01:39:25 2019
+                      ; This file was generated Mon Sep 30 00:08:41 2019
                       ;--------------------------------------------------------
                       ;--------------------------------------------------------
                       ; global & static initialisations
                       ;--------------------------------------------------------
+                      constant _intcon, 00
+                      constant _eusart1TxHead, 01
+                      constant _eusart1TxTail, 02
+                      constant _eusart1TxBufferRemaining, 03
+                      constant _eusart1RxHead, 04
+                      constant _eusart1RxTail, 05
+                      constant _eusart1RxCount, 06
+                      constant _eusart1TxBuffer_7, 07
+                      constant _eusart1TxBuffer_6, 08
+                      constant _eusart1TxBuffer_5, 09
+                      constant _eusart1TxBuffer_4, 0a
+                      constant _eusart1TxBuffer_3, 0b
+                      constant _eusart1TxBuffer_2, 0c
+                      constant _eusart1TxBuffer_1, 0d
+                      constant _eusart1TxBuffer_0, 0e
+                      constant _eusart1RxBuffer_7, 0f
+                      constant _eusart1RxBuffer_6, 10
+                      constant _eusart1RxBuffer_5, 11
+                      constant _eusart1RxBuffer_4, 12
+                      constant _eusart1RxBuffer_3, 13
+                      constant _eusart1RxBuffer_2, 14
+                      constant _eusart1RxBuffer_1, 15
+                      constant _eusart1RxBuffer_0, 16
 
+                      ;	../common/bamse.h:37: volatile unsigned char intcon = 0;
+                      load s0, 00
+                      store s0, _intcon
+                      ;	../common/serial.h:27: volatile unsigned char eusart1TxHead = 0;
+                      load s0, 00
+                      store s0, _eusart1TxHead
+                      ;	../common/serial.h:28: volatile unsigned char eusart1TxTail = 0;
+                      load s0, 00
+                      store s0, _eusart1TxTail
+                      ;	../common/serial.h:30: volatile unsigned char eusart1TxBufferRemaining = 0;
+                      load s0, 00
+                      store s0, _eusart1TxBufferRemaining
+                      ;	../common/serial.h:31: volatile unsigned char eusart1RxHead = 0;
+                      load s0, 00
+                      store s0, _eusart1RxHead
+                      ;	../common/serial.h:32: volatile unsigned char eusart1RxTail = 0;
+                      load s0, 00
+                      store s0, _eusart1RxTail
                       load sf, 3f
                       jump __sdcc_program_startup
                       ;--------------------------------------------------------
@@ -20,94 +61,395 @@
                       ;--------------------------------------------------------
                       ; code
                       ;--------------------------------------------------------
-                      ;	../common/serial.h:21: void UART_setupRx()
-       _UART_setupRx:
-                      ;	../common/serial.h:23: PBLAZEPORT[UART_OUT_CONFIG_L] = UART_CLK_BIT_L;
+                      ;	../common/bamse.h:39: void update_intcon(void)
+      _update_intcon:
+                      ;	../common/bamse.h:41: PBLAZEPORT[INT_OUT_CONFIG] = intcon;
+                      fetch s0, _intcon
+                      output s0, 00
+                      return
+                      ;	../common/bamse.h:44: void intcon_enable_bit(unsigned char pos)
+  _intcon_enable_bit:
+                      load s0, sb
+                      ;	../common/bamse.h:46: intcon |= pos;
+                      fetch s1, _intcon
+                      load s2, s1
+                      or s2, s0
+                      store s2, _intcon
+                      return
+                      ;	../common/bamse.h:50: void intcon_disable_bit(unsigned char pos)
+ _intcon_disable_bit:
+                      load s0, sb
+                      ;	../common/bamse.h:52: intcon &= (~pos);
+                      xor s0, ff
+                      fetch s1, _intcon
+                      load s2, s1
+                      and s2, s0
+                      store s2, _intcon
+                      return
+                      ;	device/include/pblaze/intr.h:30: void pbcc_enable_interrupt(void)
+ _pbcc_enable_interrupt:
+                      ;	device/include/pblaze/intr.h:34: __endasm;
+                      enable INTERRUPT
+                      return
+                      ;	device/include/pblaze/intr.h:37: void pbcc_disable_interrupt(void)
+ _pbcc_disable_interrupt:
+                      ;	device/include/pblaze/intr.h:41: __endasm;
+                      ;
+                      ;REMOVED: disable INTERRUPT
+                      ;REMOVED: return
+                      ;	../common/serial.h:55: void UART_setup()
+         _UART_setup:
+                      ;	../common/serial.h:57: PBLAZEPORT[UART_OUT_CONFIG_L] = UART_CLK_BIT_L;
                       load s0, 05
                       output s0, 07
-                      ;	../common/serial.h:24: PBLAZEPORT[UART_OUT_CONFIG_H] = UART_CLK_BIT_H;
+                      ;	../common/serial.h:58: PBLAZEPORT[UART_OUT_CONFIG_H] = UART_CLK_BIT_H;
                       load s0, 0d
                       output s0, 08
+                      ;	../common/serial.h:61: eusart1TxHead = 0;
+                      load s0, 00
+                      store s0, _eusart1TxHead
+                      ;	../common/serial.h:62: eusart1TxTail = 0;
+                      load s0, 00
+                      store s0, _eusart1TxTail
+                      ;	../common/serial.h:63: eusart1TxBufferRemaining = sizeof(eusart1TxBuffer);
+                      load s0, 08
+                      store s0, _eusart1TxBufferRemaining
+                      ;	../common/serial.h:65: eusart1RxHead = 0;
+                      load s0, 00
+                      store s0, _eusart1RxHead
+                      ;	../common/serial.h:66: eusart1RxTail = 0;
+                      load s0, 00
+                      store s0, _eusart1RxTail
+                      ;	../common/serial.h:67: eusart1RxCount = 0;
+                      load s0, 00
+                      store s0, _eusart1RxCount
+                      ;	../common/serial.h:70: intcon_enable_bit(UART_RX_INT_FLAG_BIT);
+                      load sb, 08
+                      call _intcon_enable_bit
+                      ;	../common/serial.h:71: update_intcon();
+                      call _update_intcon
                       return
-                      ;	../common/serial.h:27: unsigned char getchar()
+                      ;	../common/serial.h:76: unsigned char getchar()
             _getchar:
-                      ;	../common/serial.h:31: aux = 0;
-                      ;REMOVED: load s0, 00
-                      ;	../common/serial.h:32: while (!aux) {
-             _L00103:
+                      ;	../common/serial.h:80: do {
+             _L00113:
+                      ;	../common/serial.h:81: flags = PBLAZEPORT[INT_IN_FLAGS];
+                      ;REMOVED: input s0, 00
+                      ;	../common/serial.h:82: rx = flags & UART_RX_INT_FLAG_BIT;
+                      ;REMOVED: and s0, 08
+                      ;	../common/serial.h:83: } while (!rx);
                       ;REMOVED: compare s0, 00
-                      ;REMOVED: jump Z, _LC00125
-                      ;REMOVED: jump _L00105
-            _LC00125:
-                      ;	../common/serial.h:33: aux = PBLAZEPORT[INT_IN_FLAGS];
-                      ;REMOVED: input s1, 00
-                      ;REMOVED: load s0, s1
-                      ;	../common/serial.h:34: aux = aux & UART_RX_INT_FLAG_BIT;
-                      ;REMOVED: load s1, s0
-                      ;REMOVED: and s1, 08
-                      ;REMOVED: load s0, s1
-                      ;REMOVED: jump _L00103
-             _L00105:
-                      ;	../common/serial.h:37: aux = PBLAZEPORT[UART_RX];
-                      ;REMOVED: input s1, 06
-                      ;REMOVED: load s0, s1
-                      ;	../common/serial.h:38: return aux;
+                      ;REMOVED: jump NZ, _LC00185
+                      ;REMOVED: jump _L00113
+            _LC00185:
+                      ;	../common/serial.h:85: return PBLAZEPORT[UART_RX];
+                      ;REMOVED: input s0, 06
                       ;REMOVED: load sb, s0
                       ;REMOVED: return
-                      ;	test_serial.c:5: void main()
-               _main:
-                      ;	test_serial.c:11: UART_setupRx();
-                      call _UART_setupRx
-                      ;	test_serial.c:15: rx = 0;
-                      load s0, 00
-                      ;	test_serial.c:16: tx = 0;
-                      load s1, 00
-                      ;	test_serial.c:18: PBLAZEPORT[PORTC_OUT] = 0x55;
-                      load s2, 55
-                      output s2, 05
-                      ;	test_serial.c:22: while (!rx) {
-             _L00110:
-                      compare s0, 00
-                      jump Z, _LC00126
-                      jump _L00112
-            _LC00126:
-                      ;	test_serial.c:23: flags = PBLAZEPORT[INT_IN_FLAGS];
-                      input s2, 00
-                      load s3, s2
-                      ;	test_serial.c:24: rx = flags & UART_RX_INT_FLAG_BIT;
-                      load s2, s3
-                      and s2, 08
-                      load s0, s2
-                      jump _L00110
-             _L00112:
-                      ;	test_serial.c:26: rx = 0;
-                      load s0, 00
-                      ;	test_serial.c:28: data = PBLAZEPORT[UART_RX];
-                      input s2, 06
-                      load s4, s2
-                      ;	test_serial.c:29: PBLAZEPORT[PORTC_OUT] = data;
-                      output s4, 05
-                      ;	test_serial.c:33: while(!tx) {
-             _L00113:
-                      compare s1, 00
-                      jump Z, _LC00127
-                      jump _L00115
-            _LC00127:
-                      ;	test_serial.c:34: flags = PBLAZEPORT[INT_IN_FLAGS];
-                      input s2, 00
-                      load s3, s2
-                      ;	test_serial.c:35: tx = flags & UART_TX_INT_FLAG_BIT;
-                      load s2, s3
-                      and s2, 10
-                      load s1, s2
-                      jump _L00113
-             _L00115:
-                      ;	test_serial.c:37: tx = 0;
-                      load s1, 00
-                      ;	test_serial.c:39: PBLAZEPORT[UART_TX] = data;
-                      output s4, 09
-                      jump _L00110
+                      ;	../common/serial.h:89: void putchar(unsigned char data)
+            _putchar:
+                      ;REMOVED: load s0, sb
+                      ;	../common/serial.h:93: do {
+             _L00120:
+                      ;	../common/serial.h:94: flags = PBLAZEPORT[INT_IN_FLAGS];
+                      ;REMOVED: input s1, 00
+                      ;	../common/serial.h:95: tx = flags & UART_TX_INT_FLAG_BIT;
+                      ;REMOVED: and s1, 10
+                      ;	../common/serial.h:96: } while (!tx);
+                      ;REMOVED: compare s1, 00
+                      ;REMOVED: jump NZ, _LC00186
+                      ;REMOVED: jump _L00120
+            _LC00186:
+                      ;	../common/serial.h:98: PBLAZEPORT[UART_TX] = data;
+                      ;REMOVED: output s0, 09
                       ;REMOVED: return
+                      ;	../common/serial.h:104: void EUSART1_Write(unsigned char txData)
+      _EUSART1_Write:
+                      ;REMOVED: load s0, sb
+                      ;	../common/serial.h:107: aux = eusart1TxBufferRemaining;
+                      ;REMOVED: fetch s1, _eusart1TxBufferRemaining
+                      ;	../common/serial.h:109: while(0 == aux)
+                      ;REMOVED: load s2, 00
+                      ;REMOVED: compare s1, 00
+                      ;REMOVED: jump NZ, _LC00187
+                      ;REMOVED: load s2, 01
+            _LC00187:
+             _L00127:
+                      ;REMOVED: compare s2, 00
+                      ;REMOVED: jump Z, _LC00188
+                      ;REMOVED: jump _L00127
+            _LC00188:
+                      ;	../common/serial.h:113: intcon_disable_bit(UART_TX_INT_FLAG_BIT);
+                      ;REMOVED: store s0, (sf)
+                      ;REMOVED: sub sf, 01
+                      ;REMOVED: store s1, (sf)
+                      ;REMOVED: sub sf, 01
+                      ;REMOVED: load sb, 10
+                      ;REMOVED: call _intcon_disable_bit
+                      ;REMOVED: add sf, 01
+                      ;REMOVED: fetch s1, (sf)
+                      ;REMOVED: add sf, 01
+                      ;REMOVED: fetch s0, (sf)
+                      ;	../common/serial.h:114: update_intcon();
+                      ;REMOVED: store s0, (sf)
+                      ;REMOVED: sub sf, 01
+                      ;REMOVED: store s1, (sf)
+                      ;REMOVED: sub sf, 01
+                      ;REMOVED: call _update_intcon
+                      ;REMOVED: add sf, 01
+                      ;REMOVED: fetch s1, (sf)
+                      ;REMOVED: add sf, 01
+                      ;REMOVED: fetch s0, (sf)
+                      ;	../common/serial.h:116: eusart1TxBuffer[eusart1TxHead++] = txData;
+                      ;REMOVED: load s2, _eusart1TxBuffer_7
+                      ;REMOVED: fetch s3, _eusart1TxHead
+                      ;REMOVED: fetch s4, _eusart1TxHead
+                      ;REMOVED: add s4, 01
+                      ;REMOVED: add s2, s3
+                      ;REMOVED: store s0, (s2)
+                      ;	../common/serial.h:117: if(sizeof(eusart1TxBuffer) <= eusart1TxHead) {
+                      ;REMOVED: compare s4, 08
+                      ;REMOVED: jump C, _L00131
+                      ;	../common/serial.h:118: eusart1TxHead = 0;
+                      ;REMOVED: load s0, 00
+                      ;REMOVED: store s0, _eusart1TxHead
+             _L00131:
+                      ;	../common/serial.h:121: aux--;
+                      ;REMOVED: sub s1, 01
+                      ;	../common/serial.h:122: eusart1TxBufferRemaining = aux;
+                      ;REMOVED: store s1, _eusart1TxBufferRemaining
+                      ;	../common/serial.h:124: intcon_enable_bit(UART_TX_INT_FLAG_BIT);
+                      ;REMOVED: store s4, _eusart1TxHead
+                      ;REMOVED: load sb, 10
+                      ;REMOVED: call _intcon_enable_bit
+                      ;	../common/serial.h:125: update_intcon();
+                      ;REMOVED: call _update_intcon
+                      ;REMOVED: return
+                      ;	../common/serial.h:129: unsigned char EUSART1_is_tx_ready(void)
+ _EUSART1_is_tx_ready:
+                      ;	../common/serial.h:131: return eusart1TxBufferRemaining;
+                      ;REMOVED: fetch s0, _eusart1TxBufferRemaining
+                      ;REMOVED: load sb, s0
+                      ;REMOVED: return
+                      ;	../common/serial.h:134: void EUSART1_Transmit_ISR(void)
+ _EUSART1_Transmit_ISR:
+                      ;	../common/serial.h:139: if(sizeof(eusart1TxBuffer) > eusart1TxBufferRemaining)
+                      fetch s0, _eusart1TxBufferRemaining
+                      compare s0, 08
+                      jump C, _LC00189
+                      jump _L00142
+            _LC00189:
+                      ;	../common/serial.h:143: aux1 = eusart1TxTail;
+                      fetch s1, _eusart1TxTail
+                      ;	../common/serial.h:144: PBLAZEPORT[UART_TX] = eusart1TxBuffer[aux1];
+                      load s2, _eusart1TxBuffer_7
+                      add s2, s1
+                      fetch s3, (s2)
+                      output s3, 09
+                      ;	../common/serial.h:145: aux1++;
+                      add s1, 01
+                      ;	../common/serial.h:146: eusart1TxTail = aux1;
+                      store s1, _eusart1TxTail
+                      ;	../common/serial.h:149: if(sizeof(eusart1TxBuffer) <= aux1)
+                      compare s1, 08
+                      jump C, _L00140
+                      ;	../common/serial.h:152: eusart1TxTail = aux1;
+                      load s2, 00
+                      store s2, _eusart1TxTail
+             _L00140:
+                      ;	../common/serial.h:155: aux1 = eusart1TxBufferRemaining;
+                      ;	../common/serial.h:156: aux1++;
+                      add s0, 01
+                      ;	../common/serial.h:158: eusart1TxBufferRemaining = aux1;
+                      store s0, _eusart1TxBufferRemaining
+                      jump _L00144
+             _L00142:
+                      ;	../common/serial.h:163: intcon_disable_bit(UART_TX_INT_FLAG_BIT);
+                      load sb, 10
+                      call _intcon_disable_bit
+                      ;	../common/serial.h:164: update_intcon();
+                      call _update_intcon
+             _L00144:
+                      return
+                      ;	../common/serial.h:170: unsigned char EUSART1_Read(void)
+       _EUSART1_Read:
+                      ;	../common/serial.h:174: aux1 = eusart1RxCount;
+                      fetch s0, _eusart1RxCount
+                      ;	../common/serial.h:175: while(0 == aux1)
+                      load s1, 00
+                      compare s0, 00
+                      jump NZ, _LC00190
+                      load s1, 01
+            _LC00190:
+             _L00148:
+                      compare s1, 00
+                      jump Z, _LC00191
+                      jump _L00148
+            _LC00191:
+                      ;	../common/serial.h:181: aux2 = eusart1RxTail;
+                      fetch s1, _eusart1RxTail
+                      ;	../common/serial.h:182: readValue = eusart1RxBuffer[aux2];
+                      load s2, _eusart1RxBuffer_7
+                      add s2, s1
+                      fetch s3, (s2)
+                      load s2, s3
+                      ;	../common/serial.h:183: aux2++;
+                      add s1, 01
+                      ;	../common/serial.h:184: if(sizeof(eusart1RxBuffer) <= aux2)
+                      compare s1, 08
+                      jump C, _L00152
+                      ;	../common/serial.h:186: aux2 = 0;
+                      load s1, 00
+             _L00152:
+                      ;	../common/serial.h:188: eusart1RxTail = aux2;
+                      store s1, _eusart1RxTail
+                      ;	../common/serial.h:190: intcon_disable_bit(UART_RX_INT_FLAG_BIT);
+                      store s0, (sf)
+                      sub sf, 01
+                      store s2, (sf)
+                      sub sf, 01
+                      load sb, 08
+                      call _intcon_disable_bit
+                      add sf, 01
+                      fetch s2, (sf)
+                      add sf, 01
+                      fetch s0, (sf)
+                      ;	../common/serial.h:191: update_intcon();
+                      store s0, (sf)
+                      sub sf, 01
+                      store s2, (sf)
+                      sub sf, 01
+                      call _update_intcon
+                      add sf, 01
+                      fetch s2, (sf)
+                      add sf, 01
+                      fetch s0, (sf)
+                      ;	../common/serial.h:193: aux1--;
+                      sub s0, 01
+                      ;	../common/serial.h:194: eusart1RxCount = aux1;
+                      store s0, _eusart1RxCount
+                      ;	../common/serial.h:196: intcon_enable_bit(UART_RX_INT_FLAG_BIT);
+                      store s2, (sf)
+                      sub sf, 01
+                      load sb, 08
+                      call _intcon_enable_bit
+                      add sf, 01
+                      fetch s2, (sf)
+                      ;	../common/serial.h:197: update_intcon();
+                      store s2, (sf)
+                      sub sf, 01
+                      call _update_intcon
+                      add sf, 01
+                      fetch s2, (sf)
+                      ;	../common/serial.h:199: return readValue;
+                      load sb, s2
+                      return
+                      ;	../common/serial.h:202: void EUSART1_Receive_ISR(void)
+ _EUSART1_Receive_ISR:
+                      ;	../common/serial.h:206: aux1 = eusart1RxHead;
+                      fetch s0, _eusart1RxHead
+                      ;	../common/serial.h:207: eusart1RxBuffer[aux1] = PBLAZEPORT[UART_RX];
+                      load s1, _eusart1RxBuffer_7
+                      add s1, s0
+                      input s2, 06
+                      store s2, (s1)
+                      ;	../common/serial.h:208: aux1++;
+                      add s0, 01
+                      ;	../common/serial.h:209: if(sizeof(eusart1RxBuffer) <= aux1)
+                      compare s0, 08
+                      jump C, _L00159
+                      ;	../common/serial.h:211: aux1 = 0;
+                      load s0, 00
+             _L00159:
+                      ;	../common/serial.h:213: eusart1RxHead = aux1;
+                      store s0, _eusart1RxHead
+                      ;	../common/serial.h:215: aux2 = eusart1RxCount;
+                      fetch s0, _eusart1RxCount
+                      ;	../common/serial.h:216: aux2++;
+                      add s0, 01
+                      ;	../common/serial.h:217: eusart1RxCount = aux2;
+                      store s0, _eusart1RxCount
+                      return
+                      ;	test_serial.c:6: void main()
+               _main:
+                      ;	test_serial.c:12: intcon = 0;
+                      load s0, 00
+                      store s0, _intcon
+                      ;	test_serial.c:14: UART_setup();
+                      call _UART_setup
+                      ;	test_serial.c:16: pbcc_enable_interrupt();
+                      call _pbcc_enable_interrupt
+                      ;	test_serial.c:19: while(1) {
+             _L00166:
+                      ;	test_serial.c:20: if(eusart1RxCount) {
+                      fetch s0, _eusart1RxCount
+                      compare s0, 00
+                      jump NZ, _LC00192
+                      jump _L00166
+            _LC00192:
+                      ;	test_serial.c:21: data = EUSART1_Read();
+                      call _EUSART1_Read
+                      load s0, sb
+                      load s1, s0
+                      ;	test_serial.c:22: PBLAZEPORT[PORTC_OUT] = data;
+                      output s1, 05
+                      jump _L00166
+                      ;	test_serial.c:53: void _interrupt_handler(void) __interrupt (1)
+  _interrupt_handler:
+                      ;	test_serial.c:57: flags = PBLAZEPORT[INT_IN_FLAGS];
+                      store s0, (sf)
+                      sub sf, 01
+                      input s0, 00
+                      store s1, (sf)
+                      sub sf, 01
+                      load s1, s0
+                      ;	test_serial.c:59: if ((flags & UART_TX_INT_FLAG_BIT) && (intcon & UART_TX_INT_FLAG_BIT)) {
+                      load s0, s1
+                      and s0, 10
+                      compare s0, 00
+                      jump NZ, _LC00193
+                      jump _L00176
+            _LC00193:
+                      fetch s0, _intcon
+                      store s2, (sf)
+                      sub sf, 01
+                      load s2, s0
+                      and s2, 10
+                      compare s2, 00
+                      jump NZ, _LC00194
+                      jump _L00176
+            _LC00194:
+                      ;	test_serial.c:60: EUSART1_Transmit_ISR();
+                      call _EUSART1_Transmit_ISR
+                      jump _L00179
+             _L00176:
+                      ;	test_serial.c:61: } else if ((flags & UART_RX_INT_FLAG_BIT) && (intcon & UART_RX_INT_FLAG_BIT)) {
+                      load s0, s1
+                      load s2, s0
+                      and s2, 08
+                      compare s2, 00
+                      jump NZ, _LC00195
+                      jump _L00179
+            _LC00195:
+                      fetch s0, _intcon
+                      load s2, s0
+                      and s2, 08
+                      compare s2, 00
+                      jump NZ, _LC00196
+                      jump _L00179
+            _LC00196:
+                      ;	test_serial.c:62: EUSART1_Receive_ISR();
+                      call _EUSART1_Receive_ISR
+             _L00179:
+                      add sf, 01
+                      fetch s2, (sf)
+                      add sf, 01
+                      fetch s1, (sf)
+                      add sf, 01
+                      fetch s0, (sf)
+                      returni ENABLE
                       ;--------------------------------------------------------
                       ; interrupt vector
                       ;--------------------------------------------------------
+                      address 3ff
+                      jump _interrupt_handler
