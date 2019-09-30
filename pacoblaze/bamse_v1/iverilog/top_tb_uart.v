@@ -117,7 +117,13 @@ initial begin
 	#(50000*tck) i_TX_Byte = 8'hcd;
 	#(100*tck) i_TX_DV = 1;
 	#(2*tck) i_TX_DV = 0;
-	//interrupts;
+	#(50000*tck) i_TX_Byte = 8'h54;
+	#(100*tck) i_TX_DV = 1;
+	#(2*tck) i_TX_DV = 0;
+	#(50000*tck) i_TX_Byte = 8'heb;
+	#(100*tck) i_TX_DV = 1;
+	#(2*tck) i_TX_DV = 0;
+
 
 	#(program_cycles*tck+100) $finish;
 end

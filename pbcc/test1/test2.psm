@@ -1,0 +1,66 @@
+;--------------------------------------------------------
+; File Created by SDCC : free open source ANSI-C Compiler
+; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+; This file was generated Mon Sep 30 21:04:46 2019
+;--------------------------------------------------------
+;--------------------------------------------------------
+; global & static initialisations
+;--------------------------------------------------------
+	CONSTANT	_intcon, 00
+
+	;	../common/bamse.h:37: volatile unsigned char intcon = 0;
+	LOAD	s0, 00
+	STORE	s0, _intcon
+	LOAD	sF, 3f
+	JUMP	__sdcc_program_startup
+;--------------------------------------------------------
+; Home
+;--------------------------------------------------------
+__sdcc_program_startup:
+	CALL	_main
+;	return from main will lock up
+__sdcc_loop:
+	JUMP	__sdcc_loop
+;--------------------------------------------------------
+; code
+;--------------------------------------------------------
+	;	../common/bamse.h:39: void update_intcon(void) 
+_update_intcon:
+	;	../common/bamse.h:41: PBLAZEPORT[INT_OUT_CONFIG] = intcon;
+	FETCH	s0, _intcon
+	OUTPUT	s0, 00
+	RETURN
+	;	../common/bamse.h:44: void intcon_enable_bit(unsigned char pos)
+_intcon_enable_bit:
+	LOAD	s0, sB
+	;	../common/bamse.h:46: intcon |= pos;
+	FETCH	s1, _intcon
+	LOAD	s2, s1
+	OR	s2, s0
+	STORE	s2, _intcon
+	RETURN
+	;	../common/bamse.h:50: void intcon_disable_bit(unsigned char pos)
+_intcon_disable_bit:
+	LOAD	s0, sB
+	;	../common/bamse.h:52: intcon &= (~pos);	
+	XOR	s0, ff
+	FETCH	s1, _intcon
+	LOAD	s2, s1
+	AND	s2, s0
+	STORE	s2, _intcon
+	RETURN
+	;	test2.c:3: void main()
+_main:
+	;	test2.c:14: __endasm;
+	 LOAD s0, f0
+	 LOAD S1, 00
+	 SLA s0
+	 SLA s1
+	 LOAD s0, 0f
+	 LOAD s1, 0
+	 SRA s0
+	 SRA s1
+	RETURN
+;--------------------------------------------------------
+; interrupt vector 
+;--------------------------------------------------------

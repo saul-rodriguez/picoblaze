@@ -1,6 +1,6 @@
 #include "../common/bamse.h"
 #include <intr.h>
-//#include "../common/delay.h"
+#include "../common/delay.h"
 #include "../common/serial.h"
 
 void main()
@@ -15,8 +15,9 @@ void main()
 	
 	pbcc_enable_interrupt();
 
-	
+	delay_ms(4);
 	while(1) {
+		
 		if(eusart1RxCount) {
 			data = EUSART1_Read();
 			PBLAZEPORT[PORTC_OUT] = data;	

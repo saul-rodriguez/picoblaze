@@ -1,0 +1,66 @@
+                      ;--------------------------------------------------------
+                      ; File Created by SDCC : free open source ANSI-C Compiler
+                      ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+                      ; This file was generated Mon Sep 30 21:04:46 2019
+                      ;--------------------------------------------------------
+                      ;--------------------------------------------------------
+                      ; global & static initialisations
+                      ;--------------------------------------------------------
+                      constant _intcon, 00
+
+                      ;	../common/bamse.h:37: volatile unsigned char intcon = 0;
+                      load s0, 00
+                      store s0, _intcon
+                      load sf, 3f
+                      jump __sdcc_program_startup
+                      ;--------------------------------------------------------
+                      ; Home
+                      ;--------------------------------------------------------
+ __sdcc_program_startup:
+                      call _main
+                      ;	return from main will lock up
+         __sdcc_loop:
+                      jump __sdcc_loop
+                      ;--------------------------------------------------------
+                      ; code
+                      ;--------------------------------------------------------
+                      ;	../common/bamse.h:39: void update_intcon(void)
+      _update_intcon:
+                      ;	../common/bamse.h:41: PBLAZEPORT[INT_OUT_CONFIG] = intcon;
+                      ;REMOVED: fetch s0, _intcon
+                      ;REMOVED: output s0, 00
+                      ;REMOVED: return
+                      ;	../common/bamse.h:44: void intcon_enable_bit(unsigned char pos)
+  _intcon_enable_bit:
+                      ;REMOVED: load s0, sb
+                      ;	../common/bamse.h:46: intcon |= pos;
+                      ;REMOVED: fetch s1, _intcon
+                      ;REMOVED: load s2, s1
+                      ;REMOVED: or s2, s0
+                      ;REMOVED: store s2, _intcon
+                      ;REMOVED: return
+                      ;	../common/bamse.h:50: void intcon_disable_bit(unsigned char pos)
+ _intcon_disable_bit:
+                      ;REMOVED: load s0, sb
+                      ;	../common/bamse.h:52: intcon &= (~pos);
+                      ;REMOVED: xor s0, ff
+                      ;REMOVED: fetch s1, _intcon
+                      ;REMOVED: load s2, s1
+                      ;REMOVED: and s2, s0
+                      ;REMOVED: store s2, _intcon
+                      ;REMOVED: return
+                      ;	test2.c:3: void main()
+               _main:
+                      ;	test2.c:14: __endasm;
+                      load s0, f0
+                      load s1, 00
+                      sla s0
+                      sla s1
+                      load s0, 0f
+                      load s1, 0
+                      sra s0
+                      sra s1
+                      return
+                      ;--------------------------------------------------------
+                      ; interrupt vector
+                      ;--------------------------------------------------------

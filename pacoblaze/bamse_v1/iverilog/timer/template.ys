@@ -1,0 +1,18 @@
+# read design
+read_verilog NAME
+hierarchy -check
+
+# high-level synthesis
+proc; 
+show
+opt;
+
+fsm;
+opt; 
+
+memory;
+opt;
+
+ 
+
+
