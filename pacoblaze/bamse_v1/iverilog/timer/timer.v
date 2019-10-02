@@ -9,17 +9,25 @@ module timer(
 	en,
 	go,
 	auto_load,
-	tmr_int	
+	tmr_int,
+	go_clear,
+	address,
+	ren,	
 );
 
 input clk_in;
-input rst;
-input [2:0] prescaler_conf;
-input [15:0] timer_conf; 
+input rst; //(H)
+input [2:0] prescaler_conf; //Select between 8 possible frequencies 000 -> clk_in : 111 -> clk_in/128
+input [15:0] timer_conf; // 16 bit load value for the counter 
 input en; //enable (H)
 input go; //start (H)
 input auto_load; //automatic restart timer after rolloff (H)
 output reg tmr_int; //interrupt (H)
+output reg go_clear;
+input [7:0] address;
+input ren;
+
+parameter ADDR = 8'b0000_0000; 
 
 reg [6:0] prescaler_out;
 
@@ -63,7 +71,12 @@ reg [1:0] timer_state;
 
 parameter IDLE  = 2'b00, 
 		  GO =    2'b01,
-		  ROLL  = 2'b11;
+		  ROLL  = 2'b11,
+		  WAIT  = 2'b10;
+
+
+wire read_flag;
+assign read_flag = (address == ADDR && ren)? 1'b1 : 1'b0;
 
 always @(posedge selected_freq) begin
 	if (rst) begin
@@ -71,6 +84,7 @@ always @(posedge selected_freq) begin
 		tmr_int <= 0;
 		timer_state <= IDLE;
 		prescaler_reset <= 0;
+		go_clear <= 0;
 	end else begin 
 		if (en) begin
 			case (timer_state)
@@ -79,33 +93,35 @@ always @(posedge selected_freq) begin
 								timer_count <= timer_conf;														
 								timer_state <= GO;
 								prescaler_reset <= 1;
-							end else begin
-								tmr_int <= 0; //When go == L the interrupt is reset
-							end
+							end 
+							
+							if (read_flag) tmr_int <= 0;
+						
 						end
 				GO:		begin 
 							prescaler_reset <= 0;
 							timer_count <= timer_count + 1;
+							
 							if (timer_count == 16'hffff) begin
 								timer_state <= ROLL;
-							end
+								go_clear <= 1;
+							end							
 							
-							if (go == 0) begin
-								tmr_int <= 0;
-								timer_state <= IDLE;
-							end
+							if (read_flag) tmr_int <= 0;													
 						end
 				ROLL: 	begin
 							tmr_int <= 1;
+							go_clear <= 0;
 							if (auto_load) begin
 								timer_count <= timer_conf;														
 								timer_state <= GO;
 							end else begin
 								timer_state <= IDLE;
 							end
-						end
-				default: timer_state <= IDLE;
+						end				
 			endcase
+		end else begin
+			timer_state <= IDLE;
 		end
 	
 	end
