@@ -13,34 +13,24 @@ reg [15:0] timer_conf;
 reg en; //enable (H)
 reg go; //start (H)
 reg auto_load; //automatic restart timer after rolloff (H)
-wire tmr_interrupt; //interrupt (H)
+reg int;
 reg [7:0] address;
 wire [7:0] config_in;
 wire [7:0] config_out;
 reg ren;
 reg wen;
 
-assign config_in = {{1'b0},prescaler_conf,auto_load,en,go,tmr_interrupt};
+wire interrupt;
+
+assign interrupt = config_out[0];
+
+assign config_in = {{1'b0},prescaler_conf,auto_load,en,go,int};
 parameter ADDR=8'h00;
-/*
-//Resetable register
-always @(posedge clk_in) begin
-	if (rst) begin
-		go_aux <= 0;
-	end else if (go_clear) begin
-		go_aux <= ~go_clear & go_aux;
-	end	else if (address == (ADDR && wen)) begin
-		go_aux <= go;	
-	end
-end
-*/
 
 TIMER_BAMSE #(.ADDR(8'h00)) dut(
 	.clk(clk),
 	.rst(rst),	
 	.timer_conf(timer_conf),
-	//.en(en),		
-	.tmr_interrupt(tmr_interrupt),
 	.address(address),
 	.config_in(config_in),
 	.config_out(config_out),
@@ -52,8 +42,9 @@ always #(2) clk = ~clk;
 
 initial begin
 	$dumpfile("dump.vcd");
-	$dumpvars(0,dut,config_in,config_out);
+	$dumpvars(-1,dut,config_in,config_out,interrupt);
 	
+	en = 0;
 	clk = 0;
 	rst = 0;
 	prescaler_conf = 0;
@@ -64,6 +55,7 @@ initial begin
 	address = 8'h00;
 	ren = 0;
 	wen = 0;
+	int = 0;
 		
 	
 	#10 rst = 1;
@@ -74,22 +66,33 @@ initial begin
 	#10 wen = 1;
 	#10 go = 0; wen = 0;
 	
+	#80 wen = 1; 
+	#10 wen = 0;
 	
-		/*
-	#100 rst = 1;
-	#10 rst = 0;
-	#10 auto_load = 1;
-	#10 go = 1;
-	#10 go = 0;	
+	#50 auto_load = 1; go = 1;
+	#10 wen = 1;
+	#10 wen = 0;
 	
-	#100 ren = 1;
-	#10 ren = 0;
+	#70 go = 0; int = 0;
+	#10 wen = 1;
+	#10 wen = 0;
 	
-	#100 ren = 1;
-	#10 ren = 0;
+	#80 auto_load = 0; int = 0;
+	#10 wen = 1;
+	#10 wen = 0;
 	
-	#200 */
-	#(250) $finish;
+	#80 auto_load = 1;
+	#10 wen = 1;
+	#10 wen = 0;
+	
+	#80 en = 0;
+	#10 wen = 1;
+	#10 wen = 0;
+	
+	
+	 
+	
+	#(100) $finish;
 end
 
 endmodule

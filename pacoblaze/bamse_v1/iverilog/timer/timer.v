@@ -2,28 +2,16 @@
 `define TIMER_V
 
 module timer(
-	clk_in,
-	rst,
-	prescaler_conf,
-	timer_conf,
-	en,
-	go,
-	auto_load,
-	tmr_int_clear,	
-	tmr_int,
-	go_clear	
+	input clk_in,
+	input rst, //(H)
+	input [2:0] prescaler_conf, //Select between 8 possible frequencies 000 -> clk_in : 111 -> clk_in/128
+	input [15:0] timer_conf, // 16 bit load value for the counter 
+	input en, //enable (H)
+	input go, //start (H)
+	input auto_load, //automatic restart timer after rolloff (H)
+	output reg tmr_int, //roll of - interrupt 1 pulse (H)
+	output reg go_clear // 1 pulse (H)
 );
-
-input clk_in;
-input rst; //(H)
-input [2:0] prescaler_conf; //Select between 8 possible frequencies 000 -> clk_in : 111 -> clk_in/128
-input [15:0] timer_conf; // 16 bit load value for the counter 
-input en; //enable (H)
-input go; //start (H)
-input auto_load; //automatic restart timer after rolloff (H)
-input tmr_int_clear; 
-output reg tmr_int; //interrupt (H)
-output reg go_clear;
 
 reg [6:0] prescaler_out;
 
@@ -45,7 +33,6 @@ always @(posedge clk_in) begin
 end
 
 //Prescaler selector
-
 reg selected_freq;
 
 always @(*) begin
@@ -85,8 +72,8 @@ always @(posedge selected_freq) begin
 								timer_state <= GO;
 								prescaler_reset <= 1;
 							end 
-							
-							if (tmr_int_clear) tmr_int <= 0;
+														
+							tmr_int <= 0;
 						
 						end
 				GO:		begin 
@@ -98,7 +85,7 @@ always @(posedge selected_freq) begin
 								go_clear <= 1;
 							end							
 							
-							if (tmr_int_clear) tmr_int <= 0;													
+							tmr_int <= 0;													
 						end
 				ROLL: 	begin
 							tmr_int <= 1;
@@ -124,16 +111,17 @@ endmodule
 /*    TIMER BAMSE         */
 /**************************/
 
-// Configuration word
+// Configuration word (config_in and config_out)
 //      B7       B6        B5       B4        B3        B2        B1        B0
 //   	-        PS2      PS1       PS0      AUTO_LD    EN        GO      INT_TMR
+//
+// Note: GO and INT_TMR R&W bits that are set/cleared by the timer.
+// 
 
 module TIMER_BAMSE (
 	input clk,
 	input rst, //(H)
 	input [15:0] timer_conf, // 16 bit load value for the counter 
-	//input en, //enable (H)
-	output tmr_interrupt, //interrupt (H)
 	input [7:0] address,
 	input [7:0] config_in,
 	output [7:0] config_out,
@@ -145,26 +133,23 @@ parameter ADDR = 8'h00; // This same register address is used for read and write
 
 reg  [7:0] timer_config_reg;
 wire [1:0] mask_reset;
-reg tmr_int_clear;
 wire go_clear;
 wire tmr_int;
 
+//outputs from timer
 assign mask_reset[0] = tmr_int;
 assign mask_reset[1] = go_clear;
 
 always @(posedge clk) begin
 	if (rst) begin
 		timer_config_reg <= 0;
-		tmr_int_clear <= 0;
 	end else if (|mask_reset) begin // Signals from timer module 
 			if (mask_reset[0]) timer_config_reg[0] <= 1; // To interrupt out
 			if (mask_reset[1]) timer_config_reg[1] <= 0; // To GO
 		end	else if (address == ADDR) begin //signals written from software
 		if (wen) begin
 			timer_config_reg <= config_in;
-			if (config_in[0] == 0) tmr_int_clear <= 1;			
-		end		
-		if (tmr_int_clear) tmr_int_clear <= 0;
+		end				
 	end
 end
 
@@ -173,7 +158,6 @@ assign config_out = timer_config_reg;
 wire go, en, auto_load;
 wire [2:0] prescaler_conf;
 
-assign tmr_interrupt = config_out[0];
 assign go = config_out[1];
 assign en = config_out[2];
 assign auto_load = config_out[3];
@@ -186,12 +170,10 @@ timer tmt(
 	.timer_conf(timer_conf),
 	.en(en),
 	.go(go),
-	.auto_load(auto_load),
-	.tmr_int_clear(tmr_int_clear),	
+	.auto_load(auto_load),	
 	.tmr_int(tmr_int),
 	.go_clear(go_clear)
 );
-
 
 endmodule
 
