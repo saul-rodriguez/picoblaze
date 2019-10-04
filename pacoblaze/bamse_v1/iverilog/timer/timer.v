@@ -9,25 +9,23 @@ module timer(
 	input en, //enable (H)
 	input go, //start (H)
 	input auto_load, //automatic restart timer after rolloff (H)
+	input write,
 	output reg tmr_int, //roll of - interrupt 1 pulse (H)
 	output reg go_clear // 1 pulse (H)
 );
 
 reg [6:0] prescaler_out;
-
-//Prescaler
-reg prescaler_reset;
+		  
+//reg prescaler_state;
 
 always @(posedge clk_in) begin
 	if (rst) begin
-		prescaler_out <= 0;		
+		prescaler_out <= 0;			
 	end else begin
-		if (en) begin
-			if (prescaler_reset) begin
-				prescaler_out <= 0;
-			end else begin
-				prescaler_out <= prescaler_out + 1;
-			end		
+		if (write) begin
+			prescaler_out <= 0;					
+		end else begin
+			prescaler_out <= prescaler_out + 1;
 		end
 	end
 end
@@ -45,6 +43,7 @@ always @(*) begin
 		3'b101: selected_freq = prescaler_out[4]; 
 		3'b110: selected_freq = prescaler_out[5];
 		3'b111: selected_freq = prescaler_out[6];
+		default: selected_freq = clk_in;
 	endcase
 end
 
@@ -61,7 +60,7 @@ always @(posedge selected_freq) begin
 		timer_count <= 0;					
 		tmr_int <= 0;
 		timer_state <= IDLE;
-		prescaler_reset <= 0;
+		//prescaler_reset <= 0;
 		go_clear <= 0;
 	end else begin 
 		if (en) begin
@@ -70,14 +69,14 @@ always @(posedge selected_freq) begin
 							if (go) begin 
 								timer_count <= timer_conf;														
 								timer_state <= GO;
-								prescaler_reset <= 1;
+								//prescaler_reset <= 1;
 							end 
 														
 							tmr_int <= 0;
 						
 						end
 				GO:		begin 
-							prescaler_reset <= 0;
+							//prescaler_reset <= 0;
 							timer_count <= timer_count + 1;
 							
 							if (timer_count == 16'hffff) begin
@@ -140,17 +139,20 @@ wire tmr_int;
 assign mask_reset[0] = tmr_int;
 assign mask_reset[1] = go_clear;
 
+wire update_config;
+assign update_config = ((address == ADDR) & wen)? 1'b1 : 1'b0;
+
 always @(posedge clk) begin
 	if (rst) begin
 		timer_config_reg <= 0;
 	end else if (|mask_reset) begin // Signals from timer module 
-			if (mask_reset[0]) timer_config_reg[0] <= 1; // To interrupt out
-			if (mask_reset[1]) timer_config_reg[1] <= 0; // To GO
-		end	else if (address == ADDR) begin //signals written from software
-		if (wen) begin
+		if (mask_reset[0]) timer_config_reg[0] <= 1; // To interrupt out
+		if (mask_reset[1]) timer_config_reg[1] <= 0; // To GO
+	//	end	else if (address == ADDR) begin //signals written from software
+	//	if (wen) begin
+	end else if (update_config) begin
 			timer_config_reg <= config_in;
-		end				
-	end
+	end				
 end
 
 assign config_out = timer_config_reg;
@@ -163,6 +165,7 @@ assign en = config_out[2];
 assign auto_load = config_out[3];
 assign prescaler_conf[2:0] = config_out[6:4];
 
+
 timer tmt(
 	.clk_in(clk),
 	.rst(rst),
@@ -171,6 +174,7 @@ timer tmt(
 	.en(en),
 	.go(go),
 	.auto_load(auto_load),	
+	.write(wen),
 	.tmr_int(tmr_int),
 	.go_clear(go_clear)
 );

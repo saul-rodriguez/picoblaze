@@ -61,6 +61,14 @@ initial begin
 	#10 rst = 1;
 	#10 rst = 0;
 	
+	//task1;
+	task2;
+	
+	#(100) $finish;
+end
+
+task task1; //selected_clk = 000
+	begin
 	#50 en = 1;
 	#10 go = 1;
 	#10 wen = 1;
@@ -89,10 +97,42 @@ initial begin
 	#10 wen = 1;
 	#10 wen = 0;
 	
+	end
+endtask
+
+task task2; //selected_clk = 001
+	begin
+	#10 prescaler_conf = 3'b001;
+	#50 en = 1;
+	#10 go = 1;
+	#10 wen = 1;
+	#10 go = 0; wen = 0;
 	
-	 
+	#160 wen = 1; 
+	#10 wen = 0;
 	
-	#(100) $finish;
-end
+	#100 auto_load = 1; go = 1;
+	#10 wen = 1;
+	#10 wen = 0;
+	
+	#160 go = 0; int = 0;
+	#10 wen = 1;
+	#10 wen = 0;
+	
+	#160 auto_load = 0; int = 0;
+	#10 wen = 1;
+	#10 wen = 0;
+	
+	#160 auto_load = 1;
+	#10 wen = 1;
+	#10 wen = 0;
+	
+	#160 en = 0;
+	#10 wen = 1;
+	#10 wen = 0;
+	
+	end
+endtask
+
 
 endmodule
