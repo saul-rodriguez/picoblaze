@@ -110,11 +110,11 @@ endmodule
 /*    TIMER BAMSE         */
 /**************************/
 
-// Configuration word (config_in and config_out)
+// Configuration word (both input and output)
 //      B7       B6        B5       B4        B3        B2        B1        B0
 //   	-        PS2      PS1       PS0      AUTO_LD    EN        GO      INT_TMR
 //
-// Note: GO and INT_TMR R&W bits that are set/cleared by the timer.
+// Note: GO and INT_TMR are R&W bits that are set/cleared by the timer.
 // 
 
 module TIMER_BAMSE (
@@ -132,12 +132,35 @@ parameter ADDR = 8'h00; // This same register address is used for read and write
 
 reg  [7:0] timer_config_reg;
 wire [1:0] mask_reset;
+
 wire go_clear;
+reg  go_clear_sync;
+wire go_clear_pulse;
+
 wire tmr_int;
+reg tmr_int_sync;
+wire tmr_int_pulse;
+
+//synchronize signals from timer
+
+always @(posedge clk) begin
+	if (rst) begin
+		go_clear_sync <= 0;
+		tmr_int_sync <= 0;
+	end else begin
+		go_clear_sync <= go_clear;
+		tmr_int_sync <= tmr_int;	
+	end		
+end
+
+assign go_clear_pulse = go_clear & (~go_clear_sync);
+assign tmr_int_pulse = tmr_int & (~tmr_int_sync);
+
+
 
 //outputs from timer
-assign mask_reset[0] = tmr_int;
-assign mask_reset[1] = go_clear;
+assign mask_reset[0] = tmr_int_pulse;
+assign mask_reset[1] = go_clear_pulse;
 
 wire update_config;
 assign update_config = ((address == ADDR) & wen)? 1'b1 : 1'b0;

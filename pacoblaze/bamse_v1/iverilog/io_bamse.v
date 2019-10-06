@@ -6,6 +6,7 @@
 `include "bamse_inc.v"
 `include "gio.v"
 `include "usart.v"
+`include "timer.v"
  
 module io_bamse(
     //Ports 
@@ -19,8 +20,6 @@ module io_bamse(
 	port_out,  // to input port in Pacoblaze 
 	port_in, // from output port in Pacoblaze
 	interrupt, // to interrupt in Pacoblaze 
-	//ioc_flags, // to interrupt register input in Pacoblaze
-	//interrupt_ack, // from interrupt ack Pacoblaze
 	clk,
 	rst,
 	wen,
@@ -198,12 +197,55 @@ UART_TX tx_uart(
    );
 
 /******************/
+/**** TIMER0 ******/
+/******************/
+
+//Timer LREG
+wire [7:0] timer0_lreg;
+
+outport #(.ADDR(`TIMER0_LREG)) Timer0_LREG(
+	.address(port_id),
+	.value_in(port_in),
+	.wen(wen),
+	.rst(rst),
+	.port_out(timer0_lreg)	
+);
+
+//Timer HREG
+wire [7:0] timer0_hreg;
+
+outport #(.ADDR(`TIMER0_HREG)) Timer0_HREG(
+	.address(port_id),
+	.value_in(port_in),
+	.wen(wen),
+	.rst(rst),
+	.port_out(timer0_hreg)	
+);
+
+//Timer module
+wire [15:0] timer_conf;
+assign timer_conf = {timer0_hreg,timer0_lreg};
+
+wire [7:0] timer0_bus_8;
+
+TIMER_BAMSE #(.ADDR(`TIMER0)) timer0(
+	.clk(clk),
+	.rst(rst),	
+	.timer_conf(timer_conf),
+	.address(port_id),
+	.config_in(port_in),
+	.config_out(timer0_bus_8),
+	.ren(ren),
+	.wen(wen)
+);
+
+/******************/
 /*** INTERRUPTS ***/
 /******************/
 
 // Interrupt bits order in IntCon and inflags
 //  B7     B6     B5     B4      B3     B2     B1     B0
-//  -      -      -    TX_UART RX_UART  IOC2  IOC1   IOC0
+//  -      -      TMR0 TX_UART RX_UART  IOC2  IOC1   IOC0
 
 //Iterrupt enable config
 wire [7:0] interrupt_enable; 
@@ -221,7 +263,7 @@ wire [7:0] interrupt_flags;
 
 assign interrupt_flags[7] = 0;
 assign interrupt_flags[6] = 0;
-assign interrupt_flags[5] = 0;
+assign interrupt_flags[5] = timer0_bus_8[0];
 assign interrupt_flags[4] = uart_tx_int_flag;
 assign interrupt_flags[3] = uart_rx_int_flag;
 assign interrupt_flags[2] = ioc_flags[2];
@@ -249,13 +291,15 @@ assign interrupt = | ( interrupt_flags & interrupt_enable);
 in_port_selector #(.ADDR0(`INT_IN_FLAGS), 
                    .ADDR1(`PORTA_IN), 
                    .ADDR2(`PORTB_IN),
-                   .ADDR3(`UART_RX))
+                   .ADDR3(`UART_RX),
+                   .ADDR4(`TIMER0))
 	input_ports(
 		.address(port_id),
 		.in_port0(interruptFlags_bus_8),
 		.in_port1(portA_bus_8),
 		.in_port2(portB_bus_8),
 		.in_port3(uart_rx_bus_8),
+		.in_port4(timer0_bus_8),
 		.out_port(port_out)
 );
 

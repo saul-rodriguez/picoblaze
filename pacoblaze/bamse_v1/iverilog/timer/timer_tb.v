@@ -25,9 +25,10 @@ wire interrupt;
 assign interrupt = config_out[0];
 
 assign config_in = {{1'b0},prescaler_conf,auto_load,en,go,int};
-parameter ADDR=8'h00;
+parameter ADDR=8'h01;
+parameter pres_factor = 3;
 
-TIMER_BAMSE #(.ADDR(8'h00)) dut(
+TIMER_BAMSE #(.ADDR(ADDR)) dut(
 	.clk(clk),
 	.rst(rst),	
 	.timer_conf(timer_conf),
@@ -52,7 +53,7 @@ initial begin
 	en = 0;
 	go = 0;
 	auto_load = 0;
-	address = 8'h00;
+	address = 8'h01;
 	ren = 0;
 	wen = 0;
 	int = 0;
@@ -102,37 +103,38 @@ endtask
 
 task task2; //selected_clk = 001
 	begin
-	#10 prescaler_conf = 3'b001;
+	#10 prescaler_conf = pres_factor;
 	#50 en = 1;
 	#10 go = 1;
 	#10 wen = 1;
-	#10 go = 0; wen = 0;
-	
-	#160 wen = 1; 
 	#10 wen = 0;
 	
-	#100 auto_load = 1; go = 1;
+	#(90*pres_factor) wen = 1; 
+	#10 wen = 0;
+	
+	#(100*pres_factor) auto_load = 1; go = 1;
 	#10 wen = 1;
 	#10 wen = 0;
 	
-	#160 go = 0; int = 0;
+	#(90*pres_factor) go = 0; int = 0;
 	#10 wen = 1;
 	#10 wen = 0;
 	
-	#160 auto_load = 0; int = 0;
+	#(90*pres_factor) auto_load = 0; int = 0;
 	#10 wen = 1;
 	#10 wen = 0;
 	
-	#160 auto_load = 1;
+	#(90*pres_factor) auto_load = 1;
 	#10 wen = 1;
 	#10 wen = 0;
 	
-	#160 en = 0;
+	#(90*pres_factor) en = 0;
 	#10 wen = 1;
 	#10 wen = 0;
 	
 	end
 endtask
+
 
 
 endmodule

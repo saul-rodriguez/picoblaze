@@ -1,0 +1,169 @@
+                      ;--------------------------------------------------------
+                      ; File Created by SDCC : free open source ANSI-C Compiler
+                      ; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+                      ; This file was generated Sun Oct  6 23:11:36 2019
+                      ;--------------------------------------------------------
+                      ;--------------------------------------------------------
+                      ; global & static initialisations
+                      ;--------------------------------------------------------
+                      constant _intcon, 00
+
+                      ;	../common/bamse.h:42: volatile unsigned char intcon = 0;
+                      load s0, 00
+                      store s0, _intcon
+                      load sf, 3f
+                      jump __sdcc_program_startup
+                      ;--------------------------------------------------------
+                      ; Home
+                      ;--------------------------------------------------------
+ __sdcc_program_startup:
+                      call _main
+                      ;	return from main will lock up
+         __sdcc_loop:
+                      jump __sdcc_loop
+                      ;--------------------------------------------------------
+                      ; code
+                      ;--------------------------------------------------------
+                      ;	../common/bamse.h:44: void update_intcon(void)
+      _update_intcon:
+                      ;	../common/bamse.h:46: PBLAZEPORT[INT_OUT_CONFIG] = intcon;
+                      ;REMOVED: fetch s0, _intcon
+                      ;REMOVED: output s0, 00
+                      ;REMOVED: return
+                      ;	../common/bamse.h:49: void intcon_enable_bit(unsigned char pos)
+  _intcon_enable_bit:
+                      ;REMOVED: load s0, sb
+                      ;	../common/bamse.h:51: intcon |= pos;
+                      ;REMOVED: fetch s1, _intcon
+                      ;REMOVED: load s2, s1
+                      ;REMOVED: or s2, s0
+                      ;REMOVED: store s2, _intcon
+                      ;REMOVED: return
+                      ;	../common/bamse.h:55: void intcon_disable_bit(unsigned char pos)
+ _intcon_disable_bit:
+                      ;REMOVED: load s0, sb
+                      ;	../common/bamse.h:57: intcon &= (~pos);
+                      ;REMOVED: xor s0, ff
+                      ;REMOVED: fetch s1, _intcon
+                      ;REMOVED: load s2, s1
+                      ;REMOVED: and s2, s0
+                      ;REMOVED: store s2, _intcon
+                      ;REMOVED: return
+                      ;	device/include/pblaze/intr.h:30: void pbcc_enable_interrupt(void)
+ _pbcc_enable_interrupt:
+                      ;	device/include/pblaze/intr.h:34: __endasm;
+                      ;REMOVED: enable INTERRUPT
+                      ;REMOVED: return
+                      ;	device/include/pblaze/intr.h:37: void pbcc_disable_interrupt(void)
+ _pbcc_disable_interrupt:
+                      ;	device/include/pblaze/intr.h:41: __endasm;
+                      ;
+                      ;REMOVED: disable INTERRUPT
+                      ;REMOVED: return
+                      ;	../common/timer.h:17: void TIMER_setCounter(unsigned short count)
+   _TIMER_setCounter:
+                      load s0, sb
+                      load s1, sc
+                      ;	../common/timer.h:21: aux = (unsigned char)(count);
+                      load s2, s0
+                      ;	../common/timer.h:22: PBLAZEPORT[TIMER_LREG] = aux;
+                      output s2, 0b
+                      ;	../common/timer.h:24: aux = (unsigned char)(count >> 8);
+                      load s3, s1
+                      load s4, 01
+                      ;	../common/timer.h:25: PBLAZEPORT[TIMER_HREG] = aux;
+                      output s3, 0c
+                      return
+                      ;	../common/timer.h:28: void TIMER_setConf(unsigned char conf)
+      _TIMER_setConf:
+                      load s0, sb
+                      ;	../common/timer.h:30: PBLAZEPORT[TIMER] = conf;
+                      output s0, 0a
+                      return
+                      ;	../common/timer.h:33: unsigned char TIMER_readConf()
+     _TIMER_readConf:
+                      ;	../common/timer.h:37: aux = PBLAZEPORT[TIMER];
+                      input s0, 0a
+                      ;	../common/timer.h:38: return aux;
+                      load sb, s0
+                      return
+                      ;	test_timer.c:7: void main()
+               _main:
+                      ;	test_timer.c:11: flag = 0;
+                      load s0, 00
+                      ;	test_timer.c:13: TIMER_setCounter(0xfff0);
+                      store s0, (sf)
+                      sub sf, 01
+                      load sb, f0
+                      load sc, ff
+                      call _TIMER_setCounter
+                      add sf, 01
+                      fetch s0, (sf)
+                      ;	test_timer.c:16: TIMER_setConf(aux);
+                      store s0, (sf)
+                      sub sf, 01
+                      load sb, 06
+                      call _TIMER_setConf
+                      add sf, 01
+                      fetch s0, (sf)
+                      ;	test_timer.c:20: while(1) {
+             _L00124:
+                      ;	test_timer.c:22: TIMER_setConf(aux);
+                      store s0, (sf)
+                      sub sf, 01
+                      load sb, 06
+                      call _TIMER_setConf
+                      add sf, 01
+                      fetch s0, (sf)
+                      ;	test_timer.c:23: do {
+             _L00117:
+                      ;	test_timer.c:24: aux = TIMER_readConf() & 0x02;
+                      store s0, (sf)
+                      sub sf, 01
+                      call _TIMER_readConf
+                      add sf, 01
+                      fetch s0, (sf)
+                      load s1, sb
+                      and s1, 02
+                      ;	test_timer.c:25: } while (aux);
+                      compare s1, 00
+                      jump Z, _LC00134
+                      jump _L00117
+            _LC00134:
+                      ;	test_timer.c:27: if (flag) {
+                      compare s0, 00
+                      jump NZ, _LC00135
+                      jump _L00121
+            _LC00135:
+                      ;	test_timer.c:28: flag = 0;
+                      load s0, 00
+                      ;	test_timer.c:29: PBLAZEPORT[PORTC_OUT] = 0x00;
+                      load s1, 00
+                      output s1, 05
+                      jump _L00124
+             _L00121:
+                      ;	test_timer.c:32: flag = 1;
+                      load s0, 01
+                      ;	test_timer.c:33: PBLAZEPORT[PORTC_OUT] = 0xff;
+                      load s1, ff
+                      output s1, 05
+                      jump _L00124
+                      ;	test_timer.c:39: void _interrupt_handler(void) __interrupt (1)
+  _interrupt_handler:
+                      ;	test_timer.c:43: flags = PBLAZEPORT[INT_IN_FLAGS];
+                      store s0, (sf)
+                      sub sf, 01
+                      input s0, 00
+                      store s1, (sf)
+                      sub sf, 01
+                      load s1, s0
+                      add sf, 01
+                      fetch s1, (sf)
+                      add sf, 01
+                      fetch s0, (sf)
+                      returni ENABLE
+                      ;--------------------------------------------------------
+                      ; interrupt vector
+                      ;--------------------------------------------------------
+                      address 3ff
+                      jump _interrupt_handler

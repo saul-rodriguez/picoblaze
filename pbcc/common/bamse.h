@@ -26,6 +26,11 @@
 #define UART_TX 0x09
 #define UART_TX_INT_FLAG_BIT 0b00010000
 
+#define TIMER 0x0A
+#define TIMER_LREG 0x0B
+#define TIMER_HREG 0x0C
+#define TIMER_INT_FLAG_BIT 0b00100000
+
 #define INT_OUT_CONFIG 0x00 
 #define INT_IN_FLAGS  0x00 
 

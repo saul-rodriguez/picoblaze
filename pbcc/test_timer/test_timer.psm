@@ -1,0 +1,169 @@
+;--------------------------------------------------------
+; File Created by SDCC : free open source ANSI-C Compiler
+; Version 3.0.1 #6227 (Oct 24 2011) (CYGWIN)
+; This file was generated Sun Oct  6 23:11:36 2019
+;--------------------------------------------------------
+;--------------------------------------------------------
+; global & static initialisations
+;--------------------------------------------------------
+	CONSTANT	_intcon, 00
+
+	;	../common/bamse.h:42: volatile unsigned char intcon = 0;
+	LOAD	s0, 00
+	STORE	s0, _intcon
+	LOAD	sF, 3f
+	JUMP	__sdcc_program_startup
+;--------------------------------------------------------
+; Home
+;--------------------------------------------------------
+__sdcc_program_startup:
+	CALL	_main
+;	return from main will lock up
+__sdcc_loop:
+	JUMP	__sdcc_loop
+;--------------------------------------------------------
+; code
+;--------------------------------------------------------
+	;	../common/bamse.h:44: void update_intcon(void) 
+_update_intcon:
+	;	../common/bamse.h:46: PBLAZEPORT[INT_OUT_CONFIG] = intcon;
+	FETCH	s0, _intcon
+	OUTPUT	s0, 00
+	RETURN
+	;	../common/bamse.h:49: void intcon_enable_bit(unsigned char pos)
+_intcon_enable_bit:
+	LOAD	s0, sB
+	;	../common/bamse.h:51: intcon |= pos;
+	FETCH	s1, _intcon
+	LOAD	s2, s1
+	OR	s2, s0
+	STORE	s2, _intcon
+	RETURN
+	;	../common/bamse.h:55: void intcon_disable_bit(unsigned char pos)
+_intcon_disable_bit:
+	LOAD	s0, sB
+	;	../common/bamse.h:57: intcon &= (~pos);	
+	XOR	s0, ff
+	FETCH	s1, _intcon
+	LOAD	s2, s1
+	AND	s2, s0
+	STORE	s2, _intcon
+	RETURN
+	;	device/include/pblaze/intr.h:30: void pbcc_enable_interrupt(void)
+_pbcc_enable_interrupt:
+	;	device/include/pblaze/intr.h:34: __endasm;
+	       ENABLE INTERRUPT
+	RETURN
+	;	device/include/pblaze/intr.h:37: void pbcc_disable_interrupt(void)
+_pbcc_disable_interrupt:
+	;	device/include/pblaze/intr.h:41: __endasm;
+	;
+	      DISABLE INTERRUPT
+	RETURN
+	;	../common/timer.h:17: void TIMER_setCounter(unsigned short count)
+_TIMER_setCounter:
+	LOAD	s0, sB
+	LOAD	s1, sC
+	;	../common/timer.h:21: aux = (unsigned char)(count);
+	LOAD	s2, s0
+	;	../common/timer.h:22: PBLAZEPORT[TIMER_LREG] = aux;
+	OUTPUT	s2, 0b
+	;	../common/timer.h:24: aux = (unsigned char)(count >> 8);
+	LOAD	s3, s1
+	LOAD	s4, 01
+	;	../common/timer.h:25: PBLAZEPORT[TIMER_HREG] = aux;
+	OUTPUT	s3, 0c
+	RETURN
+	;	../common/timer.h:28: void TIMER_setConf(unsigned char conf)
+_TIMER_setConf:
+	LOAD	s0, sB
+	;	../common/timer.h:30: PBLAZEPORT[TIMER] = conf;	
+	OUTPUT	s0, 0a
+	RETURN
+	;	../common/timer.h:33: unsigned char TIMER_readConf()
+_TIMER_readConf:
+	;	../common/timer.h:37: aux = PBLAZEPORT[TIMER];
+	INPUT	s0, 0a
+	;	../common/timer.h:38: return aux;
+	LOAD	sB, s0
+	RETURN
+	;	test_timer.c:7: void main()
+_main:
+	;	test_timer.c:11: flag = 0;
+	LOAD	s0, 00
+	;	test_timer.c:13: TIMER_setCounter(0xfff0);
+	STORE	s0, (sF)
+	SUB	sF, 01
+	LOAD	sB, f0
+	LOAD	sC, ff
+	CALL	_TIMER_setCounter
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	;	test_timer.c:16: TIMER_setConf(aux);
+	STORE	s0, (sF)
+	SUB	sF, 01
+	LOAD	sB, 06
+	CALL	_TIMER_setConf
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	;	test_timer.c:20: while(1) {
+_L00124:
+	;	test_timer.c:22: TIMER_setConf(aux);
+	STORE	s0, (sF)
+	SUB	sF, 01
+	LOAD	sB, 06
+	CALL	_TIMER_setConf
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	;	test_timer.c:23: do {
+_L00117:
+	;	test_timer.c:24: aux = TIMER_readConf() & 0x02;			
+	STORE	s0, (sF)
+	SUB	sF, 01
+	CALL	_TIMER_readConf
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	LOAD	s1, sB
+	AND	s1, 02
+	;	test_timer.c:25: } while (aux);	
+	COMPARE	s1, 00
+	JUMP	Z, _LC00134
+	JUMP	_L00117
+_LC00134:
+	;	test_timer.c:27: if (flag) {
+	COMPARE	s0, 00
+	JUMP	NZ, _LC00135
+	JUMP	_L00121
+_LC00135:
+	;	test_timer.c:28: flag = 0;
+	LOAD	s0, 00
+	;	test_timer.c:29: PBLAZEPORT[PORTC_OUT] = 0x00;
+	LOAD	s1, 00
+	OUTPUT	s1, 05
+	JUMP	_L00124
+_L00121:
+	;	test_timer.c:32: flag = 1;
+	LOAD	s0, 01
+	;	test_timer.c:33: PBLAZEPORT[PORTC_OUT] = 0xff;
+	LOAD	s1, ff
+	OUTPUT	s1, 05
+	JUMP	_L00124
+	;	test_timer.c:39: void _interrupt_handler(void) __interrupt (1)
+_interrupt_handler:
+	;	test_timer.c:43: flags = PBLAZEPORT[INT_IN_FLAGS];
+	STORE	s0, (sF)
+	SUB	sF, 01
+	INPUT	s0, 00
+	STORE	s1, (sF)
+	SUB	sF, 01
+	LOAD	s1, s0
+	ADD	sF, 01
+	FETCH	s1, (sF)
+	ADD	sF, 01
+	FETCH	s0, (sF)
+	RETURNI ENABLE
+;--------------------------------------------------------
+; interrupt vector 
+;--------------------------------------------------------
+	ADDRESS	3ff
+	JUMP	_interrupt_handler
