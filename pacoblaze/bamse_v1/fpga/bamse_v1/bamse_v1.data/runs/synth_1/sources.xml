@@ -38,15 +38,15 @@
     <File Path="$PSRCDIR/sources_1/imports/iverilog/io_bamse.v">
       <FileInfo SFType="VHeader">
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/io_bamse.v"/>
-        <Attr Name="ImportTime" Val="1569540792"/>
+        <Attr Name="ImportTime" Val="1570477899"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/imports/hello_duo/firmware.v">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../../../pbcc/test_serial/firmware.v"/>
-        <Attr Name="ImportTime" Val="1569541230"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../pbcc/test_timer/firmware.v"/>
+        <Attr Name="ImportTime" Val="1570478112"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>
@@ -134,9 +134,17 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/imports/iverilog/usart.v">
-      <FileInfo>
+      <FileInfo SFType="VHeader">
         <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/usart.v"/>
         <Attr Name="ImportTime" Val="1569540853"/>
+        <Attr Name="UsedInSynthesis" Val="1"/>
+        <Attr Name="UsedInSimulation" Val="1"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/iverilog/timer.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../iverilog/timer.v"/>
+        <Attr Name="ImportTime" Val="1570218964"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
         <Attr Name="UsedInSimulation" Val="1"/>

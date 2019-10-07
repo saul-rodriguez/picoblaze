@@ -10,7 +10,7 @@
 `endif
 
 `ifndef TEST_CYCLES
-`define TEST_CYCLES 10000
+`define TEST_CYCLES 300000
 `endif
 
 `include "timescale_inc.v"
@@ -71,8 +71,8 @@ initial begin
 	$dumpfile("dump.vcd");
 	//$dumpvars(-1, dut);
 	$dumpvars(1,dut);
-	$dumpvars(1,dut.bamse1, dut.bamse1.ports, dut.bamse1.ports.Port_A,
-	          dut.bamse1.din, dut.bamse1.ports.timer0, dut.bamse1.rom);
+	//$dumpvars(1,dut.bamse1, dut.bamse1.ports, dut.bamse1.ports.Port_A,
+	  //        dut.bamse1.din, dut.bamse1.ports.timer0, dut.bamse1.rom);
 
 	//pacoblaze's registers
 	for(idx = 0; idx < `register_size; idx = idx + 1) begin
@@ -99,7 +99,8 @@ initial begin
 		
 	#(tck*2);
 	@(negedge clk) rst = 0; // free processor
-		
+	
+	/*	
 	#(100*tck) i_TX_DV = 1;
 	#(2*tck) i_TX_DV = 0;
 	#(50000*tck) i_TX_Byte = 8'hcd;
@@ -111,7 +112,7 @@ initial begin
 	#(50000*tck) i_TX_Byte = 8'heb;
 	#(100*tck) i_TX_DV = 1;
 	#(2*tck) i_TX_DV = 0;
-
+*/
 
 	#(program_cycles*tck+100) $finish;
 end

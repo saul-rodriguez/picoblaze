@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Fri Sep 27 01:41:02 2019
+// Written by: Map P.20131013 on Mon Oct 07 22:08:59 2019
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -28,6 +28,6 @@ COMP "ARDUINO_RESET" LOCATE = SITE "P139" LEVEL 1;
 COMP "DIR_RIGHT" LOCATE = SITE "P131" LEVEL 1;
 COMP "DIR_LEFT" LOCATE = SITE "P134" LEVEL 1;
 COMP "DIR_DOWN" LOCATE = SITE "P133" LEVEL 1;
-NET "CLK_BUFGP/IBUFG" PERIOD = 31 ns HIGH 50%;
+NET "CLK_IBUF" PERIOD = 31 ns HIGH 50%;
 SCHEMATIC END;
 

@@ -27,6 +27,11 @@
 `define UART_OUT_CONFIG_H 8'h08
 `define UART_TX 8'h09
 
+// TIMER0
+`define TIMER0 8'h0A
+`define TIMER0_LREG 8'h0B
+`define TIMER0_HREG 8'h0C
+
 // Interrupts
 `define INT_OUT_CONFIG 8'h00 // address interrupt config. register
 `define INT_IN_FLAGS  8'h00 //address interrupt flags

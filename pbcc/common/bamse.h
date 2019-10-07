@@ -41,20 +41,32 @@ extern volatile char PBLAZEPORT[];
 
 volatile unsigned char intcon = 0;
 
-void update_intcon(void) 
+/*void update_intcon(void) 
 {
 	PBLAZEPORT[INT_OUT_CONFIG] = intcon;
-}
+}*/
 
-void intcon_enable_bit(unsigned char pos)
-{
-	intcon |= pos;
+void intcon_enable_bits(unsigned char pos)
+{	
+	unsigned char aux;
+	aux = intcon;
 	
+	aux |= pos;	 
+	PBLAZEPORT[INT_OUT_CONFIG] = aux;
+	
+	intcon = aux;	
 }
 
-void intcon_disable_bit(unsigned char pos)
+void intcon_disable_bits(unsigned char pos)
 {
-	intcon &= (~pos);	
+	unsigned char aux;
+	
+	aux = intcon;
+	
+	aux &= (~pos);	
+	PBLAZEPORT[INT_OUT_CONFIG] = aux;
+	
+	intcon = aux;
 }
 
 

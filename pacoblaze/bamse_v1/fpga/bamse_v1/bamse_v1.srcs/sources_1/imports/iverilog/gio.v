@@ -181,6 +181,7 @@ module in_port_selector(
 	in_port1,
 	in_port2,
 	in_port3,
+	in_port4,
 	//add more ports here
 	out_port
 );
@@ -190,6 +191,7 @@ parameter ADDR0 = 8'h00;
 parameter ADDR1 = 8'h01;
 parameter ADDR2 = 8'h02;
 parameter ADDR3 = 8'h03;
+parameter ADDR4 = 8'h04;
 //parameter ADDR2 = 8'h02;
 
 input [7:0] address;
@@ -197,6 +199,7 @@ input [7:0] in_port0;
 input [7:0] in_port1;
 input [7:0] in_port2;
 input [7:0] in_port3;
+input [7:0] in_port4;
 
 output reg [7:0] out_port;
 
@@ -206,6 +209,7 @@ always @(*) begin
 		ADDR1: out_port = in_port1;
 		ADDR2: out_port = in_port2;
 		ADDR3: out_port = in_port3;
+		ADDR4: out_port = in_port4;
 		default: out_port = 8'h00;	
 	endcase	
 end
